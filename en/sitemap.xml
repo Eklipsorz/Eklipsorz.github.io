@@ -3,6 +3,71 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://Eklipsorz.github.io/about/</loc>
+    <lastmod>2020-07-20T17:32:23+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://Eklipsorz.github.io/</loc>
+    <lastmod>2020-07-20T16:56:49+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://Eklipsorz.github.io/fr/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pl"
+                href="https://Eklipsorz.github.io/pl/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="https://Eklipsorz.github.io/pt/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="de"
+                href="https://Eklipsorz.github.io/de/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://Eklipsorz.github.io/es/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://Eklipsorz.github.io/zh-cn/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://Eklipsorz.github.io/zh-tw/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://Eklipsorz.github.io/ja/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://Eklipsorz.github.io/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://Eklipsorz.github.io/posts/my-first-post/</loc>
+    <lastmod>2020-07-20T16:56:49+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://Eklipsorz.github.io/posts/</loc>
+    <lastmod>2020-07-20T16:56:49+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://Eklipsorz.github.io/categories/</loc>
     <xhtml:link
                 rel="alternate"
@@ -48,55 +113,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://Eklipsorz.github.io/categories/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://Eklipsorz.github.io/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="fr"
-                href="https://Eklipsorz.github.io/fr/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="pl"
-                href="https://Eklipsorz.github.io/pl/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="pt"
-                href="https://Eklipsorz.github.io/pt/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="de"
-                href="https://Eklipsorz.github.io/de/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://Eklipsorz.github.io/es/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://Eklipsorz.github.io/zh-cn/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-tw"
-                href="https://Eklipsorz.github.io/zh-tw/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="https://Eklipsorz.github.io/ja/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://Eklipsorz.github.io/"
                 />
   </url>
   
