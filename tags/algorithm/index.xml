@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Algorithm on CS Pensieve</title>
+    <link>https://Eklipsorz.github.io/tags/algorithm/</link>
+    <description>Recent content in Algorithm on CS Pensieve</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-TW</language>
+    <lastBuildDate>Tue, 21 Jul 2020 15:05:34 +0800</lastBuildDate>
+    
+	<atom:link href="https://Eklipsorz.github.io/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Introduction: Floyd Cycle Detection</title>
+      <link>https://Eklipsorz.github.io/blog/floydcycledetect/</link>
+      <pubDate>Tue, 21 Jul 2020 15:05:34 +0800</pubDate>
+      
+      <guid>https://Eklipsorz.github.io/blog/floydcycledetect/</guid>
+      <description>\[ AveP = \int_0^1 p(r) dr \]</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -3,23 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://Eklipsorz.github.io/contact/</loc>
-    <lastmod>2020-07-21T14:00:02+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://Eklipsorz.github.io/about/</loc>
-    <lastmod>2020-07-20T17:32:23+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://Eklipsorz.github.io/blog/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://Eklipsorz.github.io/categories/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <loc>https://Eklipsorz.github.io/en/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -53,7 +37,7 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-tw"
-                href="https://Eklipsorz.github.io/zh-tw/categories/"
+                href="https://Eklipsorz.github.io/categories/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -63,13 +47,12 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://Eklipsorz.github.io/categories/"
+                href="https://Eklipsorz.github.io/en/categories/"
                 />
   </url>
   
   <url>
-    <loc>https://Eklipsorz.github.io/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <loc>https://Eklipsorz.github.io/en/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -103,7 +86,7 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-tw"
-                href="https://Eklipsorz.github.io/zh-tw/"
+                href="https://Eklipsorz.github.io/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -113,38 +96,12 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://Eklipsorz.github.io/"
+                href="https://Eklipsorz.github.io/en/"
                 />
   </url>
   
   <url>
-    <loc>https://Eklipsorz.github.io/tags/css/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://Eklipsorz.github.io/tags/html/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://Eklipsorz.github.io/tags/markdown/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://Eklipsorz.github.io/blog/test/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://Eklipsorz.github.io/categories/syntax/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://Eklipsorz.github.io/tags/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <loc>https://Eklipsorz.github.io/en/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
@@ -178,7 +135,7 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-tw"
-                href="https://Eklipsorz.github.io/zh-tw/tags/"
+                href="https://Eklipsorz.github.io/tags/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -188,18 +145,8 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://Eklipsorz.github.io/tags/"
+                href="https://Eklipsorz.github.io/en/tags/"
                 />
-  </url>
-  
-  <url>
-    <loc>https://Eklipsorz.github.io/tags/themes/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://Eklipsorz.github.io/categories/themes/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
   </url>
   
 </urlset>

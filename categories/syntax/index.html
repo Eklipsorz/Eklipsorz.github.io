@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-tw">
   <head>
   <meta charset="utf-8">
 <title>syntax - CS Pensieve</title>
@@ -15,11 +15,44 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="syntax"/>
 <meta name="twitter:description" content=""/>
-<link rel="stylesheet" href="/css/bundle.min.759e3848ea529eef056dab665b241e2af569e601ab80f68f8d4a4d002a155dd4.css" integrity="sha256-dZ44SOpSnu8FbatmWyQeKvVp5gGrgPaPjUpNACoVXdQ="><link rel="stylesheet" href="/css/add-on.css">
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+<link rel="stylesheet" href="/css/bundle.min.759e3848ea529eef056dab665b241e2af569e601ab80f68f8d4a4d002a155dd4.css" integrity="sha256-dZ44SOpSnu8FbatmWyQeKvVp5gGrgPaPjUpNACoVXdQ="><link rel="stylesheet" href="/css/add-on.css"> 
 </head>
 
   <body>
     
+
 
 <header id="site-header">
   <nav id="site-nav">
@@ -27,7 +60,7 @@
       <a href="/" class="nav">
         
           
-            Categories
+            分類
           
         
       </a>
@@ -74,14 +107,16 @@
     </menu>
     <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
     <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
-    <a href="#lang-menu" class="nav lang-toggle" lang="en">en</a>
+    <a href="#lang-menu" class="nav lang-toggle" lang="zh-tw">zh-tw</a>
     <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
   </nav>
   <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
   <menu id="lang-menu" class="flyout-menu menu">
-  <a href="#" lang="en" class="nav link active">English (en)</a>
+  <a href="#" lang="zh-tw" class="nav link active">中文 (zh-tw)</a>
   
     
+      
+        <a href="/en" lang="en" class="nav no-lang link">English (en)</a>
       
     
       
@@ -108,8 +143,6 @@
         <a href="/zh-cn" lang="zh-cn" class="nav no-lang link">中文 (zh-cn)</a>
       
     
-      
-        <a href="/zh-tw" lang="zh-tw" class="nav no-lang link">中文 (zh-tw)</a>
       
     
       
@@ -159,7 +192,7 @@
   
 
   
-        <a href="mailto:?subject=Check%20out%20this%20post%20by %7b%20%20%20%20%20%20%20%20map%5b%5d%7d&amp;body=https%3a%2f%2fEklipsorz.github.io%2fcategories%2fsyntax%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+        <a href="mailto:?subject=%e6%9f%a5%e7%9c%8b%e6%ad%a4%e5%b8%96%e5%ad%90%e7%9a%84%e4%bd%9c%e8%80%85 %7b%20%20%20%20%20%20%20%20map%5b%5d%7d&amp;body=https%3a%2f%2fEklipsorz.github.io%2fcategories%2fsyntax%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
           <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
         </a>
   
@@ -252,7 +285,7 @@
     </time>
     <span class="author">Hugo Authors</span>
     
-      <p>1 minute read</p>
+      <p>1 分鐘</p>
     
   </div>
 </header>
@@ -262,7 +295,7 @@
   
   <p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.</p>
   <footer>
-    <a href="/blog/test/" class="button big">Read more</a>
+    <a href="/blog/test/" class="button big">閱讀全文</a>
     <ul class="stats">
   <li class="categories">
     <ul>
@@ -312,7 +345,7 @@
   
     <section id="recent-posts">
       <header>
-        <h1>Recent posts</h1>
+        <h1>最新文章</h1>
       </header>
       
       <article class="mini-post">
@@ -334,7 +367,7 @@
     
       <section id="categories">
         <header>
-          <h1><a href="/categories">Categories</a></h1>
+          <h1><a href="/categories">分類</a></h1>
         </header>
         <ul>
           
@@ -360,11 +393,11 @@
   
     <section id="mini-bio">
       <header>
-        <h1>About</h1>
+        <h1>關於</h1>
       </header>
       <p>一個儲存電腦科學知識的儲思盆，希望能記錄所有其他知識。</p>
       <footer>
-        <a href="/about" class="button">Learn More</a>
+        <a href="/about" class="button">了解更多</a>
       </footer>
     </section>
   
@@ -428,7 +461,7 @@
         CS Pensieve
       
     . <br>
-    Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='0.74.2' target='_blank' rel='noopener'>Hugo</a>
+    主題: <a href='https://themes.gohugo.io/hugo-future-imperfect-slim/' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>移植自 <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP</a> | 由 <a href='https://gohugo.io/' target='_blank' rel='noopener' title='0.74.2'>Hugo</a> 提供
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
