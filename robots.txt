@@ -1,9 +1,12 @@
 User-agent: *
 
 
-Disallow: /en/categories/
 
-Disallow: /en/
-
-Disallow: /en/tags/
-
+Disallow: /css/*
+#
+#Disallow: /en/categories/
+#
+#Disallow: /en/
+#
+#Disallow: /en/tags/
+#
