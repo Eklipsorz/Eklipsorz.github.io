@@ -6,44 +6,26 @@
     <description>Recent content in Tags on CS Pensieve</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-TW</language>
-    <lastBuildDate>Mon, 11 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 21 Jul 2020 15:05:34 +0800</lastBuildDate>
     
 	<atom:link href="https://Eklipsorz.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>css</title>
-      <link>https://Eklipsorz.github.io/tags/css/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      <title>Algorithm</title>
+      <link>https://Eklipsorz.github.io/tags/algorithm/</link>
+      <pubDate>Tue, 21 Jul 2020 15:05:34 +0800</pubDate>
       
-      <guid>https://Eklipsorz.github.io/tags/css/</guid>
+      <guid>https://Eklipsorz.github.io/tags/algorithm/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>html</title>
-      <link>https://Eklipsorz.github.io/tags/html/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      <title>Cycle Detection</title>
+      <link>https://Eklipsorz.github.io/tags/cycle-detection/</link>
+      <pubDate>Tue, 21 Jul 2020 15:05:34 +0800</pubDate>
       
-      <guid>https://Eklipsorz.github.io/tags/html/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>markdown</title>
-      <link>https://Eklipsorz.github.io/tags/markdown/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eklipsorz.github.io/tags/markdown/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>themes</title>
-      <link>https://Eklipsorz.github.io/tags/themes/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://Eklipsorz.github.io/tags/themes/</guid>
+      <guid>https://Eklipsorz.github.io/tags/cycle-detection/</guid>
       <description></description>
     </item>
     

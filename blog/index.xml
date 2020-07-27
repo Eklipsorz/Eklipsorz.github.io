@@ -6,18 +6,31 @@
     <description>Recent content in Blog on CS Pensieve</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-TW</language>
-    <lastBuildDate>Mon, 11 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 21 Jul 2020 15:05:34 +0800</lastBuildDate>
     
 	<atom:link href="https://Eklipsorz.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Markdown Syntax Guide</title>
-      <link>https://Eklipsorz.github.io/blog/test/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      <title>Introduction: Floyd Cycle Detection</title>
+      <link>https://Eklipsorz.github.io/blog/floydcycledetect/</link>
+      <pubDate>Tue, 21 Jul 2020 15:05:34 +0800</pubDate>
       
-      <guid>https://Eklipsorz.github.io/blog/test/</guid>
-      <description>&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;</description>
+      <guid>https://Eklipsorz.github.io/blog/floydcycledetect/</guid>
+      <description>當你想解決任何一個需要檢測在多個相互連接的元素是否存在著循環結構之場景，比如說
+ 道路模型。
+ 由多個有限狀態所組成的數學模型。
+ 有限輸入下在同一個函式$f(x)$所形成的結果，比如集合為$\{1,2\}$，且$f(1)=2$以及$f(2)=1$，在這裏1和2就透過函式關係形成一個循環結構。  我們可以將這些場景轉化成由多個節點構成的List結構，並且大致區分為兩種不同結構：
+ 擁有循環結構的List結構 
+ 沒擁有循環結構的List結構
+  
+當我們轉換成如此的結構時，我們可以更容易以肉眼看出哪些模型存在著循環，在這裏我們可以知道List A是存在著循環，而List B由於尾巴部分並未跟 前幾個節點相接，所以不構成循環。在這裡你或許會選擇以肉眼來辨識，但現實是當面對大量或者複雜的模型時，肉眼看會顯得效率太差，所以最好由電 腦進行這樣的重複辨識工作。
+可換作是電腦，它要如何辨識呢？畢竟他本身就不存在像人眼那樣的辨識模型，在這裏提供一個方法來幫助電腦辨識：Floyd&#39;s Cycle Detection Algorithm， 據說是由Robert W. Floyd所發明的演算法，所以以他的名字來命名，普遍上會以演算法的特色來稱呼：龜兔賽跑算法。顧名思義，這個演算法會假設一隻烏龜和 一隻兔子在這個許多節點構成的List結構進行賽跑，烏龜每次只能走一個節點，而兔子只能走二個節點，如果List結構存在著循環，他們只要跑下去肯定能到循環 裡，並且他們肯定能在循環中碰面或者在同一點會合的話。
+ .center { text-align: center; }   然而，如果兔子走到結構中的終點卻沒跟烏龜會合的話，那就表示著結構不存著循環。(如下圖)
+ .center { text-align: center; }   乍看之下這方法很簡單，但問題是這方法真能判別循環問題嗎？如果你對此也感到懷疑，歡迎到Proof章節來進行討論，但如果沒有的話，我可以告訴你 這方法確實能判別循環問題，而非是運氣，另外也建議讀者您參考Implementation以及Performance這兩個章節來看其代碼以及成本。
+Proof:How it works? 首先我們先來考慮擁有循環的結構(如下圖)，在循環之前可能會有$N$個點或者沒存在任何節點，而這$N$的值會影響著烏龜和兔子在循環中的初始位置，再來 為了很好地地瞭解影響，設定了數字來表示循環中的第幾個節點，以$0$到$\lambda-1$來命名，而$\lambda$則是定義成循環中的長度，在這裡$\lambda=10$。
+ .center { text-align: center; }   首先我們先考慮著$N=0$時，兔子和烏龜會在循環的起點會合，並從那裡開始進行他們的賽跑。
+ .center { text-align: center; }   根據兔子走兩步和烏龜走一步的前提，當兔子走完一圈時，烏龜才走半圈，而兔子再走完下一個完整的圈時，這時烏龜才走完一圈，此時他們倆就在一開始的點會合。</description>
     </item>
     
   </channel>

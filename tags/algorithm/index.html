@@ -15,36 +15,28 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Algorithm"/>
 <meta name="twitter:description" content=""/>
-<link rel="stylesheet" href="/css/bundle.min.759e3848ea529eef056dab665b241e2af569e601ab80f68f8d4a4d002a155dd4.css" integrity="sha256-dZ44SOpSnu8FbatmWyQeKvVp5gGrgPaPjUpNACoVXdQ="><link rel="stylesheet" href="/css/add-on.css"> 
-  <script type="text/javascript"
-        async
-        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[\[','\]\]']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
-});
-
-
-MathJax.Hub.Queue(function() {
-    
-    
-    
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i = 0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
     }
-});
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
 
 </script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
 code.has-jax {
     font: inherit;
@@ -55,7 +47,7 @@ code.has-jax {
 }
 </style>
 
-
+<link rel="stylesheet" href="/css/bundle.min.759e3848ea529eef056dab665b241e2af569e601ab80f68f8d4a4d002a155dd4.css" integrity="sha256-dZ44SOpSnu8FbatmWyQeKvVp5gGrgPaPjUpNACoVXdQ="><link rel="stylesheet" href="/css/add-on.css"> 
 </head>
 
   <body>
@@ -293,7 +285,7 @@ code.has-jax {
     </time>
     <span class="author">Eklipsorz</span>
     
-      <p>1 分鐘</p>
+      <p>2 分鐘</p>
     
   </div>
 </header>
@@ -301,9 +293,7 @@ code.has-jax {
   
 
   
-  <p><span  class="math">\[
-AveP = \int_0^1 p(r) dr
-\]</span></p>
+  <p>當你想解決任何一個需要檢測在多個相互連接的元素是否存在著循環結構之場景，比如說</p>
   <footer>
     <a href="/blog/floydcycledetect/" class="button big">閱讀全文</a>
     <ul class="stats">
@@ -363,17 +353,6 @@ AveP = \int_0^1 p(r) dr
         </header>
       </article>
       
-      <article class="mini-post">
-        <section>
-          
-
-        </section>
-        <header>
-          <h2><a href="/blog/test/">Markdown Syntax Guide</a></h2>
-          <time class="published" datetime="">March 11, 2019</time>
-        </header>
-      </article>
-      
       
     </section>
   
@@ -392,16 +371,6 @@ AveP = \int_0^1 p(r) dr
           <li>
             
               <a href="/categories/algorithm/">algorithm<span class="count">1</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/syntax/">syntax<span class="count">1</span></a>
-            
-          
-          <li>
-            
-              <a href="/categories/themes/">themes<span class="count">1</span></a>
             
           
           </li>
