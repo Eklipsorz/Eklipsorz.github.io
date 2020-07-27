@@ -2,11 +2,14 @@ User-agent: *
 
 
 
-Disallow: /css/*
-#
-#Disallow: /en/categories/
-#
-#Disallow: /en/
-#
-#Disallow: /en/tags/
-#
+Disallow: /css/
+Disallow: /de/
+Disallow: /es/
+Disallow: /fr/
+Disallow: /img/
+Disallow: /ja/
+Disallow: /js/
+Disallow: /pt/
+Disallow: /tags/
+Disallow: /webfonts/
+Disallow: /zh-cn/
