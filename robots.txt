@@ -1,2 +1,15 @@
 User-agent: *
-Allow: / 
+
+
+
+Disallow: /css/
+Disallow: /de/
+Disallow: /es/
+Disallow: /fr/
+Disallow: /img/
+Disallow: /ja/
+Disallow: /js/
+Disallow: /pt/
+Disallow: /tags/
+Disallow: /webfonts/
+Disallow: /zh-cn/
