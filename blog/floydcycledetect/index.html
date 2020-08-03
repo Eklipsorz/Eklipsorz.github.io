@@ -55,7 +55,34 @@ code.has-jax {
 }
 </style>
 
-<link rel="stylesheet" href="/css/bundle.min.759e3848ea529eef056dab665b241e2af569e601ab80f68f8d4a4d002a155dd4.css" integrity="sha256-dZ44SOpSnu8FbatmWyQeKvVp5gGrgPaPjUpNACoVXdQ="><link rel="stylesheet" href="/css/add-on.css"> 
+
+  <script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/Eklipsorz.github.io\/"
+    },
+    "articleSection" : "blog",
+    "name" : "Introduction: Floyd Cycle Detection",
+    "headline" : "Introduction: Floyd Cycle Detection",
+    "description" : "一個利用兩個指標(Pointer)來解決List上的循環問題",
+    "inLanguage" : "en-US",
+    "author" : "",
+    "creator" : "",
+    "publisher": "",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-07-21 15:05:34 \u002b0800 CST",
+    "dateModified" : "2020-07-21 15:05:34 \u002b0800 CST",
+    "url" : "https:\/\/Eklipsorz.github.io\/blog\/floydcycledetect\/",
+    "wordCount" : "392",
+    "keywords" : [ "Algorithm","Cycle Detection","Blog" ]
+}
+</script>
+<link rel="stylesheet" href="https://Eklipsorz.github.io/css/bundle.min.759e3848ea529eef056dab665b241e2af569e601ab80f68f8d4a4d002a155dd4.css" integrity="sha256-dZ44SOpSnu8FbatmWyQeKvVp5gGrgPaPjUpNACoVXdQ="><link rel="stylesheet" href="https://Eklipsorz.github.io/css/add-on.css"> 
 </head>
 
   <body>
@@ -65,7 +92,7 @@ code.has-jax {
 <header id="site-header">
   <nav id="site-nav">
     <h1 class="nav-title">
-      <a href="/" class="nav">
+      <a href="https://Eklipsorz.github.io/" class="nav">
         
           
             部落格
@@ -78,35 +105,35 @@ code.has-jax {
         
           
           
-            <a href="/" class="nav link"><i class='fa fa-home'></i> Home</a>
+            <a href="https://Eklipsorz.github.io/" class="nav link"><i class='fa fa-home'></i> Home</a>
           
         
       
         
           
           
-            <a href="/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+            <a href="https://Eklipsorz.github.io/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
           
         
       
         
           
           
-            <a href="/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
+            <a href="https://Eklipsorz.github.io/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
           
         
       
         
           
           
-            <a href="/categories/" class="nav link"><i class='fas fa-sitemap'></i> Categories</a>
+            <a href="https://Eklipsorz.github.io/categories/" class="nav link"><i class='fas fa-sitemap'></i> Categories</a>
           
         
       
         
           
           
-            <a href="/contact/" class="nav link"><i class='far fa-envelope'></i> Contact</a>
+            <a href="https://Eklipsorz.github.io/contact/" class="nav link"><i class='far fa-envelope'></i> Contact</a>
           
         
       
@@ -124,37 +151,37 @@ code.has-jax {
   
     
       
-        <a href="/en" lang="en" class="nav no-lang link">English (en)</a>
+        <a href="https://Eklipsorz.github.io/en" lang="en" class="nav no-lang link">English (en)</a>
       
     
       
-        <a href="/fr" lang="fr" class="nav no-lang link">Français (fr)</a>
+        <a href="https://Eklipsorz.github.io/fr" lang="fr" class="nav no-lang link">Français (fr)</a>
       
     
       
-        <a href="/pl" lang="pl" class="nav no-lang link">Polski (pl)</a>
+        <a href="https://Eklipsorz.github.io/pl" lang="pl" class="nav no-lang link">Polski (pl)</a>
       
     
       
-        <a href="/pt" lang="pt" class="nav no-lang link">Português (pt)</a>
+        <a href="https://Eklipsorz.github.io/pt" lang="pt" class="nav no-lang link">Português (pt)</a>
       
     
       
-        <a href="/de" lang="de" class="nav no-lang link">Deutsche (de)</a>
+        <a href="https://Eklipsorz.github.io/de" lang="de" class="nav no-lang link">Deutsche (de)</a>
       
     
       
-        <a href="/es" lang="es" class="nav no-lang link">Española (es)</a>
+        <a href="https://Eklipsorz.github.io/es" lang="es" class="nav no-lang link">Española (es)</a>
       
     
       
-        <a href="/zh-cn" lang="zh-cn" class="nav no-lang link">中文 (zh-cn)</a>
+        <a href="https://Eklipsorz.github.io/zh-cn" lang="zh-cn" class="nav no-lang link">中文 (zh-cn)</a>
       
     
       
     
       
-        <a href="/ja" lang="ja" class="nav no-lang link">日本語 (ja)</a>
+        <a href="https://Eklipsorz.github.io/ja" lang="ja" class="nav no-lang link">日本語 (ja)</a>
       
     
   
@@ -212,7 +239,7 @@ code.has-jax {
 
     <div id="wrapper">
       <section id="site-intro" >
-  <a href="/"><img src="https://Eklipsorz.github.io/img/main/logo.png" class="circle" width="" alt="Hugo Future Imperfect Slim" /></a>
+  <a href="https://Eklipsorz.github.io/"><img src="https://Eklipsorz.github.io/img/main/logo.png" class="circle" width="" alt="Hugo Future Imperfect Slim" /></a>
   <header>
     <h1>Eklipsorz</h1>
   </header>
@@ -277,7 +304,7 @@ code.has-jax {
     <header>
   <div class="title">
     
-      <h2><a href="/blog/floydcycledetect/">Introduction: Floyd Cycle Detection</a></h2>
+      <h2><a href="https://Eklipsorz.github.io/blog/floydcycledetect/">Introduction: Floyd Cycle Detection</a></h2>
     
     
       <p>一個利用兩個指標(Pointer)來解決List上的循環問題</p>
@@ -354,12 +381,12 @@ code.has-jax {
 
 <ol>
 <li><p>擁有循環結構的List結構
-<figure><img src="/img/floydCycleDetect/ListAexample.png" alt=""></figure></p></li>
+<figure><img src="https://Eklipsorz.github.io/img/floydCycleDetect/ListAexample.png" alt=""></figure></p></li>
 
 <li><p>沒擁有循環結構的List結構</p></li>
 </ol>
 
-<p><figure><img src="/img/floydCycleDetect/ListBexample.png" alt=""></figure></p>
+<p><figure><img src="https://Eklipsorz.github.io/img/floydCycleDetect/ListBexample.png" alt=""></figure></p>
 
 <p>當我們轉換成如此的結構時，我們可以更容易以肉眼看出哪些模型存在著循環，在這裏我們可以知道List A是存在著循環，而List B由於尾巴部分並未跟
 前幾個節點相接，所以不構成循環。在這裡你或許會選擇以肉眼來辨識，但現實是當面對大量或者複雜的模型時，肉眼看會顯得效率太差，所以最好由電
@@ -386,7 +413,7 @@ code.has-jax {
 
 <div class="center">
   <img
-    src="/img/floydCycleDetect/CycleExample.png"
+    src="https://Eklipsorz.github.io/img/floydCycleDetect/CycleExample.png"
     alt="擁有循環的List結構"
     decoding="async"
   />
@@ -411,7 +438,7 @@ code.has-jax {
 
 <div class="center">
   <img
-    src="/img/floydCycleDetect/NoCycleExample.png"
+    src="https://Eklipsorz.github.io/img/floydCycleDetect/NoCycleExample.png"
     alt="沒擁有循環的List結構"
     decoding="async"
   />
@@ -442,7 +469,7 @@ code.has-jax {
 
 <div class="center">
   <img
-    src="/img/floydCycleDetect/NandCycle.png"
+    src="https://Eklipsorz.github.io/img/floydCycleDetect/NandCycle.png"
     alt="沒擁有循環的List結構"
     decoding="async"
   />
@@ -467,7 +494,7 @@ code.has-jax {
 
 <div class="center">
   <img
-    src="/img/floydCycleDetect/N0andCycle.png"
+    src="https://Eklipsorz.github.io/img/floydCycleDetect/N0andCycle.png"
     alt="沒擁有循環的List結構"
     decoding="async"
   />
@@ -543,7 +570,7 @@ code.has-jax {
 
 <div class="center">
   <img
-    src="/img/floydCycleDetect/N1andCycle.png"
+    src="https://Eklipsorz.github.io/img/floydCycleDetect/N1andCycle.png"
     alt="N = 1時的情況"
     decoding="async"
   />
@@ -639,7 +666,7 @@ code.has-jax {
 
 <div class="center">
   <img
-    src="/img/floydCycleDetect/N2andCycle.png"
+    src="https://Eklipsorz.github.io/img/floydCycleDetect/N2andCycle.png"
     alt="N = 2時的情況"
     decoding="async"
   />
@@ -710,7 +737,7 @@ code.has-jax {
 
 <div class="center">
   <img
-    src="/img/floydCycleDetect/NMandCycle.png"
+    src="https://Eklipsorz.github.io/img/floydCycleDetect/NMandCycle.png"
     alt="N = M時的情況"
     decoding="async"
   />
@@ -980,7 +1007,7 @@ code.has-jax {
 
 <div class="center">
   <img
-    src="/img/floydCycleDetect/2length.png"
+    src="https://Eklipsorz.github.io/img/floydCycleDetect/2length.png"
     alt="N = 考慮二種路線的長度"
     decoding="async"
   />
@@ -1005,7 +1032,7 @@ code.has-jax {
 
 <div class="center">
   <img
-    src="/img/floydCycleDetect/3length.png"
+    src="https://Eklipsorz.github.io/img/floydCycleDetect/3length.png"
     alt="N = 考慮三種路線的長度"
     decoding="async"
   />
@@ -1218,7 +1245,7 @@ code.has-jax {
 
 <div class="center">
   <img
-    src="/img/floydCycleDetect/N1N2length.png"
+    src="https://Eklipsorz.github.io/img/floydCycleDetect/N1N2length.png"
     alt="$N_1和N_2的示意圖$"
     decoding="async"
   />
@@ -1240,7 +1267,7 @@ code.has-jax {
     
       
         
-          <li><a class="article-terms-link" href="/categories/algorithm/">Algorithm</a></li>
+          <li><a class="article-terms-link" href="https://Eklipsorz.github.io/categories/algorithm/">Algorithm</a></li>
         
       
     
@@ -1251,9 +1278,9 @@ code.has-jax {
     
       
         
-          <li><a class="article-terms-link" href="/tags/algorithm/">Algorithm</a></li>
+          <li><a class="article-terms-link" href="https://Eklipsorz.github.io/tags/algorithm/">Algorithm</a></li>
         
-          <li><a class="article-terms-link" href="/tags/cycle-detection/">Cycle Detection</a></li>
+          <li><a class="article-terms-link" href="https://Eklipsorz.github.io/tags/cycle-detection/">Cycle Detection</a></li>
         
       
     
@@ -1332,7 +1359,7 @@ code.has-jax {
 
         </section>
         <header>
-          <h2><a href="/blog/floydcycledetect/">Introduction: Floyd Cycle Detection</a></h2>
+          <h2><a href="https://Eklipsorz.github.io/blog/floydcycledetect/">Introduction: Floyd Cycle Detection</a></h2>
           <time class="published" datetime="">July 21, 2020</time>
         </header>
       </article>
@@ -1345,7 +1372,7 @@ code.has-jax {
     
       <section id="categories">
         <header>
-          <h1><a href="/categories">分類</a></h1>
+          <h1><a href="https://Eklipsorz.github.io/categories">分類</a></h1>
         </header>
         <ul>
           
@@ -1354,7 +1381,7 @@ code.has-jax {
           
           <li>
             
-              <a href="/categories/algorithm/">algorithm<span class="count">1</span></a>
+              <a href="https://Eklipsorz.github.io/categories/algorithm/">algorithm<span class="count">1</span></a>
             
           
           </li>
@@ -1370,7 +1397,7 @@ code.has-jax {
       </header>
       <p>一個儲存電腦科學知識的儲思盆，希望能記錄所有其他知識。</p>
       <footer>
-        <a href="/about" class="button">了解更多</a>
+        <a href="https://Eklipsorz.github.io/about" class="button">了解更多</a>
       </footer>
     </section>
   
@@ -1437,9 +1464,9 @@ code.has-jax {
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
 
-      <script src="/js/highlight.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script><script src="/js/bundle.min.5e0ea733bf0d4dbe4708ae8a58107ddb9182e6499f51f9c7eba1f895531cbe81.js" integrity="sha256-Xg6nM78NTb5HCK6KWBB925GC5kmfUfnH66H4lVMcvoE="></script>
-    <script src="/js/add-on.js"></script>
+      <script src="https://Eklipsorz.github.io/js/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script><script src="https://Eklipsorz.github.io/js/bundle.min.5e0ea733bf0d4dbe4708ae8a58107ddb9182e6499f51f9c7eba1f895531cbe81.js" integrity="sha256-Xg6nM78NTb5HCK6KWBB925GC5kmfUfnH66H4lVMcvoE="></script>
+    <script src="https://Eklipsorz.github.io/js/add-on.js"></script>
     </div>
   </body>
 </html>
