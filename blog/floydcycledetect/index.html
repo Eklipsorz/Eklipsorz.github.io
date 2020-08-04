@@ -10,7 +10,7 @@
 <meta itemprop="description" content="利用兩個指標(Pointer)來解決List上的循環問題">
 <meta itemprop="datePublished" content="2020-07-21T15:05:34&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-21T15:05:34&#43;08:00" />
-<meta itemprop="wordCount" content="414">
+<meta itemprop="wordCount" content="415">
 
 
 
@@ -78,7 +78,7 @@ code.has-jax {
     "datePublished": "2020-07-21 15:05:34 \u002b0800 CST",
     "dateModified" : "2020-07-21 15:05:34 \u002b0800 CST",
     "url" : "https:\/\/Eklipsorz.github.io\/blog\/floydcycledetect\/",
-    "wordCount" : "414",
+    "wordCount" : "415",
     "keywords" : [ "Algorithm","Cycle Detection","Blog" ]
 }
 </script>
@@ -1218,7 +1218,7 @@ code.has-jax {
 
 <h2 id="pseudo-code">Pseudo Code</h2>
 
-<p>下圖是根據Floyd's Cycle Detection所描述的演算法而寫出的Pseudo Code，其中使用$next[i]$和$head[i]$來分別代表變數$i$的下一個節點以及
+<p>根據Floyd's Cycle Detection所描述的演算法而寫出的Pseudo Code，其中使用$next[i]$和$head[i]$來分別代表變數$i$的下一個節點以及
 其頭部節點，而NIL在這裡代表不存在任何節點。</p>
 
 
@@ -1290,7 +1290,8 @@ code.has-jax {
 
 <h2 id="conclusion">Conclusion</h2>
 
-<p>我們稍微介紹這方法以及應用場景，並且在最後證明這方法的可行性，同時從證明過程得到五個有趣結果。</p>
+<p>我們利用一些場景來說明循環問題，接著將這些場景轉化成電腦可以判斷是否有循環的List結構，最後我們提出知名的龜兔賽跑算法來幫助電腦
+判斷該List結構是否有循環。除此之外，我們也額外提供讀者一些章節來描述該方法是如何成功地判斷、如何實現以及其算法的執行成本。</p>
 
     </div>
     <footer>
