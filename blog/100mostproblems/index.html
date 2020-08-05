@@ -1,0 +1,1106 @@
+<!doctype html>
+<html lang="zh-tw">
+  <head>
+  <meta charset="utf-8">
+<title>LeetCode Study: Top 100 Liked Questions - CS Pensieve</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="generator" content="Hugo 0.74.2" /><meta itemprop="name" content="LeetCode Study: Top 100 Liked Questions">
+<meta itemprop="description" content="一個關於100個經典LeetCode題目的研究心得">
+<meta itemprop="datePublished" content="2020-08-05T15:05:34&#43;08:00" />
+<meta itemprop="dateModified" content="2020-08-05T15:05:34&#43;08:00" />
+<meta itemprop="wordCount" content="448">
+
+
+
+<meta itemprop="keywords" content="Algorithm,LeetCode," /><meta property="og:title" content="LeetCode Study: Top 100 Liked Questions" />
+<meta property="og:description" content="一個關於100個經典LeetCode題目的研究心得" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Eklipsorz.github.io/blog/100mostproblems/" />
+<meta property="article:published_time" content="2020-08-05T15:05:34+08:00" />
+<meta property="article:modified_time" content="2020-08-05T15:05:34+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="LeetCode Study: Top 100 Liked Questions"/>
+<meta name="twitter:description" content="一個關於100個經典LeetCode題目的研究心得"/>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+
+  <script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/Eklipsorz.github.io\/"
+    },
+    "articleSection" : "blog",
+    "name" : "LeetCode Study: Top 100 Liked Questions",
+    "headline" : "LeetCode Study: Top 100 Liked Questions",
+    "description" : "一個關於100個經典LeetCode題目的研究心得",
+    "inLanguage" : "en-US",
+    "author" : "",
+    "creator" : "",
+    "publisher": "",
+    "accountablePerson" : "",
+    "copyrightHolder" : "",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-08-05 15:05:34 \u002b0800 CST",
+    "dateModified" : "2020-08-05 15:05:34 \u002b0800 CST",
+    "url" : "https:\/\/Eklipsorz.github.io\/blog\/100mostproblems\/",
+    "wordCount" : "448",
+    "keywords" : [ "Algorithm","LeetCode","Blog" ]
+}
+</script>
+<link rel="stylesheet" href="https://Eklipsorz.github.io/css/bundle.min.759e3848ea529eef056dab665b241e2af569e601ab80f68f8d4a4d002a155dd4.css" integrity="sha256-dZ44SOpSnu8FbatmWyQeKvVp5gGrgPaPjUpNACoVXdQ="><link rel="stylesheet" href="https://Eklipsorz.github.io/css/add-on.css"> 
+</head>
+
+  <body>
+    
+
+
+<header id="site-header">
+  <nav id="site-nav">
+    <h1 class="nav-title">
+      <a href="https://Eklipsorz.github.io/" class="nav">
+        
+          
+            部落格
+          
+        
+      </a>
+    </h1>
+    <menu id="site-nav-menu" class="flyout-menu menu">
+      
+        
+          
+          
+            <a href="https://Eklipsorz.github.io/" class="nav link"><i class='fa fa-home'></i> Home</a>
+          
+        
+      
+        
+          
+          
+            <a href="https://Eklipsorz.github.io/about/" class="nav link"><i class='far fa-id-card'></i> About</a>
+          
+        
+      
+        
+          
+          
+            <a href="https://Eklipsorz.github.io/blog/" class="nav link"><i class='far fa-newspaper'></i> Blog</a>
+          
+        
+      
+        
+          
+          
+            <a href="https://Eklipsorz.github.io/categories/" class="nav link"><i class='fas fa-sitemap'></i> Categories</a>
+          
+        
+      
+        
+          
+          
+            <a href="https://Eklipsorz.github.io/contact/" class="nav link"><i class='far fa-envelope'></i> Contact</a>
+          
+        
+      
+      <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt">&nbsp;</i>Share</a>
+      <a href="#search-input" class="nav search-toggle"><i class="fas fa-search">&nbsp;</i>Search</a>
+    </menu>
+    <a href="#search-input" class="nav search-toggle"><i class="fas fa-search fa-2x">&nbsp;</i></a>
+    <a href="#share-menu" class="nav share-toggle"><i class="fas fa-share-alt fa-2x">&nbsp;</i></a>
+    <a href="#lang-menu" class="nav lang-toggle" lang="zh-tw">zh-tw</a>
+    <a href="#site-nav" class="nav nav-toggle"><i class="fas fa-bars fa-2x"></i></a>
+  </nav>
+  <menu id="search" class="menu"><input id="search-input" class="search-input menu"></input><div id="search-results" class="search-results menu"></div></menu>
+  <menu id="lang-menu" class="flyout-menu menu">
+  <a href="#" lang="zh-tw" class="nav link active">中文 (zh-tw)</a>
+  
+    
+      
+        <a href="https://Eklipsorz.github.io/en" lang="en" class="nav no-lang link">English (en)</a>
+      
+    
+      
+        <a href="https://Eklipsorz.github.io/fr" lang="fr" class="nav no-lang link">Français (fr)</a>
+      
+    
+      
+        <a href="https://Eklipsorz.github.io/pl" lang="pl" class="nav no-lang link">Polski (pl)</a>
+      
+    
+      
+        <a href="https://Eklipsorz.github.io/pt" lang="pt" class="nav no-lang link">Português (pt)</a>
+      
+    
+      
+        <a href="https://Eklipsorz.github.io/de" lang="de" class="nav no-lang link">Deutsche (de)</a>
+      
+    
+      
+        <a href="https://Eklipsorz.github.io/es" lang="es" class="nav no-lang link">Española (es)</a>
+      
+    
+      
+        <a href="https://Eklipsorz.github.io/zh-cn" lang="zh-cn" class="nav no-lang link">中文 (zh-cn)</a>
+      
+    
+      
+    
+      
+        <a href="https://Eklipsorz.github.io/ja" lang="ja" class="nav no-lang link">日本語 (ja)</a>
+      
+    
+  
+</menu>
+
+  
+    <menu id="share-menu" class="flyout-menu menu">
+      <h1>Share Post</h1>
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=LeetCode%20Study%3a%20Top%20100%20Liked%20Questions&amp;url=https%3a%2f%2fEklipsorz.github.io%2fblog%2f100mostproblems%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fEklipsorz.github.io%2fblog%2f100mostproblems%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fEklipsorz.github.io%2fblog%2f100mostproblems%2f&amp;title=LeetCode%20Study%3a%20Top%20100%20Liked%20Questions" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fEklipsorz.github.io%2fblog%2f100mostproblems%2f&amp;title=LeetCode%20Study%3a%20Top%20100%20Liked%20Questions" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fEklipsorz.github.io%2fblog%2f100mostproblems%2f&amp;description=LeetCode%20Study%3a%20Top%20100%20Liked%20Questions" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=%e6%9f%a5%e7%9c%8b%e6%ad%a4%e5%b8%96%e5%ad%90%e7%9a%84%e4%bd%9c%e8%80%85 Eklipsorz&amp;body=https%3a%2f%2fEklipsorz.github.io%2fblog%2f100mostproblems%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+    </menu>
+  
+</header>
+
+    <div id="wrapper">
+      <section id="site-intro" >
+  <a href="https://Eklipsorz.github.io/"><img src="https://Eklipsorz.github.io/img/main/logo.png" class="circle" width="" alt="Hugo Future Imperfect Slim" /></a>
+  <header>
+    <h1>Eklipsorz</h1>
+  </header>
+  <main>
+    <p>一名不具名的平凡人，認為沒有任何事物是在客觀上是具有意義的，有的只是無止盡的主觀，因此在這裡只會有引人思考、想像的文章或者議題，甚至我的大頭貼也是如此XD</p>
+  </main>
+  
+    <footer>
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/Eklipsorz" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//telegram.me/Eklipsorz" target="_blank" rel="noopener" title="telegram" class="fab fa-telegram"></a></li>
+
+
+
+
+
+
+<li><a href="mailto:eklipsorz@protonmail.ch" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+    </footer>
+  
+</section>
+
+      <main id="site-main">
+        
+  <article class="post">
+    <header>
+  <div class="title">
+    
+      <h2><a href="https://Eklipsorz.github.io/blog/100mostproblems/">LeetCode Study: Top 100 Liked Questions</a></h2>
+    
+    
+      <p>一個關於100個經典LeetCode題目的研究心得</p>
+    
+  </div>
+  <div class="meta">
+    <time class="published" datetime="2020-08-05 15:05:34 &#43;0800 CST">
+      August 5, 2020
+    </time>
+    <span class="author">Eklipsorz</span>
+    
+      <p>3 分鐘</p>
+    
+  </div>
+</header>
+
+    <section id="socnet-share">
+      
+
+
+
+
+  
+    
+    <a href="//twitter.com/share?text=LeetCode%20Study%3a%20Top%20100%20Liked%20Questions&amp;url=https%3a%2f%2fEklipsorz.github.io%2fblog%2f100mostproblems%2f" target="_blank" rel="noopener" class="nav share-btn twitter">
+        <i class="fab fa-twitter"></i><p>&nbsp;Twitter</p>
+      </a>
+  
+
+  
+      <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fEklipsorz.github.io%2fblog%2f100mostproblems%2f" target="_blank" rel="noopener" class="nav share-btn facebook">
+        <i class="fab fa-facebook"></i><p>&nbsp;Facebook</p>
+        </a>
+  
+
+  
+    <a href="//www.reddit.com/submit?url=https%3a%2f%2fEklipsorz.github.io%2fblog%2f100mostproblems%2f&amp;title=LeetCode%20Study%3a%20Top%20100%20Liked%20Questions" target="_blank" rel="noopener" class="nav share-btn reddit">
+          <i class="fab fa-reddit-alien"></i><p>&nbsp;Reddit</p>
+        </a>
+  
+
+  
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fEklipsorz.github.io%2fblog%2f100mostproblems%2f&amp;title=LeetCode%20Study%3a%20Top%20100%20Liked%20Questions" target="_blank" rel="noopener" class="nav share-btn linkedin">
+            <i class="fab fa-linkedin"></i><p>&nbsp;LinkedIn</p>
+          </a>
+  
+
+  
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fEklipsorz.github.io%2fblog%2f100mostproblems%2f&amp;description=LeetCode%20Study%3a%20Top%20100%20Liked%20Questions" target="_blank" rel="noopener" class="nav share-btn pinterest">
+          <i class="fab fa-pinterest-p"></i><p>&nbsp;Pinterest</p>
+        </a>
+  
+
+  
+        <a href="mailto:?subject=%e6%9f%a5%e7%9c%8b%e6%ad%a4%e5%b8%96%e5%ad%90%e7%9a%84%e4%bd%9c%e8%80%85 Eklipsorz&amp;body=https%3a%2f%2fEklipsorz.github.io%2fblog%2f100mostproblems%2f" target="_blank" class="nav share-btn email" data-proofer-ignore>
+          <i class="fas fa-envelope"></i><p>&nbsp;Email</p>
+        </a>
+  
+
+
+    </section>
+    
+
+    <div class="content">
+      <p>為了追蹤自己曾寫過的題目以及對於其題目所想到的思路而建立以下表格，其中該表格的欄位分為題目和研究心得連結，研究心得連結是自己擁有的hackmd筆記連結，
+有些筆記可能還存在著一些瑕疵，這部分會在短期內完成修改，並且記錄其他題目。另外NIL代表著還未有對應的筆記連結，換言之，還沒開始寫那題目的筆記XD。</p>
+
+<table>
+<thead>
+<tr>
+<th>題目</th>
+<th>研究心得連結</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Two Sum</td>
+<td><a href="https://hackmd.io/@eklipsorz/H1Rup1PF8">https://hackmd.io/@eklipsorz/H1Rup1PF8</a></td>
+</tr>
+
+<tr>
+<td>Add Two Numbers</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Longest Substring Without Repeating Characters</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Median of Two Sorted Arrays</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Longest Palindromic Substring</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Regular Expression Matching</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Container With Most Water</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>3Sum</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Letter Combinations of a Phone Number</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Remove Nth Node From End of List</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Valid Parentheses</td>
+<td><a href="https://hackmd.io/@eklipsorz/ryn15Vt5U">https://hackmd.io/@eklipsorz/ryn15Vt5U</a></td>
+</tr>
+
+<tr>
+<td>Merge Two Sorted Lists</td>
+<td><a href="https://hackmd.io/@eklipsorz/r1okmM0vL">https://hackmd.io/@eklipsorz/r1okmM0vL</a></td>
+</tr>
+
+<tr>
+<td>Generate Parentheses</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Merge k Sorted Lists</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Longest Valid Parentheses</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Search in Rotated Sorted Array</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Find First and Last Position of Element in Sorted Array</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Combination Sum</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>First Missing Positive</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Trapping Rain Water</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Permutations</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Rotate Image</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Group Anagrams</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Maximum Subarray</td>
+<td><a href="https://hackmd.io/@eklipsorz/BymotGetI">https://hackmd.io/@eklipsorz/BymotGetI</a></td>
+</tr>
+
+<tr>
+<td>Jump Game</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Merge Intervals</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Unique Paths</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Minimum Path Sum</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Climbing Stairs</td>
+<td><a href="https://hackmd.io/@eklipsorz/Hy3TA_YdL">https://hackmd.io/@eklipsorz/Hy3TA_YdL</a></td>
+</tr>
+
+<tr>
+<td>Edit Distance</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Sort Colors</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Minimum Window Substring</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Subsets</td>
+<td><a href="https://hackmd.io/@eklipsorz/HJWLg-QkD">https://hackmd.io/@eklipsorz/HJWLg-QkD</a></td>
+</tr>
+
+<tr>
+<td>Word Search</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Largest Rectangle in Histogram</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Maximal Rectangle</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Binary Tree Inorder Traversal</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Unique Binary Search Trees</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Validate Binary Search Tree</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Symmetric Tree</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Binary Tree Level Order Traversal</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Maximum Depth of Binary Tree</td>
+<td><a href="https://hackmd.io/@eklipsorz/HkIpIfRv8">https://hackmd.io/@eklipsorz/HkIpIfRv8</a></td>
+</tr>
+
+<tr>
+<td>Construct Binary Tree from Preorder and Inorder Traversal</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Flatten Binary Tree to Linked List</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Best Time to Buy and Sell Stock</td>
+<td><a href="https://hackmd.io/@eklipsorz/BJuq1iAFI">https://hackmd.io/@eklipsorz/BJuq1iAFI</a></td>
+</tr>
+
+<tr>
+<td>Binary Tree Maximum Path Sum</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Longest Consecutive Sequence</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Single Number</td>
+<td><a href="https://hackmd.io/@eklipsorz/SJtK5qpvI">https://hackmd.io/@eklipsorz/SJtK5qpvI</a></td>
+</tr>
+
+<tr>
+<td>Copy List with Random Pointer</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Word Break</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Linked List Cycle</td>
+<td><a href="https://hackmd.io/@eklipsorz/ryusl4Z5L">https://hackmd.io/@eklipsorz/ryusl4Z5L</a></td>
+</tr>
+
+<tr>
+<td>Linked List Cycle II</td>
+<td><a href="https://hackmd.io/@eklipsorz/ryXLRDM5I">https://hackmd.io/@eklipsorz/ryXLRDM5I</a></td>
+</tr>
+
+<tr>
+<td>LRU Cache</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Sort List</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Maximum Product Subarray</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Min Stack</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Intersection of Two Linked Lists</td>
+<td><a href="https://hackmd.io/@eklipsorz/BkzWzfSqU">https://hackmd.io/@eklipsorz/BkzWzfSqU</a></td>
+</tr>
+
+<tr>
+<td>Majority Element</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>House Robber</td>
+<td><a href="https://hackmd.io/@eklipsorz/BJtNPeJ9I">https://hackmd.io/@eklipsorz/BJtNPeJ9I</a></td>
+</tr>
+
+<tr>
+<td>Number of Islands</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Reverse Linked List</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Course Schedule</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Implement Trie (Prefix Tree)</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Word Search II</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Kth Largest Element in an Array</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Maximal Square</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Invert Binary Tree</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Kth Smallest Element in a BST</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Palindrome Linked List</td>
+<td><a href="https://hackmd.io/@eklipsorz/Hy2iQYLcI">https://hackmd.io/@eklipsorz/Hy2iQYLcI</a></td>
+</tr>
+
+<tr>
+<td>Lowest Common Ancestor of a Binary Tree</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Product of Array Except Self</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Sliding Window Maximum</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Search a 2D Matrix II</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Meeting Rooms II</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Perfect Squares</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Move Zeroes</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Find the Duplicate Number</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Serialize and Deserialize Binary Tree</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Longest Increasing Subsequence</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Remove Invalid Parentheses</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Best Time to Buy and Sell Stock with Cooldown</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Coin Change</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>House Robber III</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Counting Bits</td>
+<td><a href="https://hackmd.io/@eklipsorz/rJZhS6s9U">https://hackmd.io/@eklipsorz/rJZhS6s9U</a></td>
+</tr>
+
+<tr>
+<td>Top K Frequent Elements</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Decode String</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Queue Reconstruction by Height</td>
+<td><a href="https://hackmd.io/@eklipsorz/BkTVFwLj8">https://hackmd.io/@eklipsorz/BkTVFwLj8</a></td>
+</tr>
+
+<tr>
+<td>Partition Equal Subset Sum</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Path Sum III</td>
+<td><a href="https://hackmd.io/@eklipsorz/Hyo1xWVF8">https://hackmd.io/@eklipsorz/Hyo1xWVF8</a></td>
+</tr>
+
+<tr>
+<td>Find All Anagrams in a String</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Find All Numbers Disappeared in an Array</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Target Sum</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Diameter of Binary Tree</td>
+<td><a href="https://hackmd.io/@eklipsorz/rk0EVrwdL">https://hackmd.io/@eklipsorz/rk0EVrwdL</a></td>
+</tr>
+
+<tr>
+<td>Subarray Sum Equals K</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Shortest Unsorted Continuous Subarray</td>
+<td><a href="https://hackmd.io/@eklipsorz/rJcz6ic58">https://hackmd.io/@eklipsorz/rJcz6ic58</a></td>
+</tr>
+
+<tr>
+<td>Merge Two Binary Trees</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Task Scheduler</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Palindromic Substrings</td>
+<td>NIL</td>
+</tr>
+
+<tr>
+<td>Daily Temperatures</td>
+<td><a href="https://hackmd.io/@eklipsorz/BkMYGyaoI">https://hackmd.io/@eklipsorz/BkMYGyaoI</a></td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+    <footer>
+      <ul class="stats">
+  <li class="categories">
+    <ul>
+    
+      
+        
+          <li><a class="article-terms-link" href="https://Eklipsorz.github.io/categories/leetcode/">LeetCode</a></li>
+        
+      
+    
+    </ul>
+  </li>
+  <li class="tags">
+    <ul>
+    
+      
+        
+          <li><a class="article-terms-link" href="https://Eklipsorz.github.io/tags/algorithm/">Algorithm</a></li>
+        
+          <li><a class="article-terms-link" href="https://Eklipsorz.github.io/tags/leetcode/">LeetCode</a></li>
+        
+      
+    
+    </ul>
+  </li>
+</ul>
+
+    </footer>
+  </article>
+  
+  <article class="post">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "https-eklipsorz-github-io" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </article>
+
+
+
+
+  <div class="pagination">
+  
+    <a href="https://Eklipsorz.github.io/blog/floydcycledetect/" class="button"><div class="previous"><div>Introduction: Floyd Cycle Detection</div></div></a>
+  
+  
+</div>
+
+  <div class="disqus markdown">
+  	<div id="disqus_thread"></div>
+<script>
+
+
+
+
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://https-eklipsorz-github-io.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+
+  </div>
+
+      </main>
+      <section id="site-sidebar">
+  
+    <section id="recent-posts">
+      <header>
+        <h1>最新文章</h1>
+      </header>
+      
+      <article class="mini-post">
+        <section>
+          
+
+        </section>
+        <header>
+          <h2><a href="https://Eklipsorz.github.io/blog/100mostproblems/">LeetCode Study: Top 100 Liked Questions</a></h2>
+          <time class="published" datetime="">August 5, 2020</time>
+        </header>
+      </article>
+      
+      <article class="mini-post">
+        <section>
+          
+
+        </section>
+        <header>
+          <h2><a href="https://Eklipsorz.github.io/blog/floydcycledetect/">Introduction: Floyd Cycle Detection</a></h2>
+          <time class="published" datetime="">July 21, 2020</time>
+        </header>
+      </article>
+      
+      
+    </section>
+  
+
+  
+    
+      <section id="categories">
+        <header>
+          <h1><a href="https://Eklipsorz.github.io/categories">分類</a></h1>
+        </header>
+        <ul>
+          
+            
+          
+          
+          <li>
+            
+              <a href="https://Eklipsorz.github.io/categories/algorithm/">algorithm<span class="count">1</span></a>
+            
+          
+          <li>
+            
+              <a href="https://Eklipsorz.github.io/categories/leetcode/">leetcode<span class="count">1</span></a>
+            
+          
+          </li>
+        </ul>
+      </section>
+    
+  
+
+  
+    <section id="mini-bio">
+      <header>
+        <h1>關於</h1>
+      </header>
+      <p>一個儲存電腦科學知識的儲思盆，希望能記錄所有其他知識。</p>
+      <footer>
+        <a href="https://Eklipsorz.github.io/about" class="button">了解更多</a>
+      </footer>
+    </section>
+  
+</section>
+
+      <footer id="site-footer">
+  
+      <ul class="socnet-icons">
+        
+
+        <li><a href="//github.com/Eklipsorz" target="_blank" rel="noopener" title="GitHub" class="fab fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//telegram.me/Eklipsorz" target="_blank" rel="noopener" title="telegram" class="fab fa-telegram"></a></li>
+
+
+
+
+
+
+<li><a href="mailto:eklipsorz@protonmail.ch" target="_blank" title="Email" class="far fa-envelope"></a></li>
+
+      </ul>
+  
+  <p class="copyright">
+    
+      &copy; 2020
+      
+        CS Pensieve
+      
+    . <br>
+    主題: <a href='https://themes.gohugo.io/hugo-future-imperfect-slim/' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>移植自 <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP</a> | 由 <a href='https://gohugo.io/' target='_blank' rel='noopener' title='0.74.2'>Hugo</a> 提供
+  </p>
+</footer>
+<a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>
+
+      <script src="https://Eklipsorz.github.io/js/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script><script src="https://Eklipsorz.github.io/js/bundle.min.5e0ea733bf0d4dbe4708ae8a58107ddb9182e6499f51f9c7eba1f895531cbe81.js" integrity="sha256-Xg6nM78NTb5HCK6KWBB925GC5kmfUfnH66H4lVMcvoE="></script>
+    <script src="https://Eklipsorz.github.io/js/add-on.js"></script>
+    </div>
+  </body>
+</html>

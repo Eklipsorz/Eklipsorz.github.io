@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>LeetCode on CS Pensieve</title>
+    <link>https://Eklipsorz.github.io/categories/leetcode/</link>
+    <description>Recent content in LeetCode on CS Pensieve</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-TW</language>
+    <lastBuildDate>Wed, 05 Aug 2020 15:05:34 +0800</lastBuildDate>
+    
+	<atom:link href="https://Eklipsorz.github.io/categories/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>LeetCode Study: Top 100 Liked Questions</title>
+      <link>https://Eklipsorz.github.io/blog/100mostproblems/</link>
+      <pubDate>Wed, 05 Aug 2020 15:05:34 +0800</pubDate>
+      
+      <guid>https://Eklipsorz.github.io/blog/100mostproblems/</guid>
+      <description>為了追蹤自己曾寫過的題目以及對於其題目所想到的思路而建立以下表格，其中該表格的欄位分為題目和研究心得連結，研究心得連結是自己擁有的hackmd筆記連結， 有些筆記可能還存在著一些瑕疵，這部分會在短期內完成修改，並且記錄其他題目。另外NIL代表著還未有對應的筆記連結，換言之，還沒開始寫那題目的筆記XD。
+   題目 研究心得連結     Two Sum https://hackmd.io/@eklipsorz/H1Rup1PF8   Add Two Numbers NIL   Longest Substring Without Repeating Characters NIL   Median of Two Sorted Arrays NIL   Longest Palindromic Substring NIL   Regular Expression Matching NIL   Container With Most Water NIL   3Sum NIL   Letter Combinations of a Phone Number NIL   Remove Nth Node From End of List NIL   Valid Parentheses https://hackmd.</description>
+    </item>
+    
+  </channel>
+</rss>
