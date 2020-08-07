@@ -4,7 +4,7 @@
   
   <url>
     <loc>https://Eklipsorz.github.io/ja/categories/</loc>
-    <changefreq>monthly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
                 rel="alternate"
@@ -55,7 +55,7 @@
   
   <url>
     <loc>https://Eklipsorz.github.io/ja/</loc>
-    <changefreq>monthly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
                 rel="alternate"
@@ -106,7 +106,7 @@
   
   <url>
     <loc>https://Eklipsorz.github.io/ja/tags/</loc>
-    <changefreq>monthly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
                 rel="alternate"
