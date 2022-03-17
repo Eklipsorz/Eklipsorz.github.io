@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"eklipsorz.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="為了方便在object的method下使用該object的屬性或者其他method，而建立一個名為this變數，而這個變數會是指著object本身。 另外每一個function（非簡化版本）都擁有this這內建變數，只有arrow function不存在this 舉例來說： 假如我們建立一個object給user變數(此變數就成了該instance的reference或者別名)，該object的屬">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript - This 變數">
+<meta property="og:url" content="https://eklipsorz.github.io/2021/07/30/jsThis/index.html">
+<meta property="og:site_name" content="Sloth Engineer">
+<meta property="og:description" content="為了方便在object的method下使用該object的屬性或者其他method，而建立一個名為this變數，而這個變數會是指著object本身。 另外每一個function（非簡化版本）都擁有this這內建變數，只有arrow function不存在this 舉例來說： 假如我們建立一個object給user變數(此變數就成了該instance的reference或者別名)，該object的屬">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-29T16:38:50.000Z">
+<meta property="article:modified_time" content="2022-03-17T16:06:36.104Z">
+<meta property="article:author" content="Eklipsorz">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://eklipsorz.github.io/2021/07/30/jsThis/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>JavaScript - This 變數 | Sloth Engineer</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Sloth Engineer</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://eklipsorz.github.io/2021/07/30/jsThis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1632402033/blog/medium_brown-throated-sloth-Nortondefeis-toned-2160x1827_zz1pai.jpg">
+      <meta itemprop="name" content="Eklipsorz">
+      <meta itemprop="description" content="Success is nothing more than a few simple disciplines, practiced every day.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sloth Engineer">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaScript - This 變數
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-07-30 00:38:50" itemprop="dateCreated datePublished" datetime="2021-07-30T00:38:50+08:00">2021-07-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-03-18 00:06:36" itemprop="dateModified" datetime="2022-03-18T00:06:36+08:00">2022-03-18</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>為了方便在object的method下使用該object的屬性或者其他method，而建立一個名為this變數，而這個變數會是指著object本身。 另外每一個function（非簡化版本）都擁有this這內建變數，只有arrow function不存在this</p>
+<p>舉例來說：</p>
+<p>假如我們建立一個object給user變數(此變數就成了該instance的reference或者別名)，該object的屬性為name，而方法(method)則為speak()函式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const user = &#123;</span><br><span class="line">      name: &#x27;apple&#x27;,</span><br><span class="line">      speak() &#123;</span><br><span class="line">        console.log(&#x27;my name is&#x27;)</span><br><span class="line">      &#125;,</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>，每當我們想要呼叫該object的speak方法時，會產生</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my name is</span><br></pre></td></tr></table></figure>
+<p>可如果說想讓這方法去印出object本身的name，那麼就能利用下面語法來印出，其中this就這個user指向的object本身，而name則是object所擁有的屬性name</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">speak() &#123;</span><br><span class="line">        console.log(&#x27;my name is&#x27;, this.name)</span><br><span class="line">      &#125;,</span><br></pre></td></tr></table></figure>
+<p>，結果會是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my name is apple</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="this-本身內容"><a href="#this-本身內容" class="headerlink" title="this 本身內容"></a>this 本身內容</h2><p>this本身會根據呼叫者是否物件、被呼叫的函式(方法)是否為arrow function來決定指向哪個物件。</p>
+<h3 id="當呼叫者是物件本身且方法為一般函式-非簡化"><a href="#當呼叫者是物件本身且方法為一般函式-非簡化" class="headerlink" title="當呼叫者是物件本身且方法為一般函式(非簡化)"></a>當呼叫者是物件本身且方法為一般函式(非簡化)</h3><p>在這種情況下的方法會是以下形式，若我們建立了一個物件並給予person1這個別名（reference)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function functionName &#123;</span><br><span class="line">    Statement</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>，其object會是以下內容，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const person1 = &#123;</span><br><span class="line">    name: &#x27;John&#x27;,</span><br><span class="line">    myNameIs() &#123;</span><br><span class="line">        console.log(&#x27;my name is&#x27;, this.person1)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>當我們利用person1下的myNameIs方法時，系統會解析呼叫myNameIs的物件是誰，在這裡系統會發現是person1所指向的物件呼叫該方法的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">person1.myNameIs()</span><br></pre></td></tr></table></figure>
+<p>，接著它就直接該物件下的myNameIs()方法，同時它也會發現this這變數，在這裏由於系統已經發現是person1所指向的物件，所以this會跟著指向同個物件並允許系統獲取該物件的name，也就是John，最後螢幕顯示的結果會是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my name is John</span><br></pre></td></tr></table></figure>
+
+<p>可如果這時我再添加另一個person2來指向另一個新的物件時，比如說</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const person2 = &#123;</span><br><span class="line">    name: &#x27;Sam&#x27;,</span><br><span class="line">    myNameIs() &#123;</span><br><span class="line">        console.log(&#x27;my name is&#x27;, this.person1)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那麼同樣地，我們再次下達以下程式碼：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">person1.myNameIs()</span><br><span class="line">person2.myNameIs()</span><br></pre></td></tr></table></figure>
+<p>系統會根據先前的解析方式來分別從person1和person2所指向的物件來獲取name的資訊並顯示以下結果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">my name is John</span><br><span class="line">my name is Sam</span><br></pre></td></tr></table></figure>
+
+<h3 id="沒有物件的時候，呼叫時的this會是？"><a href="#沒有物件的時候，呼叫時的this會是？" class="headerlink" title="沒有物件的時候，呼叫時的this會是？"></a>沒有物件的時候，呼叫時的this會是？</h3><p>可如果呼叫的函式存在this，但呼叫時卻沒有物件方便讓系統辨識this會指向誰。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function myNameIs() &#123;</span><br><span class="line">    console.log(&#x27;my name is&#x27;, this.name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">myNameIs()</span><br></pre></td></tr></table></figure>
+<p>這時系統會預設讓這個this變數指向window這個global object，但由於window沒有name這個屬性，所以得到的結果會是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my name is undefined</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="當使用arrow-function的this會是？"><a href="#當使用arrow-function的this會是？" class="headerlink" title="當使用arrow function的this會是？"></a>當使用arrow function的this會是？</h3><p>由於arrow function本身沒有this變數，但實作上會以該function定義所在的環境是否存在其他this內建變數，若存在的話就以該this變數所指向的object為主，若不存在的話就以window這個global object為主。</p>
+<p>舉例來說：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const arrow = () =&gt; &#123;</span><br><span class="line">    console.log(this)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">arrow() 1.</span><br><span class="line"></span><br><span class="line">const user = &#123;</span><br><span class="line">        name : &#x27;John&#x27;,</span><br><span class="line">        arrow: () =&gt; &#123;</span><br><span class="line">            console.log(this)</span><br><span class="line">        &#125;,</span><br><span class="line">        speak() &#123;</span><br><span class="line">            arrow()</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">user.arrow() 2.</span><br><span class="line">user.speak() 3.</span><br></pre></td></tr></table></figure>
+
+<p>程式碼中存在1.~3.這三處，第一處呼叫了位於global scope的arrow function，由該函式本身就沒有this變數，所以this會被定義成window，而第二處則是呼叫user變數指向的object之arrow方法，該方法由於定義的範圍並不存在其他this變數，因此他的this也是window，而第三處的this則是間接呼叫位於global scope的arrow 函式，所以也跟第一處一樣是指向window這object。</p>
+<p>另一個範例為：</p>
+<pre><code>var func = function () &#123;
+  var func2 = function () &#123;
+    setTimeout(() =&gt; &#123;
+      console.log(this); 
+    &#125;, 10);
+  &#125;;
+  
+  var func3 = &#123;
+    func: func2,
+    var4: 4
+  &#125;
+  func2(); // this = window
+  func3.func(); // func3 Object
+&#125;
+func(); 
+</code></pre>
+<p>藉由func來執行整個程式碼，其中我們只需要關注func2()和func3.func()這兩個函式呼叫，func2呼叫由於是本身調用週期工作來印this，this被定義到的範圍是位於func2，而他的this變數指向window，所以週期工作的this也跟著指向window，而func3.func()則是因爲func3本身是物件且func會指向func2這函式物件，這相當於func3.func2()。</p>
+<p>由於這樣，而func2的this變數就跟著指向呼叫者-func3，因此週期任務也會跟著指向func3</p>
+<h2 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://shubo.io/what-is-this/#%E4%BB%80%E9%BA%BC%E6%98%AF-">https://shubo.io/what-is-this/#什麼是-</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.w3schools.com/js/js_this.asp">https://www.w3schools.com/js/js_this.asp</a></li>
+<li><a target="_blank" rel="noopener" href="https://wcc723.github.io/javascript/2017/12/21/javascript-es6-arrow-function/">https://wcc723.github.io/javascript/2017/12/21/javascript-es6-arrow-function/</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/07/28/jsHoisting/" rel="prev" title="JavaScript - Hoisting簡介">
+      <i class="fa fa-chevron-left"></i> JavaScript - Hoisting簡介
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/08/09/countSheep/" rel="next" title="CodeWars Learning - Counting sheep">
+      CodeWars Learning - Counting sheep <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#this-%E6%9C%AC%E8%BA%AB%E5%85%A7%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">this 本身內容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%95%B6%E5%91%BC%E5%8F%AB%E8%80%85%E6%98%AF%E7%89%A9%E4%BB%B6%E6%9C%AC%E8%BA%AB%E4%B8%94%E6%96%B9%E6%B3%95%E7%82%BA%E4%B8%80%E8%88%AC%E5%87%BD%E5%BC%8F-%E9%9D%9E%E7%B0%A1%E5%8C%96"><span class="nav-number">1.1.</span> <span class="nav-text">當呼叫者是物件本身且方法為一般函式(非簡化)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B2%92%E6%9C%89%E7%89%A9%E4%BB%B6%E7%9A%84%E6%99%82%E5%80%99%EF%BC%8C%E5%91%BC%E5%8F%AB%E6%99%82%E7%9A%84this%E6%9C%83%E6%98%AF%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">沒有物件的時候，呼叫時的this會是？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%95%B6%E4%BD%BF%E7%94%A8arrow-function%E7%9A%84this%E6%9C%83%E6%98%AF%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">當使用arrow function的this會是？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">參考資料：</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Eklipsorz"
+      src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1632402033/blog/medium_brown-throated-sloth-Nortondefeis-toned-2160x1827_zz1pai.jpg">
+  <p class="site-author-name" itemprop="name">Eklipsorz</p>
+  <div class="site-description" itemprop="description">Success is nothing more than a few simple disciplines, practiced every day.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Eklipsorz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Eklipsorz" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:eklipsorz@protonmail.ch" title="E-Mail → mailto:eklipsorz@protonmail.ch" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eklipsorz</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

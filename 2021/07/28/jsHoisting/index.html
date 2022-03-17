@@ -20,19 +20,22 @@
     var CONFIG = {"hostname":"eklipsorz.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="一種預設性的行為，能將所有object和primitive的宣告分別轉移到頂端以優先宣告他們的存在，這功能適用於當使用這些元件時且這些元件的宣告就在之後的程式碼出現，當這個情況出現時便會在使用這些元件的程式碼之前先宣告其元件的存在，而這樣的動作就好像從下方的宣告程式碼搬到到上方來處理，因此得名hoisting，接著宣告完之後便會執行原本的程式碼。  比如以下程式碼看似有宣告先後的問題: 12con">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://eklipsorz.github.io/2022/03/17/hello-world/index.html">
+<meta property="og:title" content="JavaScript - Hoisting簡介">
+<meta property="og:url" content="https://eklipsorz.github.io/2021/07/28/jsHoisting/index.html">
 <meta property="og:site_name" content="Sloth Engineer">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="一種預設性的行為，能將所有object和primitive的宣告分別轉移到頂端以優先宣告他們的存在，這功能適用於當使用這些元件時且這些元件的宣告就在之後的程式碼出現，當這個情況出現時便會在使用這些元件的程式碼之前先宣告其元件的存在，而這樣的動作就好像從下方的宣告程式碼搬到到上方來處理，因此得名hoisting，接著宣告完之後便會執行原本的程式碼。  比如以下程式碼看似有宣告先後的問題: 12con">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-03-17T15:33:44.203Z">
-<meta property="article:modified_time" content="2022-03-17T15:33:44.203Z">
+<meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1627411466/Javascript/jsHoisting/hoisitingExample_zbxrqy.png">
+<meta property="article:published_time" content="2021-07-27T18:30:23.000Z">
+<meta property="article:modified_time" content="2022-03-17T16:06:35.864Z">
 <meta property="article:author" content="Eklipsorz">
+<meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1627411466/Javascript/jsHoisting/hoisitingExample_zbxrqy.png">
 
-<link rel="canonical" href="https://eklipsorz.github.io/2022/03/17/hello-world/">
+<link rel="canonical" href="https://eklipsorz.github.io/2021/07/28/jsHoisting/">
 
 
 <script id="page-configurations">
@@ -45,7 +48,7 @@
   };
 </script>
 
-  <title>Hello World | Sloth Engineer</title>
+  <title>JavaScript - Hoisting簡介 | Sloth Engineer</title>
   
 
 
@@ -154,7 +157,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://eklipsorz.github.io/2022/03/17/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://eklipsorz.github.io/2021/07/28/jsHoisting/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1632402033/blog/medium_brown-throated-sloth-Nortondefeis-toned-2160x1827_zz1pai.jpg">
@@ -167,7 +170,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          JavaScript - Hoisting簡介
         </h1>
 
         <div class="post-meta">
@@ -177,8 +180,15 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-03-17 23:33:44" itemprop="dateCreated datePublished" datetime="2022-03-17T23:33:44+08:00">2022-03-17</time>
+              <time title="Created: 2021-07-28 02:30:23" itemprop="dateCreated datePublished" datetime="2021-07-28T02:30:23+08:00">2021-07-28</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-03-18 00:06:35" itemprop="dateModified" datetime="2022-03-18T00:06:35+08:00">2022-03-18</time>
+              </span>
 
           
 
@@ -191,19 +201,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+        <p>一種預設性的行為，能將所有object和primitive的宣告分別轉移到頂端以優先宣告他們的存在，這功能適用於當使用這些元件時且這些元件的宣告就在之後的程式碼出現，當這個情況出現時便會在使用這些元件的程式碼之前先宣告其元件的存在，而這樣的動作就好像從下方的宣告程式碼搬到到上方來處理，因此得名hoisting，接著宣告完之後便會執行原本的程式碼。 </p>
+<p>比如以下程式碼看似有宣告先後的問題:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="property">log</span> (test)</span><br><span class="line"><span class="keyword">var</span> test = <span class="number">10</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>但實際上會在處理test&#x2F;console那段前，先宣告test變數的存在，也就是說實際上會是這樣</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> test</span><br><span class="line"><span class="variable language_">console</span>.<span class="property">log</span> (test)</span><br><span class="line"><span class="keyword">var</span> test = <span class="number">10</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>當然console.log的結果會是undefined，並不會因爲後面的宣告還附加著assignment而跟著更動。</p>
+<p>實際上程式碼會是如下所示：</p>
+<p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1627411466/Javascript/jsHoisting/hoisitingExample_zbxrqy.png"></p>
+<h2 id="注意情況"><a href="#注意情況" class="headerlink" title="注意情況"></a>注意情況</h2><p>這情況發生在用var宣告的變數或者相關物件，並且並不是真的搬動後頭的宣告程式碼，而是在那些需要他們的程式碼之前先宣告存在這件事，而不包含assignment的動作</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Glossary/Hoisting">https://developer.mozilla.org/zh-TW/docs/Glossary/Hoisting</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/javascript-hoisting/">https://www.geeksforgeeks.org/javascript-hoisting/</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.techbridge.cc/2018/11/10/javascript-hoisting/">https://blog.techbridge.cc/2018/11/10/javascript-hoisting/</a></li>
+</ol>
 
     </div>
 
@@ -212,6 +225,9 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
 
         
 
@@ -219,10 +235,13 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/12/13/self-study-experience/" rel="prev" title="AC平台的自學經驗回顧">
-      <i class="fa fa-chevron-left"></i> AC平台的自學經驗回顧
+    <a href="/2021/07/26/jsLoop/" rel="prev" title="JavaScript - Loop 結構">
+      <i class="fa fa-chevron-left"></i> JavaScript - Loop 結構
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/07/30/jsThis/" rel="next" title="JavaScript - This 變數">
+      JavaScript - This 變數 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -281,7 +300,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E6%83%85%E6%B3%81"><span class="nav-number">1.</span> <span class="nav-text">注意情況</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">2.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
