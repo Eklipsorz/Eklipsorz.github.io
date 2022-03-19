@@ -1255,7 +1255,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.sloth.engineer/distanceOfTwoPoints/">
+    <link itemprop="mainEntityOfPage" href="https://blog.sloth.engineer/jsThis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1632402033/blog/medium_brown-throated-sloth-Nortondefeis-toned-2160x1827_zz1pai.jpg">
@@ -1269,7 +1269,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/distanceOfTwoPoints/" class="post-title-link" itemprop="url">CodeWars Learning - Geometry Basics &#58; Distance between points in 2D</a>
+            <a href="/jsThis/" class="post-title-link" itemprop="url">JavaScript - This 變數</a>
         </h2>
 
         <div class="post-meta">
@@ -1279,24 +1279,15 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-08-11 16:20:31" itemprop="dateCreated datePublished" datetime="2021-08-11T16:20:31+08:00">2021-08-11</time>
+              <time title="Created: 2021-07-30 00:38:50" itemprop="dateCreated datePublished" datetime="2021-07-30T00:38:50+08:00">2021-07-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-03-18 00:06:34" itemprop="dateModified" datetime="2022-03-18T00:06:34+08:00">2022-03-18</time>
+                <time title="Modified: 2022-03-18 00:06:36" itemprop="dateModified" datetime="2022-03-18T00:06:36+08:00">2022-03-18</time>
               </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CodeWars/" itemprop="url" rel="index"><span itemprop="name">CodeWars</span></a>
-                </span>
-            </span>
 
           
 
@@ -1309,16 +1300,73 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>This series of katas will introduce you to basics of doing geometry with computers.</p>
-<p>Point objects have x and y attributes (X and Y in C#) attributes.</p>
-<p>Write a function calculating distance between Point a and Point b.</p>
-<p>Tests round answers to 6 decimal places.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>由於傳過來的輸入參數a和b皆為擁有x和y這兩個屬性的物件，所以只需要計算x座標軸的值和y座標軸的值，最後再透過兩點的距離公式來獲取兩點的距離。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function distanceBetweenPoints(a, b) &#123;</span><br><span class="line"></span><br><span class="line">  let xAxis = Math.abs(a.x - b.x)</span><br><span class="line">  let yAxis = Math.abs(a.y - b.y)</span><br><span class="line">  </span><br><span class="line">  return Math.sqrt(Math.pow(xAxis, 2) + Math.pow(yAxis, 2))</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>另一個版本的答案則是使用Math物件的內建方法hypot，以a點和b點來構成三角形並求得這三角形的斜邊長度(hypotenuse)，而這個長度剛好是這兩點的距離。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function distanceBetweenPoints(a, b) &#123;</span><br><span class="line">  return Math.hypot(a.x - b.x, a.y - b.y)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+          <p>為了方便在object的method下使用該object的屬性或者其他method，而建立一個名為this變數，而這個變數會是指著object本身。 另外每一個function（非簡化版本）都擁有this這內建變數，只有arrow function不存在this</p>
+<p>舉例來說：</p>
+<p>假如我們建立一個object給user變數(此變數就成了該instance的reference或者別名)，該object的屬性為name，而方法(method)則為speak()函式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const user = &#123;</span><br><span class="line">      name: &#x27;apple&#x27;,</span><br><span class="line">      speak() &#123;</span><br><span class="line">        console.log(&#x27;my name is&#x27;)</span><br><span class="line">      &#125;,</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>，每當我們想要呼叫該object的speak方法時，會產生</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my name is</span><br></pre></td></tr></table></figure>
+<p>可如果說想讓這方法去印出object本身的name，那麼就能利用下面語法來印出，其中this就這個user指向的object本身，而name則是object所擁有的屬性name</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">speak() &#123;</span><br><span class="line">        console.log(&#x27;my name is&#x27;, this.name)</span><br><span class="line">      &#125;,</span><br></pre></td></tr></table></figure>
+<p>，結果會是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my name is apple</span><br></pre></td></tr></table></figure>
 
 
+<h2 id="this-本身內容"><a href="#this-本身內容" class="headerlink" title="this 本身內容"></a>this 本身內容</h2><p>this本身會根據呼叫者是否物件、被呼叫的函式(方法)是否為arrow function來決定指向哪個物件。</p>
+<h3 id="當呼叫者是物件本身且方法為一般函式-非簡化"><a href="#當呼叫者是物件本身且方法為一般函式-非簡化" class="headerlink" title="當呼叫者是物件本身且方法為一般函式(非簡化)"></a>當呼叫者是物件本身且方法為一般函式(非簡化)</h3><p>在這種情況下的方法會是以下形式，若我們建立了一個物件並給予person1這個別名（reference)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function functionName &#123;</span><br><span class="line">    Statement</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>，其object會是以下內容，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const person1 = &#123;</span><br><span class="line">    name: &#x27;John&#x27;,</span><br><span class="line">    myNameIs() &#123;</span><br><span class="line">        console.log(&#x27;my name is&#x27;, this.person1)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>當我們利用person1下的myNameIs方法時，系統會解析呼叫myNameIs的物件是誰，在這裡系統會發現是person1所指向的物件呼叫該方法的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">person1.myNameIs()</span><br></pre></td></tr></table></figure>
+<p>，接著它就直接該物件下的myNameIs()方法，同時它也會發現this這變數，在這裏由於系統已經發現是person1所指向的物件，所以this會跟著指向同個物件並允許系統獲取該物件的name，也就是John，最後螢幕顯示的結果會是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my name is John</span><br></pre></td></tr></table></figure>
+
+<p>可如果這時我再添加另一個person2來指向另一個新的物件時，比如說</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const person2 = &#123;</span><br><span class="line">    name: &#x27;Sam&#x27;,</span><br><span class="line">    myNameIs() &#123;</span><br><span class="line">        console.log(&#x27;my name is&#x27;, this.person1)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那麼同樣地，我們再次下達以下程式碼：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">person1.myNameIs()</span><br><span class="line">person2.myNameIs()</span><br></pre></td></tr></table></figure>
+<p>系統會根據先前的解析方式來分別從person1和person2所指向的物件來獲取name的資訊並顯示以下結果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">my name is John</span><br><span class="line">my name is Sam</span><br></pre></td></tr></table></figure>
+
+<h3 id="沒有物件的時候，呼叫時的this會是？"><a href="#沒有物件的時候，呼叫時的this會是？" class="headerlink" title="沒有物件的時候，呼叫時的this會是？"></a>沒有物件的時候，呼叫時的this會是？</h3><p>可如果呼叫的函式存在this，但呼叫時卻沒有物件方便讓系統辨識this會指向誰。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function myNameIs() &#123;</span><br><span class="line">    console.log(&#x27;my name is&#x27;, this.name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">myNameIs()</span><br></pre></td></tr></table></figure>
+<p>這時系統會預設讓這個this變數指向window這個global object，但由於window沒有name這個屬性，所以得到的結果會是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my name is undefined</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="當使用arrow-function的this會是？"><a href="#當使用arrow-function的this會是？" class="headerlink" title="當使用arrow function的this會是？"></a>當使用arrow function的this會是？</h3><p>由於arrow function本身沒有this變數，但實作上會以該function定義所在的環境是否存在其他this內建變數，若存在的話就以該this變數所指向的object為主，若不存在的話就以window這個global object為主。</p>
+<p>舉例來說：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const arrow = () =&gt; &#123;</span><br><span class="line">    console.log(this)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">arrow() 1.</span><br><span class="line"></span><br><span class="line">const user = &#123;</span><br><span class="line">        name : &#x27;John&#x27;,</span><br><span class="line">        arrow: () =&gt; &#123;</span><br><span class="line">            console.log(this)</span><br><span class="line">        &#125;,</span><br><span class="line">        speak() &#123;</span><br><span class="line">            arrow()</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">user.arrow() 2.</span><br><span class="line">user.speak() 3.</span><br></pre></td></tr></table></figure>
+
+<p>程式碼中存在1.~3.這三處，第一處呼叫了位於global scope的arrow function，由該函式本身就沒有this變數，所以this會被定義成window，而第二處則是呼叫user變數指向的object之arrow方法，該方法由於定義的範圍並不存在其他this變數，因此他的this也是window，而第三處的this則是間接呼叫位於global scope的arrow 函式，所以也跟第一處一樣是指向window這object。</p>
+<p>另一個範例為：</p>
+<pre><code>var func = function () &#123;
+  var func2 = function () &#123;
+    setTimeout(() =&gt; &#123;
+      console.log(this); 
+    &#125;, 10);
+  &#125;;
+  
+  var func3 = &#123;
+    func: func2,
+    var4: 4
+  &#125;
+  func2(); // this = window
+  func3.func(); // func3 Object
+&#125;
+func(); 
+</code></pre>
+<p>藉由func來執行整個程式碼，其中我們只需要關注func2()和func3.func()這兩個函式呼叫，func2呼叫由於是本身調用週期工作來印this，this被定義到的範圍是位於func2，而他的this變數指向window，所以週期工作的this也跟著指向window，而func3.func()則是因爲func3本身是物件且func會指向func2這函式物件，這相當於func3.func2()。</p>
+<p>由於這樣，而func2的this變數就跟著指向呼叫者-func3，因此週期任務也會跟著指向func3</p>
+<h2 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://shubo.io/what-is-this/#%E4%BB%80%E9%BA%BC%E6%98%AF-">https://shubo.io/what-is-this/#什麼是-</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.w3schools.com/js/js_this.asp">https://www.w3schools.com/js/js_this.asp</a></li>
+<li><a target="_blank" rel="noopener" href="https://wcc723.github.io/javascript/2017/12/21/javascript-es6-arrow-function/">https://wcc723.github.io/javascript/2017/12/21/javascript-es6-arrow-function/</a></li>
+</ol>
 
       
     </div>
@@ -1337,7 +1385,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1405,12 +1453,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
