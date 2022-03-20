@@ -1,26 +1,22 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-default-color-scheme=auto>
+
+
+
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.1.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.sloth.engineer","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="在這文章中，我們將簡介一個DOM物件是如何被建立、刪除、當成其他元素的子元素，而簡介內容將會以我目前所知的內容而定，後頭若有新的內容時，便會額外再增加內容。 Create an Element透過createElement方法來建立新的網頁元素newTag，並且利用innerHTML&#x2F;innerText賦予內容Content給其網頁元素，讓網頁元素在HTML形式中會像是下圖中那樣。在這小">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Eklipsorz">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="在這文章中，我們將簡介一個DOM物件是如何被建立、刪除、當成其他元素的子元素，而簡介內容將會以我目前所知的內容而定，後頭若有新的內容時，便會額外再增加內容。 Create an Element透過createElement方法來建立新的網頁元素newTag，並且利用innerHTML&#x2F;innerText賦予內容Content給其網頁元素，讓網頁元素在HTML形式中會像是下圖中那樣。在這小">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DOM - Create-Insert-Remove for an object">
 <meta property="og:url" content="https://blog.sloth.engineer/DOM-OBJ-CreateInsertRemove/index.html">
@@ -41,197 +37,225 @@
 <meta property="article:author" content="Eklipsorz">
 <meta property="article:tag" content="HTML">
 <meta property="article:tag" content="JavaScript">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630164255/blog/dom_Manipulation/file2DOM_tpcrw7.png">
+  
+  
+  <title>DOM - Create-Insert-Remove for an object - Sloth Engineer</title>
 
-<link rel="canonical" href="https://blog.sloth.engineer/DOM-OBJ-CreateInsertRemove/">
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
 
-  <title>DOM - Create-Insert-Remove for an object | Sloth Engineer</title>
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
   
 
 
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
 
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
 
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
+<link  rel="stylesheet" href="/css/main.css" />
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
+<!-- 自定义样式保持在最底部 -->
 
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.sloth.engineer","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Sloth Engineer</h1>
-      <span class="logo-line-after"><i></i></span>
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Sloth Engineer</strong>
     </a>
-  </div>
 
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
   </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-  </ul>
 </nav>
 
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://res.cloudinary.com/dqfxgtyoi/image/upload/v1647757523/GitHub-Page/default-cover_drxoxt.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="DOM - Create-Insert-Remove for an object">
+              
+            </span>
 
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
             
-
-    
+              <div class="mt-3">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.sloth.engineer/DOM-OBJ-CreateInsertRemove/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1632402033/blog/medium_brown-throated-sloth-Nortondefeis-toned-2160x1827_zz1pai.jpg">
-      <meta itemprop="name" content="Eklipsorz">
-      <meta itemprop="description" content="Success is nothing more than a few simple disciplines, practiced every day.">
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-29 17:33" pubdate>
+        August 29, 2021 pm
+      </time>
     </span>
+  
+</div>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sloth Engineer">
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.2k 字
     </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          DOM - Create-Insert-Remove for an object
-        </h1>
+  
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      27 分鐘
+    </span>
+  
 
-              <time title="Created: 2021-08-29 17:33:43" itemprop="dateCreated datePublished" datetime="2021-08-29T17:33:43+08:00">2021-08-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-03-18 00:06:35" itemprop="dateModified" datetime="2022-03-18T00:06:35+08:00">2022-03-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Website-Development/" itemprop="url" rel="index"><span itemprop="name">Website Development</span></a>
-                </span>
-            </span>
+  
+  
+</div>
+
+            
+          </div>
 
           
-
         </div>
-      </header>
+      </div>
+    </div>
+  </header>
 
+  <main>
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
       
-        <p>在這文章中，我們將簡介一個DOM物件是如何被建立、刪除、當成其他元素的子元素，而簡介內容將會以我目前所知的內容而定，後頭若有新的內容時，便會額外再增加內容。</p>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">DOM - Create-Insert-Remove for an object</h1>
+            
+            <div class="markdown-body">
+              <p>在這文章中，我們將簡介一個DOM物件是如何被建立、刪除、當成其他元素的子元素，而簡介內容將會以我目前所知的內容而定，後頭若有新的內容時，便會額外再增加內容。</p>
 <h2 id="Create-an-Element"><a href="#Create-an-Element" class="headerlink" title="Create an Element"></a>Create an Element</h2><p>透過createElement方法來建立新的網頁元素newTag，並且利用innerHTML&#x2F;innerText賦予內容Content給其網頁元素，讓網頁元素在HTML形式中會像是下圖中那樣。在這小節中，我們將會簡介這些方法。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;newTag&gt;</span><br><span class="line">	Content</span><br><span class="line">&lt;/newTag&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><pre><code class="hljs apache"><span class="hljs-section">&lt;newTag&gt;</span><br>	<span class="hljs-attribute">Content</span><br><span class="hljs-section">&lt;/newTag&gt;</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="create"><a href="#create" class="headerlink" title="create"></a>create</h3><p>document.createElement(tagName)<br>建立標籤名稱為tagName的元素節點，但在這個狀態下的元素節點並不會跟任何節點扯上parent或者child這些關係，就只是單純建立一個節點。</p>
 <p>回傳形式：以元素節點進行回傳</p>
@@ -240,221 +264,219 @@
 <h2 id="Traditional-Style-Insert-an-Element"><a href="#Traditional-Style-Insert-an-Element" class="headerlink" title="Traditional Style: Insert an Element"></a>Traditional Style: Insert an Element</h2><p>當我們透過createElement和innerHTML&#x2F;innerText來建立並指派一個新元素時，就只是單純在記憶體建立這個新元素且它並沒有任何父元素以及沒有任何子元素，這使得它無法在瀏覽器正常顯示，為了讓它能夠在瀏覽器正常顯示，必須讓該元素成為可顯示元素之下的子元素，但不會是其他元素的父元素，因為新元素本身是處在不可顯示的範圍內。</p>
 <p>在本文中，我們先介紹瀏覽器是如何從讀取到的HTML內容來轉化成節點，並透過它來得知節點們是以何種形式來儲存，進而透過一些插入方法來說明一個新元素是如何被插入或者被當成可顯示的元素之下的子元素。</p>
 <h3 id="How-the-browser-handles-some-new-nodes"><a href="#How-the-browser-handles-some-new-nodes" class="headerlink" title="How the browser handles some new nodes"></a>How the browser handles some new nodes</h3><p>預設上，瀏覽器會依據讀取的優先順序而決定某些子元素的存放順序，也就是說當瀏覽器讀取左邊的內容時，一開始讀取到element這標籤就建立element節點，接著又從標籤內發現content1這獨立內容(可以是另一個節點、文字、註解，但不會是類別屬性)，瀏覽器讀取到便建立屬於content1節點並當作是element元素的第一個子節點，而隨後讀取到的content2，便轉化成第二個子節點，後面依此類推。</p>
-<p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630164255/blog/dom_Manipulation/file2DOM_tpcrw7.png"></p>
+<p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630164255/blog/dom_Manipulation/file2DOM_tpcrw7.png" srcset="/img/loading.gif" lazyload></p>
 <p>後面新增的子節點將會放在子節點N(child node N)之後，另外，我們可以利用子節點存放方式以及存放順序，來建立一個類似於陣列的結構來存放這些子節點，並搭配index來方便存取特定子節點，在這裡瀏覽器有內建一些這樣子的物件來方便存子節點，比如NodeList以及HTMLCollection這兩種。</p>
 <h3 id="Insert-an-Element-as-the-last-element"><a href="#Insert-an-Element-as-the-last-element" class="headerlink" title="Insert an Element as the last element:"></a>Insert an Element as the last element:</h3><p>parentNode.appendChild(newNode)：<br>將元素節點newNode當作是另一個元素節點parentNode的子節點，其子節點會放在目前子節點之後，也就是子節點N(child node N)之後，而新放入的子節點將會是子節點N+1(child node N+1)</p>
-<p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630164722/blog/dom_Manipulation/defaultAddNewNode_eon6un.png"></p>
+<p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630164722/blog/dom_Manipulation/defaultAddNewNode_eon6un.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="Insert-an-Element-before-the-element"><a href="#Insert-an-Element-before-the-element" class="headerlink" title="Insert an Element before the element:"></a>Insert an Element before the element:</h3><p>parentNode.insertBefore(newNode, referenceNode)<br>將元素節點newNode當作是parentNode子節點，並放在另一個parentNode的子節點referenceNode之前，而child node N會是第N+1個子節點，</p>
-<p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630165095/blog/dom_Manipulation/insertBeforeNode_burnu5.png"></p>
+<p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630165095/blog/dom_Manipulation/insertBeforeNode_burnu5.png" srcset="/img/loading.gif" lazyload></p>
 <p>若子節點referenceNode不存在的話，會直接將節點newNode放到所有子節點之後，其動作等同於appendChild(newNode)。</p>
 <h3 id="Replace-the-old-element-with-an-new-Element"><a href="#Replace-the-old-element-with-an-new-Element" class="headerlink" title="Replace the old element with an new Element:"></a>Replace the old element with an new Element:</h3><p>parentNode.replaceChild(newNode, oldNode)<br>將元素節點newNode當作是parentNode子節點，並將這個新的子節點取代掉另一個parentNode的子節點oldNode，而子節點oldNode將會被移除並釋放記憶體空間。</p>
-<p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630166583/blog/dom_Manipulation/replaceChildNode_xhwsxd.png"></p>
+<p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630166583/blog/dom_Manipulation/replaceChildNode_xhwsxd.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="Remove-an-Element"><a href="#Remove-an-Element" class="headerlink" title="Remove an Element"></a>Remove an Element</h2><p>當我們想要移除DOM上的某個元素時，可以使用以下的方法來實現，但這些方法只是單純從DOM上移除，而非是將整個元素從記憶體中移除，所以每當執行這些方法後，這些元素會以類似剛建立的元素一樣，待在記憶體中，等待成為其他元素的子元素。</p>
-<p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630228692/blog/dom_Manipulation/removeResult_apsatq.png"></p>
+<p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630228692/blog/dom_Manipulation/removeResult_apsatq.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="Remove-a-child-node"><a href="#Remove-a-child-node" class="headerlink" title="Remove a child node"></a>Remove a child node</h3><p>Element.removeChild(NODE)<br>在DOM中，刪除Element下的子節點NODE，但實際上仍存在記憶體中等帶著下一次的新增。</p>
 <h3 id="Remove-a-node"><a href="#Remove-a-node" class="headerlink" title="Remove a node"></a>Remove a node</h3><p>NODE.remove()<br>在DOM中，移除NODE節點，但實際上仍存在記憶體中等待著下一次的新增。</p>
 <h2 id="Modern-style-Insert-an-element"><a href="#Modern-style-Insert-an-element" class="headerlink" title="Modern style: Insert an element"></a>Modern style: Insert an element</h2><p>近代的JavaScript有針對多個子元素推出幾個相關語法，這些語法與先前插入元素的方法-appendInsert、insertBefore、replaceChild相比，他們能夠接受多個子元素或者由多個元素所構成的元素集合當作參數來放入指定的地方，而先前的方法只能夠一次插入一個元素。另外由於語法上比較新，部分舊的瀏覽器很有可能無法支援較新版本的JS語法，比如IE瀏覽器。 </p>
 <p>在這幾個方法中，我們將使用newNode set來當作每個方法的示例圖中的範例，而newNode set裡頭是由要被插入的多個新節點(node1至nodeN)所構成的集合。</p>
 <h3 id="Insert-an-Element-before-the-element-1"><a href="#Insert-an-Element-before-the-element-1" class="headerlink" title="Insert an Element before the element"></a>Insert an Element before the element</h3><p>Element.before(node1, node2,….., nodeN):<br>將 node1 至 nodeN 這些節點設定為Element節點的parent節點所擁有的子節點，並將這些新的子節點放到Element節點之前，換言之，執行完之後，node1至nodeN這些節點就是Element節點的sibling 節點，且放在Element節點的前面。</p>
-<p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630225558/blog/dom_Manipulation/beforeExample_tycheb.png"></p>
+<p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630225558/blog/dom_Manipulation/beforeExample_tycheb.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="Insert-an-Element-before-the-first-child"><a href="#Insert-an-Element-before-the-first-child" class="headerlink" title="Insert an Element before the first child"></a>Insert an Element before the first child</h3><p>Element.prepend(node1, node2,…., nodeN):<br>將 node1 至 nodeN 這些節點設定為Element節點的子節點，並將這些新的子節點放到Element節點的第一個子節點之前。</p>
-<p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630225557/blog/dom_Manipulation/prependExample_l69you.png"></p>
+<p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630225557/blog/dom_Manipulation/prependExample_l69you.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="Insert-an-Element-as-the-last-child"><a href="#Insert-an-Element-as-the-last-child" class="headerlink" title="Insert an Element as the last child"></a>Insert an Element as the last child</h3><p>Element.append(node1, node2,…., nodeN):<br>將 node1 至 nodeN 這些節點設定為Element節點的子節點，並將這些新的子節點放到Element節點的最後一個子節點之後，其結果等同於for迴圈版本的appendChild： 其中node為 node1 至 nodeN，透過for迴圈將這些新節點放到後頭。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for (let node of NewNodeSet) &#123;</span><br><span class="line">	Element.appendChild(node)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">for (let <span class="hljs-keyword">node</span> <span class="hljs-title">of</span> NewNodeSet) &#123;<br>	Element.appendChild(<span class="hljs-keyword">node</span><span class="hljs-title">)</span><br><span class="hljs-title">&#125;</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630225557/blog/dom_Manipulation/appendExample_gfbdyu.png"></p>
+<p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630225557/blog/dom_Manipulation/appendExample_gfbdyu.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="Insert-an-Element-after-the-element"><a href="#Insert-an-Element-after-the-element" class="headerlink" title="Insert an Element after the element"></a>Insert an Element after the element</h3><p>Element.after(node1, node2,…, nodeN):<br>將 node1 至 nodeN 這些節點設定為Element的parent節點所擁有的子節點，並將這些新的子節點放到Element節點之後，換言之，這些新的子節點就是Element節點的sibling節點，且放在Element節點之後。</p>
-<p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630225557/blog/dom_Manipulation/afterExample_jxnc8j.png"></p>
+<p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630225557/blog/dom_Manipulation/afterExample_jxnc8j.png" srcset="/img/loading.gif" lazyload></p>
 
-    </div>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Website-Development/">Website Development</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/HTML/">HTML</a>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本Blog上的所有文章除特别聲明外，均採用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 協議</a> ，轉載請註明出處！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/lottaryFinalTask/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Simulate a Lottary game</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DOM-OBJ-HowToManAttribute/">
+                        <span class="hidden-mobile">DOM - How To Manipulate Attribute From Object</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
 
-    
-    
-    
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/HTML/" rel="tag"># HTML</a>
-              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/DOM-OBJ-HowToManAttribute/" rel="prev" title="DOM - How To Manipulate Attribute From Object">
-      <i class="fa fa-chevron-left"></i> DOM - How To Manipulate Attribute From Object
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/lottaryFinalTask/" rel="next" title="Simulate a Lottary game">
-      Simulate a Lottary game <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-    <script src="https://utteranc.es/client.js"
-        repo="Eklipsorz/eklipsorz-blog-store"
-        issue-term="pathname"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-    </script>
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
       }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Eklipsorz/eklipsorz-blog-store');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
 
+
+              </article>
+            
+          </article>
         </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-an-Element"><span class="nav-number">1.</span> <span class="nav-text">Create an Element</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#create"><span class="nav-number">1.1.</span> <span class="nav-text">create</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Assign-content-to-a-node"><span class="nav-number">1.2.</span> <span class="nav-text">Assign content to a node</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Traditional-Style-Insert-an-Element"><span class="nav-number">2.</span> <span class="nav-text">Traditional Style: Insert an Element</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#How-the-browser-handles-some-new-nodes"><span class="nav-number">2.1.</span> <span class="nav-text">How the browser handles some new nodes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Insert-an-Element-as-the-last-element"><span class="nav-number">2.2.</span> <span class="nav-text">Insert an Element as the last element:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Insert-an-Element-before-the-element"><span class="nav-number">2.3.</span> <span class="nav-text">Insert an Element before the element:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Replace-the-old-element-with-an-new-Element"><span class="nav-number">2.4.</span> <span class="nav-text">Replace the old element with an new Element:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Remove-an-Element"><span class="nav-number">3.</span> <span class="nav-text">Remove an Element</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-a-child-node"><span class="nav-number">3.1.</span> <span class="nav-text">Remove a child node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-a-node"><span class="nav-number">3.2.</span> <span class="nav-text">Remove a node</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Modern-style-Insert-an-element"><span class="nav-number">4.</span> <span class="nav-text">Modern style: Insert an element</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Insert-an-Element-before-the-element-1"><span class="nav-number">4.1.</span> <span class="nav-text">Insert an Element before the element</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Insert-an-Element-before-the-first-child"><span class="nav-number">4.2.</span> <span class="nav-text">Insert an Element before the first child</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Insert-an-Element-as-the-last-child"><span class="nav-number">4.3.</span> <span class="nav-text">Insert an Element as the last child</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Insert-an-Element-after-the-element"><span class="nav-number">4.4.</span> <span class="nav-text">Insert an Element after the element</span></a></li></ol></li></ol></div>
       </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Eklipsorz"
-      src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1632402033/blog/medium_brown-throated-sloth-Nortondefeis-toned-2160x1827_zz1pai.jpg">
-  <p class="site-author-name" itemprop="name">Eklipsorz</p>
-  <div class="site-description" itemprop="description">Success is nothing more than a few simple disciplines, practiced every day.</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">24</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">2</span>
-        <span class="site-state-item-name">categories</span>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">14</span>
-        <span class="site-state-item-name">tags</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/Eklipsorz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Eklipsorz" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:eklipsorz@protonmail.ch" title="E-Mail → mailto:eklipsorz@protonmail.ch" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-  </div>
-
-
-
-      </div>
-
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Eklipsorz</span>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
-  </div>
-
-        
-
-
-
-
-
-
-
 
       </div>
-    </footer>
+    
   </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
+  
+</footer>
 
 
-<script src="/js/schemes/pisces.js"></script>
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
 
 
-<script src="/js/next-boot.js"></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
@@ -462,21 +484,52 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
   
 
-  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
 
 </body>
 </html>
