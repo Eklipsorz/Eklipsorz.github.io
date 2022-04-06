@@ -16,21 +16,23 @@
   <meta name="author" content="Eklipsorz">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Functional Dependency typeFunctional dependency在同個表格X或者relation X上，該表格X擁有的屬性集合分別為屬性集合A和屬性集合B，若任兩筆紀錄在屬性集合A上是擁有相同屬性值集合X’，那麼這兩筆紀錄在屬性集合B也呈現出另一種相同的屬性值集合Y’的話，那麼就能以Y’ &#x3D; f(X’)來表示同個屬性值集合X’能夠透過某函式對應(確定)另一個">
+    <meta name="description" content="前置知識：子集subset &amp; superset假設有兩個集合(A、B)，若集合A的任一元素都是集合B的元素，那麼就集合A為集合B的子集(subset)，而B就是A的超集(superkey)，記為A⊆B，讀作A包含於B。舉例來說集合B為{B1, B2, B3, B4}，那麼若集合A為集合B的子集，那麼集合A可以是 1234&amp;#123;B1&amp;#125;&amp;#123;B1, B2&amp;#125;&amp;#">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Functional Dependency type">
-<meta property="og:url" content="https://blog.sloth.engineer/db-fd-type/index.html">
+<meta property="og:title" content="資料庫表格-key種類">
+<meta property="og:url" content="https://blog.sloth.engineer/db-key-type/index.html">
 <meta property="og:site_name" content="Sloth Engineer">
-<meta property="og:description" content="Functional Dependency typeFunctional dependency在同個表格X或者relation X上，該表格X擁有的屬性集合分別為屬性集合A和屬性集合B，若任兩筆紀錄在屬性集合A上是擁有相同屬性值集合X’，那麼這兩筆紀錄在屬性集合B也呈現出另一種相同的屬性值集合Y’的話，那麼就能以Y’ &#x3D; f(X’)來表示同個屬性值集合X’能夠透過某函式對應(確定)另一個">
+<meta property="og:description" content="前置知識：子集subset &amp; superset假設有兩個集合(A、B)，若集合A的任一元素都是集合B的元素，那麼就集合A為集合B的子集(subset)，而B就是A的超集(superkey)，記為A⊆B，讀作A包含於B。舉例來說集合B為{B1, B2, B3, B4}，那麼若集合A為集合B的子集，那麼集合A可以是 1234&amp;#123;B1&amp;#125;&amp;#123;B1, B2&amp;#125;&amp;#">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-04-06T15:38:48.000Z">
-<meta property="article:modified_time" content="2022-04-06T15:39:55.510Z">
+<meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1649260773/blog/database/key/foreign-key-example_ourovc.png">
+<meta property="article:published_time" content="2022-04-06T16:02:17.000Z">
+<meta property="article:modified_time" content="2022-04-06T16:03:07.705Z">
 <meta property="article:author" content="Eklipsorz">
-<meta property="article:tag" content="Functional Dependency">
+<meta property="article:tag" content="Key">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1649260773/blog/database/key/foreign-key-example_ourovc.png">
   
   
-  <title>Functional Dependency type - Sloth Engineer</title>
+  <title>資料庫表格-key種類 - Sloth Engineer</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -180,7 +182,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Functional Dependency type">
+            <span class="h2" id="subtitle" title="資料庫表格-key種類">
               
             </span>
 
@@ -195,8 +197,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-04-06 23:38" pubdate>
-        April 6, 2022 11:38 PM
+      <time datetime="2022-04-07 00:02" pubdate>
+        April 7, 2022 12:02 AM
       </time>
     </span>
   
@@ -206,7 +208,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.4k 字
+      2.5k 字
     </span>
   
 
@@ -215,7 +217,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4 分鐘
+      5 分鐘
     </span>
   
 
@@ -244,39 +246,81 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Functional Dependency type</h1>
+            <h1 style="display: none">資料庫表格-key種類</h1>
             
             <div class="markdown-body">
-              <h1 id="Functional-Dependency-type"><a href="#Functional-Dependency-type" class="headerlink" title="Functional Dependency type"></a>Functional Dependency type</h1><h2 id="Functional-dependency"><a href="#Functional-dependency" class="headerlink" title="Functional dependency"></a>Functional dependency</h2><p>在同個表格X或者relation X上，該表格X擁有的屬性集合分別為屬性集合A和屬性集合B，若任兩筆紀錄在屬性集合A上是擁有相同屬性值集合X’，那麼這兩筆紀錄在屬性集合B也呈現出另一種相同的屬性值集合Y’的話，那麼就能以Y’ &#x3D; f(X’)來表示同個屬性值集合X’能夠透過某函式對應(確定)另一個相同屬性值集合Y’是什麼，不會出現同個屬性集合值X’對應不同的屬性值集合，藉由這點也可以延伸成屬性集合A可以在某函式對應(確定)屬性集合B。</p>
-<blockquote>
-<p>If two tuples of R agree on all of the attributes A1, A2,…, An (i.e., the tuples have the same values in their respective components for each of these attributes), then they must also agree on all of another list of attributes B1, B2, …, Bm. We write this FD formally as </p>
-</blockquote>
-<figure class="highlight gams"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><pre><code class="hljs gams"><span class="hljs-function"><span class="hljs-title">A1</span></span>, A2,..., An -&gt; B1, B2,..., Bm<br><span class="hljs-comment">// say that</span><br><span class="hljs-function"><span class="hljs-title">A1</span></span>, A2,..., An functionally determine B1, B2,..., Bm<br></code></pre></td></tr></table></figure>
+              <h2 id="前置知識：子集"><a href="#前置知識：子集" class="headerlink" title="前置知識：子集"></a>前置知識：子集</h2><h3 id="subset-amp-superset"><a href="#subset-amp-superset" class="headerlink" title="subset &amp; superset"></a>subset &amp; superset</h3><p>假設有兩個集合(A、B)，若集合A的任一元素都是集合B的元素，那麼就集合A為集合B的子集(subset)，而B就是A的超集(superkey)，記為A⊆B，讀作A包含於B。舉例來說集合B為{B1, B2, B3, B4}，那麼若集合A為集合B的子集，那麼集合A可以是</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><pre><code class="hljs mipsasm">&#123;<span class="hljs-keyword">B1&#125;</span><br><span class="hljs-keyword"></span>&#123;<span class="hljs-keyword">B1, </span><span class="hljs-keyword">B2&#125;</span><br><span class="hljs-keyword"></span>&#123;<span class="hljs-keyword">B1, </span><span class="hljs-keyword">B2, </span><span class="hljs-keyword">B3&#125;</span><br><span class="hljs-keyword"></span>&#123;<span class="hljs-keyword">B1, </span><span class="hljs-keyword">B2, </span><span class="hljs-keyword">B3, </span><span class="hljs-keyword">B4&#125;</span><br></code></pre></td></tr></table></figure>
 
-<p>這時會寫作成以下形式，其描述為屬性集合A在函式上確定屬性集合B、屬性集合A在功能方面上確定屬性集合B、屬性集合B藉由函式而依賴於屬性集合A</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">A</span> -&gt; <span class="hljs-selector-tag">B</span><br><span class="hljs-selector-tag">A</span> functionally determine <span class="hljs-selector-tag">B</span><br></code></pre></td></tr></table></figure>
-<p>參考資料：</p>
+<p>Note：</p>
 <ol>
-<li>A first course in database systems (3rd)<h2 id="Full-functional-dependency"><a href="#Full-functional-dependency" class="headerlink" title="Full functional dependency"></a>Full functional dependency</h2>在同個表格中，若欄位集合X -&gt; 欄位集合Y 且 對於 X 的任意一個真子集 X’而言， X’ -&gt; Y 是不能夠成立，那麼就表示只有<br>完整的欄位集合X能夠對應另一個欄位集合Y，不能夠將欄位集合X切割成各個子集合，然後也無法讓每個子集合去對應欄位集合Y，因此稱欄位集合Y函式依賴於完整的的欄位集合X，這時函式依賴會是Full functional dependency</li>
+<li>sub-和super-開頭的字都分別泛指某項事物在某種程度來說是次要、淺下、低下、從屬，而super則是指重要、超越、之上、包含。</li>
+<li>sub和super 描述set的話就是指在被包含和包含，前者是指被包含的set，後者是指包含其他set的set</li>
 </ol>
-<blockquote>
-<p>An attribute is full functional dependent on another attribute, if it is Functionally Dependent on that attribute and not on any of its proper subset.</p>
+<h3 id="proper-subset"><a href="#proper-subset" class="headerlink" title="proper subset"></a>proper subset</h3><p>假設有兩個集合(A、B)，若兩者間的關係為A⊆B且A≠B的話，集合A就是集合B的真集合(proper subset)，以B為{B1, B2, B3, B4}的例子，那麼若集合A為集合B的真子集，那麼集合A可以是前面三個，最後一個由於會是A&#x3D;B，所以不能夠算上它</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">&#123;B1&#125;<br>&#123;B1, B2&#125;<br><span class="hljs-section">&#123;B1, B2, B3&#125;</span><br><span class="hljs-section">==================</span><br>&#123;B1, B2, B3, B4&#125;<br></code></pre></td></tr></table></figure>
+
+
+<p>Note：</p>
+<ol>
+<li>proper 在這指最主要、最重要、嚴格(正確)意義上的，在這描述集合是強調該集合是確實是它所描述。<blockquote>
+<p>belonging to the main, most important, or typical part</p>
 </blockquote>
-<p>舉例來說：<br>假設有一個表格上具有學號、班級、姓名這三個欄位，其中不同班級下是存在學號相同，而班級內是不存在學號相同的，那麼在這裡學號和班級會函式決定姓名，也就是上述提到的欄位集合X會是(學號, 班級)，而欄位集合Y會是姓名，其中學號由於不同班級下的學號相同而不能夠單獨函式決定姓名，班級也是無法單獨函式決定，因此姓名和(學號, 班級)間得函式依賴會是完全函式依賴</p>
+</li>
+</ol>
 <p>參考資料：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.tutorialspoint.com/Fully-functional-dependency-in-DBMS">Full-functional-dependency-in-DBMS</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.itread01.com/content/1547202186.html">集合基礎知識</a></li>
 </ul>
-<h2 id="Partial-functional-dependency"><a href="#Partial-functional-dependency" class="headerlink" title="Partial functional dependency"></a>Partial functional dependency</h2><p>在同個表格中，若欄位集合X -&gt; 欄位集合Y 且 對於 X 的任意一個真子集 X’而言， X’ -&gt; Y 是可以成立，那麼就表示欄位集合X中的一部分是可確定欄位集合Y 或者說 欄位集合Y函式依賴於欄位集合X的一部分子集合，這時的函式依賴會是Partial functional dependency</p>
-<p>舉例來說：<br>假設有一個表格上具有學號、身份證、姓名這三個欄位，那麼在這裡的函式依賴會是(學號, 身分證)決定姓名，換言之，這裡欄位集合X會是(學號, 身份證)以及欄位集合Y會是姓名，若對欄位集合X進行進一步的切割，如學號 或者 身分證，那麼這兩個任一個都能因為獨特性來確定姓名，因此姓名和(學號, 身分證)之間的函式依賴是部分函式依賴。</p>
-<p>也就是上述提到的欄位集合X會是(學號, 班級)，而欄位集合Y會是姓名，其中學號由於不同班級下的學號相同而不能夠單獨函式決定姓名，班級也是無法單獨函式決定，因此姓名和(學號, 班級)間得函式依賴會是完全函式依賴</p>
+<h2 id="key-type"><a href="#key-type" class="headerlink" title="key type"></a>key type</h2><h3 id="key-amp-amp-superkey"><a href="#key-amp-amp-superkey" class="headerlink" title="key &amp;&amp; superkey"></a>key &amp;&amp; superkey</h3><p>key 主要是用來識別每一個紀錄的獨特性，如同身分證可以識別每一個人的身份那樣，通常會是由表格或者relation上的欄位組合{A1, A2,…, An}所構成，而要成為key的條件為：</p>
+<ol>
+<li><p>這些欄位&#x2F;屬性必須能夠功能上確定剩下欄位&#x2F;屬性，也就是說同樣的欄位組合{A1, A2,…, An}只會對應同個紀錄，不會對應到兩個不同的紀錄。</p>
+<blockquote>
+<p>Those attributes functionally determine all other attributes of the relation. That is, it is impossible for two distinct tuples of R to agree on all of A1, A2,…, An</p>
+</blockquote>
+</li>
+<li><p>{A1, A2,…, An}中的所有真子集合中的組合(如只有A1和A2、或者是只有A1、A2、A3)不能夠功能上確定剩下屬性，換言之，只有完整的 {A1, A2,…, An}才能確定且在決定紀錄的key中是擁有最小欄位量的key</p>
+<blockquote>
+<p>No proper subet of {A1, A2,…., An} functionally determines all other attributes of R; i.e., a key must be minimal</p>
+</blockquote>
+</li>
+</ol>
+<p>若一組欄位集合能夠包含key的話，該欄位集合會稱作為superkey，或者稱key的超集，該集合中的鑰匙都會滿足於key的第一條件，不一定能夠滿足第二個條件，比如說一個表格擁有以下這幾個欄位，其中A1和A2是key，</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-built_in">A1</span>, <span class="hljs-built_in">A2</span>, <span class="hljs-built_in">A3</span>, <span class="hljs-built_in">A4</span>,..., An<br></code></pre></td></tr></table></figure>
+
+<p>那麼superkey就會是</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">&#123;<span class="hljs-built_in">A1</span>, <span class="hljs-built_in">A2</span>&#125;<br>&#123;<span class="hljs-built_in">A1</span>, <span class="hljs-built_in">A2</span>, <span class="hljs-built_in">A3</span>&#125;<br>&#123;<span class="hljs-built_in">A1</span>, <span class="hljs-built_in">A2</span>, <span class="hljs-built_in">A3</span>, <span class="hljs-built_in">A4</span>&#125;<br>&#123;<span class="hljs-built_in">A1</span>, <span class="hljs-built_in">A2</span>, <span class="hljs-built_in">A3</span>, <span class="hljs-built_in">A4</span>, <span class="hljs-built_in">A5</span>&#125;<br>&#123;<span class="hljs-built_in">A1</span>, <span class="hljs-built_in">A2</span>, <span class="hljs-built_in">A3</span>, <span class="hljs-built_in">A4</span>, <span class="hljs-built_in">A5</span>, <span class="hljs-built_in">A6</span>&#125;<br>.<br>.<br>&#123;<span class="hljs-built_in">A1</span>, <span class="hljs-built_in">A2</span>, <span class="hljs-built_in">A3</span>, <span class="hljs-built_in">A4</span>, <span class="hljs-built_in">A5</span>, <span class="hljs-built_in">A6</span>,..., An&#125;<br></code></pre></td></tr></table></figure>
+
+<p>超鍵本身包含著候選鍵(candidate key)、替代鍵(alternate key)、主鍵(primary key)、外鍵(foreign key)</p>
+<h3 id="primary-key-amp-amp-candidate-key-amp-amp-alternate-key"><a href="#primary-key-amp-amp-candidate-key-amp-amp-alternate-key" class="headerlink" title="primary key &amp;&amp; candidate key &amp;&amp; alternate key"></a>primary key &amp;&amp; candidate key &amp;&amp; alternate key</h3><p>主鍵(primary key)是由開發者或者資料庫管理系統從由key所構成的集合X中選定出來的key，是主要實際用來識別每一個紀錄的獨特性，同時間也必須要滿足以下限制：</p>
+<ul>
+<li>主鍵值必須能夠識別紀錄<blockquote>
+<p>Must uniquely identify the row;</p>
+</blockquote>
+</li>
+<li>主鍵值不能夠NULL<blockquote>
+<p>cannot have NULL values;</p>
+</blockquote>
+</li>
+<li>主鍵值不能一直被改變<blockquote>
+<p>Should not change over the time;</p>
+</blockquote>
+</li>
+<li>主鍵值必須盡可能越短越好：通常會以主鍵當作資料的索引，主鍵越短，越能節省空間和查詢時間<blockquote>
+<p>Should be as short as possible.<br>集合X中的每一個key都會是候選鍵(candidate key)，會具有以下特色：</p>
+</blockquote>
+</li>
+<li>滿足key的所有條件(識別和最小化)</li>
+<li>能夠被採納為主鍵的key，因爲這點而稱之為候選<br>另外當主鍵從集合X選出時，剩下未被選到的候選鍵就即為次要鍵(Secondary Key)或者替換鍵(Alternate key)</li>
+</ul>
 <p>參考資料：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/differentiate-between-partial-dependency-and-fully-functional-dependency/">Differentiate between Partial Dependency and Fully Functional Dependency</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.kkbruce.net/2010/10/normalization-key.html">關聯資料表正規化(NORMALIZATION)–鍵,KEY</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/22064977/what-is-the-difference-between-primary-key-and-prime-attribute">What is the difference between Primary key and prime attribute?</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.tutorialspoint.com/Alternate-Key-in-RDBMS">Alternate Key in RDBMS</a></li>
 </ul>
-<h2 id="Transitive-functional-dependency"><a href="#Transitive-functional-dependency" class="headerlink" title="Transitive functional dependency"></a>Transitive functional dependency</h2><p>在同一個表格中，若有欄位集合A能函式決定函式集合B，且函式集合B也能函式決定欄位集合C，在這樣的結果下，欄位集合A可透過函式集合B而間接函式決定欄位集合C的形式，但為了嚴格定義A、B、C 皆為不同的欄位集合且彼此間無任何延伸關係(e.g., 比如不能透過A來延伸成B)：A和B實際上是源自同一個欄位集合、B和C實際上源自於同一個欄位集合的問題，為了避免這件事而特別設定以下嚴格條件</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span> 避免(x1, x2) -&gt; x3, x4, x5 且 (x1, x2, x3) -&gt; x4, x5<br><span class="hljs-regexp">//</span> A: (x1, x2) <br><span class="hljs-regexp">//</span> B: (x1, x2, x3)<br><span class="hljs-regexp">//</span> C: (x4, x5)<br><span class="hljs-regexp">//</span> 實際上 A 和 B 都源自於同一個欄位集合(x1, x2)<br><span class="hljs-regexp">//</span> 以及<br><span class="hljs-regexp">//</span> 避免(x1, x2) -&gt; x3, x4, x5 且 (x1, x2, x3) -&gt; x4, x5<br><span class="hljs-regexp">//</span> A: (x1, x2, x3)<br><span class="hljs-regexp">//</span> B: (x1, x2)<br><span class="hljs-regexp">//</span> C: (x4, x5)<br><span class="hljs-regexp">//</span> 實際上 A 和 B 都源自於同一個欄位集合(x1, x2)<br><span class="hljs-number">1</span>. B !-&gt; A (B 不能函式決定 A) <br><span class="hljs-regexp">//</span> 等同上方<br><span class="hljs-number">2</span>. C !-&gt; B (C 不能函式決定 B)<br></code></pre></td></tr></table></figure>
-<p>單純只設定第一個條件會使得欄位集合A和B皆為不同的欄位集合，但唯獨欄位集合C無法確定是否源自於A或者B，所以只需要對任意一方設定相同的!-&gt;條件就能解決，在這裡額外添加第二個條件就能使欄位集合A、B、C皆為不同的欄位集合。</p>
+<h3 id="foreign-key"><a href="#foreign-key" class="headerlink" title="foreign key"></a>foreign key</h3><p>在一個表格X或者relation X中的欄位組合X是指向或者是其他表格Y或者其他relation Y的主鍵，那麼其欄位組合X對於表格X來說，是個外部來的主鍵，簡稱為外鍵(foreign key)，用途是來讓表格X透過外鍵來找到對應表格Y的對應主鍵，並用連接(如JOIN)來延伸其他資訊從而構成兩個表格之間的一致性。</p>
+<p>比如說：假設有兩個表格分別為住戶資料、預約疫苗，住戶資料的主鍵為身份證，預約疫苗的主鍵為序號，其中預約疫苗表格的身分證欄位是指向住戶資料的主鍵，因此會是預約表格的外主鍵或者外鍵，透過這個外鍵和Inner Join可以延伸對應的住戶資料，而結果會是最下面的合併結果<br><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1649260773/blog/database/key/foreign-key-example_ourovc.png" srcset="/img/loading.gif" lazyload></p>
 
             </div>
             <hr>
@@ -294,7 +338,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Functional-Dependency/">Functional Dependency</a>
+                      <a class="hover-with-bg" href="/tags/Key/">Key</a>
                     
                   </div>
                 
@@ -311,18 +355,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/db-key-type/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">資料庫表格-key種類</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Twitter-experience/">
-                        <span class="hidden-mobile">Twitter 團體協作體驗</span>
+                      <a href="/db-fd-type/">
+                        <span class="hidden-mobile">Functional Dependency type</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
