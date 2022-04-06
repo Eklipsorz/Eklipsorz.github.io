@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1649260773/blog/database/key/foreign-key-example_ourovc.png">
 <meta property="article:published_time" content="2022-04-06T16:02:17.000Z">
-<meta property="article:modified_time" content="2022-04-06T16:03:07.705Z">
+<meta property="article:modified_time" content="2022-04-06T16:09:08.759Z">
 <meta property="article:author" content="Eklipsorz">
 <meta property="article:tag" content="Key">
 <meta name="twitter:card" content="summary_large_image">
@@ -258,7 +258,7 @@
 <li>sub和super 描述set的話就是指在被包含和包含，前者是指被包含的set，後者是指包含其他set的set</li>
 </ol>
 <h3 id="proper-subset"><a href="#proper-subset" class="headerlink" title="proper subset"></a>proper subset</h3><p>假設有兩個集合(A、B)，若兩者間的關係為A⊆B且A≠B的話，集合A就是集合B的真集合(proper subset)，以B為{B1, B2, B3, B4}的例子，那麼若集合A為集合B的真子集，那麼集合A可以是前面三個，最後一個由於會是A&#x3D;B，所以不能夠算上它</p>
-<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">&#123;B1&#125;<br>&#123;B1, B2&#125;<br><span class="hljs-section">&#123;B1, B2, B3&#125;</span><br><span class="hljs-section">==================</span><br>&#123;B1, B2, B3, B4&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="hljs-template-variable">&#123;B1&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;B1, B2&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;B1, B2, B3&#125;</span><span class="language-xml"></span><br><span class="language-xml">// 下面是不符合規則</span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;B1, B2, B3, B4&#125;</span><br></code></pre></td></tr></table></figure>
 
 
 <p>Note：</p>
@@ -285,10 +285,10 @@
 </blockquote>
 </li>
 </ol>
-<p>若一組欄位集合能夠包含key的話，該欄位集合會稱作為superkey，或者稱key的超集，該集合中的鑰匙都會滿足於key的第一條件，不一定能夠滿足第二個條件，比如說一個表格擁有以下這幾個欄位，其中A1和A2是key，</p>
+<p>若一組欄位集合能夠包含key的話，該欄位集合會稱作為superkey，或者稱key的超集，該集合中的鑰匙都會滿足於key的第一條件，不一定能夠滿足第二個條件，比如說一個表格擁有以下這幾個欄位</p>
 <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-built_in">A1</span>, <span class="hljs-built_in">A2</span>, <span class="hljs-built_in">A3</span>, <span class="hljs-built_in">A4</span>,..., An<br></code></pre></td></tr></table></figure>
 
-<p>那麼superkey就會是</p>
+<p>，其中A1和A2是key，那麼superkey就會是</p>
 <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">&#123;<span class="hljs-built_in">A1</span>, <span class="hljs-built_in">A2</span>&#125;<br>&#123;<span class="hljs-built_in">A1</span>, <span class="hljs-built_in">A2</span>, <span class="hljs-built_in">A3</span>&#125;<br>&#123;<span class="hljs-built_in">A1</span>, <span class="hljs-built_in">A2</span>, <span class="hljs-built_in">A3</span>, <span class="hljs-built_in">A4</span>&#125;<br>&#123;<span class="hljs-built_in">A1</span>, <span class="hljs-built_in">A2</span>, <span class="hljs-built_in">A3</span>, <span class="hljs-built_in">A4</span>, <span class="hljs-built_in">A5</span>&#125;<br>&#123;<span class="hljs-built_in">A1</span>, <span class="hljs-built_in">A2</span>, <span class="hljs-built_in">A3</span>, <span class="hljs-built_in">A4</span>, <span class="hljs-built_in">A5</span>, <span class="hljs-built_in">A6</span>&#125;<br>.<br>.<br>&#123;<span class="hljs-built_in">A1</span>, <span class="hljs-built_in">A2</span>, <span class="hljs-built_in">A3</span>, <span class="hljs-built_in">A4</span>, <span class="hljs-built_in">A5</span>, <span class="hljs-built_in">A6</span>,..., An&#125;<br></code></pre></td></tr></table></figure>
 
 <p>超鍵本身包含著候選鍵(candidate key)、替代鍵(alternate key)、主鍵(primary key)、外鍵(foreign key)</p>
