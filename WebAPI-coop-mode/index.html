@@ -16,23 +16,23 @@
   <meta name="author" content="Eklipsorz">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前置知識：子集subset &amp; superset假設有兩個集合(A、B)，若集合A的任一元素都是集合B的元素，那麼就集合A為集合B的子集(subset)，而B就是A的超集(superkey)，記為A⊆B，讀作A包含於B。舉例來說集合B為{B1, B2, B3, B4}，那麼若集合A為集合B的子集，那麼集合A可以是 1234&amp;#123;B1&amp;#125;&amp;#123;B1, B2&amp;#125;&amp;#">
+    <meta name="description" content="背景在開發網頁前後分離專案時，前後兩端總是需要一份API文件來確定資料該如何調用、參數要什麼、回傳什麼、具有什麼功能，但對於整個開發流程而言，傳統上是採用Code first概念，API文件會在後端完成整個API邏輯層面的程式碼完工後才會公開，但這樣所花費的時間會使前端無法直接使用API來完成後續前後端的對接，進而讓整個專案因API文件拖到後頭才生成而被延宕，而且完工後的API文件也不見得能讓前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="資料庫表格-key種類">
-<meta property="og:url" content="https://blog.sloth.engineer/db-key-type/index.html">
+<meta property="og:title" content="筆記：Web API 前後端開發協作形式">
+<meta property="og:url" content="https://blog.sloth.engineer/WebAPI-coop-mode/index.html">
 <meta property="og:site_name" content="Sloth Engineer">
-<meta property="og:description" content="前置知識：子集subset &amp; superset假設有兩個集合(A、B)，若集合A的任一元素都是集合B的元素，那麼就集合A為集合B的子集(subset)，而B就是A的超集(superkey)，記為A⊆B，讀作A包含於B。舉例來說集合B為{B1, B2, B3, B4}，那麼若集合A為集合B的子集，那麼集合A可以是 1234&amp;#123;B1&amp;#125;&amp;#123;B1, B2&amp;#125;&amp;#">
+<meta property="og:description" content="背景在開發網頁前後分離專案時，前後兩端總是需要一份API文件來確定資料該如何調用、參數要什麼、回傳什麼、具有什麼功能，但對於整個開發流程而言，傳統上是採用Code first概念，API文件會在後端完成整個API邏輯層面的程式碼完工後才會公開，但這樣所花費的時間會使前端無法直接使用API來完成後續前後端的對接，進而讓整個專案因API文件拖到後頭才生成而被延宕，而且完工後的API文件也不見得能讓前端">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1649260773/blog/database/key/foreign-key-example_ourovc.png">
-<meta property="article:published_time" content="2022-04-06T16:02:17.000Z">
-<meta property="article:modified_time" content="2022-04-06T16:09:08.759Z">
+<meta property="og:image" content="https://static1.smartbear.co/swagger/media/blog/design-first-vs-code-first-swaggerhub-graphic.png">
+<meta property="article:published_time" content="2022-04-09T11:31:22.000Z">
+<meta property="article:modified_time" content="2022-04-09T11:32:36.060Z">
 <meta property="article:author" content="Eklipsorz">
-<meta property="article:tag" content="Key">
+<meta property="article:tag" content="Web API">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1649260773/blog/database/key/foreign-key-example_ourovc.png">
+<meta name="twitter:image" content="https://static1.smartbear.co/swagger/media/blog/design-first-vs-code-first-swaggerhub-graphic.png">
   
   
-  <title>資料庫表格-key種類 - Sloth Engineer</title>
+  <title>筆記：Web API 前後端開發協作形式 - Sloth Engineer</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -182,7 +182,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="資料庫表格-key種類">
+            <span class="h2" id="subtitle" title="筆記：Web API 前後端開發協作形式">
               
             </span>
 
@@ -197,8 +197,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-04-07 00:02" pubdate>
-        April 7, 2022 12:02 AM
+      <time datetime="2022-04-09 19:31" pubdate>
+        April 9, 2022 7:31 PM
       </time>
     </span>
   
@@ -208,7 +208,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.5k 字
+      3.1k 字
     </span>
   
 
@@ -217,7 +217,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5 分鐘
+      6 分鐘
     </span>
   
 
@@ -246,81 +246,51 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">資料庫表格-key種類</h1>
+            <h1 style="display: none">筆記：Web API 前後端開發協作形式</h1>
             
             <div class="markdown-body">
-              <h2 id="前置知識：子集"><a href="#前置知識：子集" class="headerlink" title="前置知識：子集"></a>前置知識：子集</h2><h3 id="subset-amp-superset"><a href="#subset-amp-superset" class="headerlink" title="subset &amp; superset"></a>subset &amp; superset</h3><p>假設有兩個集合(A、B)，若集合A的任一元素都是集合B的元素，那麼就集合A為集合B的子集(subset)，而B就是A的超集(superkey)，記為A⊆B，讀作A包含於B。舉例來說集合B為{B1, B2, B3, B4}，那麼若集合A為集合B的子集，那麼集合A可以是</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><pre><code class="hljs mipsasm">&#123;<span class="hljs-keyword">B1&#125;</span><br><span class="hljs-keyword"></span>&#123;<span class="hljs-keyword">B1, </span><span class="hljs-keyword">B2&#125;</span><br><span class="hljs-keyword"></span>&#123;<span class="hljs-keyword">B1, </span><span class="hljs-keyword">B2, </span><span class="hljs-keyword">B3&#125;</span><br><span class="hljs-keyword"></span>&#123;<span class="hljs-keyword">B1, </span><span class="hljs-keyword">B2, </span><span class="hljs-keyword">B3, </span><span class="hljs-keyword">B4&#125;</span><br></code></pre></td></tr></table></figure>
-
+              <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在開發網頁前後分離專案時，前後兩端總是需要一份API文件來確定資料該如何調用、參數要什麼、回傳什麼、具有什麼功能，但對於整個開發流程而言，傳統上是採用<strong>Code first概念</strong>，API文件會在後端完成整個API邏輯層面的程式碼完工後才會公開，但這樣所花費的時間會使前端無法直接使用API來完成後續前後端的對接，進而讓整個專案因API文件拖到後頭才生成而被延宕，而且完工後的API文件也不見得能讓前端方便對接，總是需要時間去協調該文件對應的程式碼以及文件該如何修改才能解決。</p>
+<p>為此就衍生出<strong>API-first 概念</strong>，來讓前後端人員以API文件來協調、確定，接著確定之後，在按照API文件打造一個假的後端伺服器以供前端使用，在這樣子的過程中，前端直接連接該假的伺服器來完成對接，從而讓前端不會再被後端的實作給延宕，而後端可以各自以自己的權責來同時完成手邊的任務，過程中很有可能因為前後端對於功能、規格上具有一定程度的衝突而修改API文件、假的伺服器，但這些因素換作是傳統概念也會遇到，所以是可以容忍的。最後當後端完成真正的伺服器時，前端只需要改連接至真正的伺服器就能直接用。</p>
+<h2 id="發生過程"><a href="#發生過程" class="headerlink" title="發生過程"></a>發生過程</h2><p>當商業團隊發現可行的產品想法時，會在進一步將想法轉換成具體如何實現的產品構思和企劃書，接著傳遞至實際開發部門來探討如何實現，這時開發部分可以有兩種選擇：</p>
+<ul>
+<li>API first：基於產品構思、企劃書來定義API文件以及Mock，隨後再來根據文件先實作Mock Server，然後讓前端先調用Mock Server進行資料和畫面的對接，後端再來從中按照API文件來開發真正的Server，最後確定完成真正的Server 就替換掉Mock Server </li>
+<li>Code first：基於產品構思、企劃書來先讓後端實作API實際對應的業務邏輯，隨後完成後在編寫API文件以及提供Server 給前端對接<br><img src="https://static1.smartbear.co/swagger/media/blog/design-first-vs-code-first-swaggerhub-graphic.png" srcset="/img/loading.gif" lazyload><h2 id="API-First"><a href="#API-First" class="headerlink" title="API First"></a>API First</h2>API first 又名為Contract First，主張前後端協作<strong>先以基本需求的文件來建立API(包含其API規格&#x2F;合約)為主，而隨後按照API來實作</strong>，在這裡API文件會被視為一份有關於前後端能夠達成一致的API合約，合約形式通常會是：</li>
+<li>OPEN API</li>
+<li>API Blueprint：Markdown Syntax for Object Notation形式，以Markdown形式<br>合約上的語言將會是以人類和機器皆能看懂和能夠解析的語言，為的就是一方面讓人類很好理解並開發對應合約，二方面就是能夠讓電腦解析合約語言並產生對應更為看得懂的合約形式。</li>
+</ul>
+<p>參考資料：<br><a target="_blank" rel="noopener" href="https://swagger.io/blog/api-design/design-first-or-code-first-api-development/">Design First or Code First: What’s the Best Approach to API Development? </a></p>
+<p>Note:</p>
+<ol>
+<li>Contract: 一份代表雙方在某件事上正式達成一致的正式文件<blockquote>
+<p>A legal document states and explains a formal agreement bewteen two different people or groups</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="API-First-Mock"><a href="#API-First-Mock" class="headerlink" title="API First + Mock"></a>API First + Mock</h3><p>除了確定API合約的內容以外，還得確定目前的API合約是否符合前端開發者(使用者)為所需，所以會依據目前約內容來打造Mock Server或者稱之為假的API Server，在這裡的Server會是以回傳內容和對應行為來模仿著後端最後所要實現出來的API Server，具體來說，依照目前合約內容而設定在它之下的每個API端點都具有設定對應的回傳內容以及簡單的回應動作(如移除資料、增加資料)。</p>
+<p>客戶端可把Mock Server當作是真正的API Server來對接，等到後端開發完真正的API Server後，就直接替換掉Mock Server，過程中可以提前解決前後端一定會遇到的對接衝突問題(P.S. 即使替換成Code First進行，也一定會遇到的衝突問題)<br>，並且 <strong>以更動Mock Server的回應和簡單回應動作的形式</strong> 來快速解決對接問題並給予前端快速對接，而後端也能按照問題優先權來安排實際的修正，最後也能藉由代表目前合約內容的Mock Server來驗證目前API合約內容是否合乎實際需求，使前後端的開發都能夠保持正確並一致的狀態下開發。</p>
+<p>參考資料：<br><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10267680">[面試][後端]在正式 API 完成前，如何讓要串接的工程師不要空等？</a><br><a target="_blank" rel="noopener" href="https://ruddyblog.wordpress.com/2021/09/08/%E6%B7%BA%E8%AB%87-api-first/">淺談 API First</a></p>
 <p>Note：</p>
 <ol>
-<li>sub-和super-開頭的字都分別泛指某項事物在某種程度來說是次要、淺下、低下、從屬，而super則是指重要、超越、之上、包含。</li>
-<li>sub和super 描述set的話就是指在被包含和包含，前者是指被包含的set，後者是指包含其他set的set</li>
+<li>Mock: 也稱之為Mock object， 意指為仿製的對象，也就是以行為或者外表來近似於某項人事物X但卻不是真實的人事物X的事務。</li>
+<li>引申至電腦科學中的物件導向程式設計，mock object是一個模擬某項物件X行為的模擬物件，該模擬方式會是以可控制的方式來模擬。<blockquote>
+<p>In object-oriented programming, mock objects are simulated objects that mimic the behavior of real objects in controlled ways, most often as part of a software testing initiative. A programmer typically creates a mock object to test the behavior of some other object, in much the same way that a car designer uses a crash test dummy to simulate the dynamic behavior of a human in vehicle impacts. The technique is also applicable in generic programming.</p>
+</blockquote>
+</li>
+<li>Mock Server：原本是基於HTTP&#x2F;HTTPS協定下的服務，主要功能為模仿特定伺服器下的特定服務並藉此給予使用者，其服務的模仿形式通常會是以具體回傳訊息以及特定具體行為來回應每個從客戶端發出的請求，如RPC-style 服務或者RESTful 服務。</li>
 </ol>
-<h3 id="proper-subset"><a href="#proper-subset" class="headerlink" title="proper subset"></a>proper subset</h3><p>假設有兩個集合(A、B)，若兩者間的關係為A⊆B且A≠B的話，集合A就是集合B的真集合(proper subset)，以B為{B1, B2, B3, B4}的例子，那麼若集合A為集合B的真子集，那麼集合A可以是前面三個，最後一個由於會是A&#x3D;B，所以不能夠算上它</p>
-<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="hljs-template-variable">&#123;B1&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;B1, B2&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;B1, B2, B3&#125;</span><span class="language-xml"></span><br><span class="language-xml">// 下面是不符合規則</span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;B1, B2, B3, B4&#125;</span><br></code></pre></td></tr></table></figure>
-
-
-<p>Note：</p>
-<ol>
-<li>proper 在這指最主要、最重要、嚴格(正確)意義上的，在這描述集合是強調該集合是確實是它所描述。<blockquote>
-<p>belonging to the main, most important, or typical part</p>
-</blockquote>
-</li>
-</ol>
-<p>參考資料：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.itread01.com/content/1547202186.html">集合基礎知識</a></li>
+<h3 id="API-First-適用時機點"><a href="#API-First-適用時機點" class="headerlink" title="API First 適用時機點"></a>API First 適用時機點</h3><ul>
+<li>考量到擁有較好的Developer Experience</li>
+<li>考量到需要交付較重要的API給客戶，尤其是需要一份契約來給予雙方信任的情況</li>
+<li>考量到團隊對於API的一致了解、溝通問題：人們可以透過易懂的文件中找出程式碼潛在的問題並給予修改建議，同時也讓使用者更快速暸解如何使用。</li>
 </ul>
-<h2 id="key-type"><a href="#key-type" class="headerlink" title="key type"></a>key type</h2><h3 id="key-amp-amp-superkey"><a href="#key-amp-amp-superkey" class="headerlink" title="key &amp;&amp; superkey"></a>key &amp;&amp; superkey</h3><p>key 主要是用來識別每一個紀錄的獨特性，如同身分證可以識別每一個人的身份那樣，通常會是由表格或者relation上的欄位組合{A1, A2,…, An}所構成，而要成為key的條件為：</p>
-<ol>
-<li><p>這些欄位&#x2F;屬性必須能夠功能上確定剩下欄位&#x2F;屬性，也就是說同樣的欄位組合{A1, A2,…, An}只會對應同個紀錄，不會對應到兩個不同的紀錄。</p>
-<blockquote>
-<p>Those attributes functionally determine all other attributes of the relation. That is, it is impossible for two distinct tuples of R to agree on all of A1, A2,…, An</p>
+<h2 id="Code-first"><a href="#Code-first" class="headerlink" title="Code first"></a>Code first</h2><p>Code first 主張 <strong>先以基本需求的文件來實現API的對應業務邏輯，之後再從實現程式碼中定義API的形式</strong>，通常這種會是以API的迭代速度來犧牲掉開發前期所需的前後端對於API的共同認知確定，而這樣通常會因為認知問題而增加溝通成本，且有可能會讓前端被迫等待後端完成才能進行對接，進而影響開發效率。</p>
+<h3 id="Code-First-適用時機點"><a href="#Code-First-適用時機點" class="headerlink" title="Code First 適用時機點"></a>Code First 適用時機點</h3><ul>
+<li>若以快速投入市場和敏捷性作為成功的API形式<blockquote>
+<p>This is important if your go-to market strategy emphasizes speed and agility as important factors for the success of the API program. The fact that automation is much easier in the code-first approach helps strengthen this case, with a lot of libraries supporting scaffolding server code, functional testing, and deployment automation. </p>
 </blockquote>
 </li>
-<li><p>{A1, A2,…, An}中的所有真子集合中的組合(如只有A1和A2、或者是只有A1、A2、A3)不能夠功能上確定剩下屬性，換言之，只有完整的 {A1, A2,…, An}才能確定且在決定紀錄的key中是擁有最小欄位量的key</p>
-<blockquote>
-<p>No proper subet of {A1, A2,…., An} functionally determines all other attributes of R; i.e., a key must be minimal</p>
-</blockquote>
-</li>
-</ol>
-<p>若一組欄位集合能夠包含key的話，該欄位集合會稱作為superkey，或者稱key的超集，該集合中的鑰匙都會滿足於key的第一條件，不一定能夠滿足第二個條件，比如說一個表格擁有以下這幾個欄位</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-built_in">A1</span>, <span class="hljs-built_in">A2</span>, <span class="hljs-built_in">A3</span>, <span class="hljs-built_in">A4</span>,..., An<br></code></pre></td></tr></table></figure>
-
-<p>，其中A1和A2是key，那麼superkey就會是</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">&#123;<span class="hljs-built_in">A1</span>, <span class="hljs-built_in">A2</span>&#125;<br>&#123;<span class="hljs-built_in">A1</span>, <span class="hljs-built_in">A2</span>, <span class="hljs-built_in">A3</span>&#125;<br>&#123;<span class="hljs-built_in">A1</span>, <span class="hljs-built_in">A2</span>, <span class="hljs-built_in">A3</span>, <span class="hljs-built_in">A4</span>&#125;<br>&#123;<span class="hljs-built_in">A1</span>, <span class="hljs-built_in">A2</span>, <span class="hljs-built_in">A3</span>, <span class="hljs-built_in">A4</span>, <span class="hljs-built_in">A5</span>&#125;<br>&#123;<span class="hljs-built_in">A1</span>, <span class="hljs-built_in">A2</span>, <span class="hljs-built_in">A3</span>, <span class="hljs-built_in">A4</span>, <span class="hljs-built_in">A5</span>, <span class="hljs-built_in">A6</span>&#125;<br>.<br>.<br>&#123;<span class="hljs-built_in">A1</span>, <span class="hljs-built_in">A2</span>, <span class="hljs-built_in">A3</span>, <span class="hljs-built_in">A4</span>, <span class="hljs-built_in">A5</span>, <span class="hljs-built_in">A6</span>,..., An&#125;<br></code></pre></td></tr></table></figure>
-
-<p>超鍵本身包含著候選鍵(candidate key)、替代鍵(alternate key)、主鍵(primary key)、外鍵(foreign key)</p>
-<h3 id="primary-key-amp-amp-candidate-key-amp-amp-alternate-key"><a href="#primary-key-amp-amp-candidate-key-amp-amp-alternate-key" class="headerlink" title="primary key &amp;&amp; candidate key &amp;&amp; alternate key"></a>primary key &amp;&amp; candidate key &amp;&amp; alternate key</h3><p>主鍵(primary key)是由開發者或者資料庫管理系統從由key所構成的集合X中選定出來的key，是主要實際用來識別每一個紀錄的獨特性，同時間也必須要滿足以下限制：</p>
-<ul>
-<li>主鍵值必須能夠識別紀錄<blockquote>
-<p>Must uniquely identify the row;</p>
-</blockquote>
-</li>
-<li>主鍵值不能夠NULL<blockquote>
-<p>cannot have NULL values;</p>
-</blockquote>
-</li>
-<li>主鍵值不能一直被改變<blockquote>
-<p>Should not change over the time;</p>
-</blockquote>
-</li>
-<li>主鍵值必須盡可能越短越好：通常會以主鍵當作資料的索引，主鍵越短，越能節省空間和查詢時間<blockquote>
-<p>Should be as short as possible.<br>集合X中的每一個key都會是候選鍵(candidate key)，會具有以下特色：</p>
-</blockquote>
-</li>
-<li>滿足key的所有條件(識別和最小化)</li>
-<li>能夠被採納為主鍵的key，因爲這點而稱之為候選<br>另外當主鍵從集合X選出時，剩下未被選到的候選鍵就即為次要鍵(Secondary Key)或者替換鍵(Alternate key)</li>
+<li>考量以團隊內部、架構較小的API，使用Code-first會較為理想，畢竟受到影響的層面已經縮小至內部，而非到外部。</li>
 </ul>
-<p>參考資料：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.kkbruce.net/2010/10/normalization-key.html">關聯資料表正規化(NORMALIZATION)–鍵,KEY</a></li>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/22064977/what-is-the-difference-between-primary-key-and-prime-attribute">What is the difference between Primary key and prime attribute?</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.tutorialspoint.com/Alternate-Key-in-RDBMS">Alternate Key in RDBMS</a></li>
-</ul>
-<h3 id="foreign-key"><a href="#foreign-key" class="headerlink" title="foreign key"></a>foreign key</h3><p>在一個表格X或者relation X中的欄位組合X是指向或者是其他表格Y或者其他relation Y的主鍵，那麼其欄位組合X對於表格X來說，是個外部來的主鍵，簡稱為外鍵(foreign key)，用途是來讓表格X透過外鍵來找到對應表格Y的對應主鍵，並用連接(如JOIN)來延伸其他資訊從而構成兩個表格之間的一致性。</p>
-<p>比如說：假設有兩個表格分別為住戶資料、預約疫苗，住戶資料的主鍵為身份證，預約疫苗的主鍵為序號，其中預約疫苗表格的身分證欄位是指向住戶資料的主鍵，因此會是預約表格的外主鍵或者外鍵，透過這個外鍵和Inner Join可以延伸對應的住戶資料，而結果會是最下面的合併結果<br><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1649260773/blog/database/key/foreign-key-example_ourovc.png" srcset="/img/loading.gif" lazyload></p>
 
             </div>
             <hr>
@@ -330,7 +300,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Database/">Database</a>
+                      <a class="hover-with-bg" href="/categories/API/">API</a>
                     
                   </div>
                 
@@ -338,7 +308,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Key/">Key</a>
+                      <a class="hover-with-bg" href="/tags/Web-API/">Web API</a>
                     
                   </div>
                 
@@ -355,18 +325,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/WebAPI-coop-mode/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">筆記：Web API 前後端開發協作形式</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/db-fd-type/">
-                        <span class="hidden-mobile">Functional Dependency type</span>
+                      <a href="/db-key-type/">
+                        <span class="hidden-mobile">資料庫表格-key種類</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
