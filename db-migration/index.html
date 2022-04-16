@@ -16,17 +16,17 @@
   <meta name="author" content="Eklipsorz">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Database migration (別名為schema migration 或者 database change management)，目前是由ORM&#x2F;ODM來實現，並非由資料庫管理系統本身來實現，其概念主要目的是為主要為了在 盡量不破壞(PS. 只是盡量，並非完全能夠避免破壞)原有表格資料的情況下，來將每一個時間點下的表格架構進行版本控制來讓這些表格架構能夠重複使用、可根據執行環">
+    <meta name="description" content="Database migration (別名為schema migration 或者 database change management)，目前是由ORM&#x2F;ODM來實現，並非由資料庫管理系統本身來實現，其概念主要目的是為了在 盡量不破壞(PS. 只是盡量，並非完全能夠避免破壞)原有表格資料的情況下，來將每一個時間點下的表格架構進行版本控制來讓這些表格架構能夠重複使用、可根據執行環境來進">
 <meta property="og:type" content="article">
 <meta property="og:title" content="探討：Database Migration">
 <meta property="og:url" content="https://blog.sloth.engineer/db-migration/index.html">
 <meta property="og:site_name" content="Sloth Engineer">
-<meta property="og:description" content="Database migration (別名為schema migration 或者 database change management)，目前是由ORM&#x2F;ODM來實現，並非由資料庫管理系統本身來實現，其概念主要目的是為主要為了在 盡量不破壞(PS. 只是盡量，並非完全能夠避免破壞)原有表格資料的情況下，來將每一個時間點下的表格架構進行版本控制來讓這些表格架構能夠重複使用、可根據執行環">
+<meta property="og:description" content="Database migration (別名為schema migration 或者 database change management)，目前是由ORM&#x2F;ODM來實現，並非由資料庫管理系統本身來實現，其概念主要目的是為了在 盡量不破壞(PS. 只是盡量，並非完全能夠避免破壞)原有表格資料的情況下，來將每一個時間點下的表格架構進行版本控制來讓這些表格架構能夠重複使用、可根據執行環境來進">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650021326/blog/database/migration/db-migration-build-table1_vjnkjf.png">
 <meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650021326/blog/database/migration/db-migration-update-table1_puwlsx.png">
 <meta property="article:published_time" content="2022-04-15T13:27:51.000Z">
-<meta property="article:modified_time" content="2022-04-16T14:43:17.179Z">
+<meta property="article:modified_time" content="2022-04-16T14:47:42.076Z">
 <meta property="article:author" content="Eklipsorz">
 <meta property="article:tag" content="Database Migration">
 <meta property="article:tag" content="Migration">
@@ -252,7 +252,7 @@
             <h1 style="display: none">探討：Database Migration</h1>
             
             <div class="markdown-body">
-              <p>Database migration (別名為schema migration 或者 database change management)，目前是由ORM&#x2F;ODM來實現，並非由資料庫管理系統本身來實現，其概念主要目的是為主要為了在 <strong>盡量不破壞(PS. 只是盡量，並非完全能夠避免破壞)原有表格資料的情況下</strong>，來將每一個時間點下的表格架構進行版本控制來讓這些表格架構能夠重複使用、可根據執行環境來進行測試、共享於整個團隊。</p>
+              <p>Database migration (別名為schema migration 或者 database change management)，目前是由ORM&#x2F;ODM來實現，並非由資料庫管理系統本身來實現，其概念主要目的是為了在 <strong>盡量不破壞(PS. 只是盡量，並非完全能夠避免破壞)原有表格資料的情況下</strong>，來將每一個時間點下的表格架構進行版本控制來讓這些表格架構能夠重複使用、可根據執行環境來進行測試、共享於整個團隊。</p>
 <blockquote>
 <p>The goals of database migration software are to make database changes repeatable, shareable, and testable without loss of data</p>
 </blockquote>
@@ -301,7 +301,7 @@
 <li>測試環境(test environment)：通常會以遠端的測試用資料庫作為連線設定的基礎</li>
 <li>線上環境(production environment)：通常會以正式上線用的資料庫作為連線設定的基礎</li>
 </ul>
-<p>這三種環境下所能使用的版本通常都是共同的，這些版本的切換通常運用在開發環境和測試環境，因為這兩個環境所儲存的資料皆為彰顯是否實現功能開發以及其功能的效能是如何，資料本身並沒有太大的意義，但若應用於線上環境下，會因為儲存的資料皆為使用者相關的而使這些資料具有較大意義而無法輕易切換版本，原因在於<strong>ORM&#x2F;ODM來處理欄位時會因為移除欄位而損失資料</strong>。</p>
+<p>這三種環境下所能使用的版本通常都是共同的，這些版本的切換通常運用在開發環境和測試環境，因為這兩個環境所儲存的資料皆為彰顯是否實現功能開發以及其功能的效能是如何，資料本身並沒有太大的意義，但若應用於線上環境下，會因為儲存的資料皆為使用者相關的而使這些資料具有較大意義，進而無法輕易切換版本，原因在於<strong>ORM&#x2F;ODM來處理欄位時會因為移除欄位而損失資料</strong>。</p>
 <h3 id="ORM-x2F-ODM-破壞原有資料？"><a href="#ORM-x2F-ODM-破壞原有資料？" class="headerlink" title="ORM&#x2F;ODM 破壞原有資料？"></a>ORM&#x2F;ODM 破壞原有資料？</h3><p>在切換版本的過程，難免會移除掉某些欄位X，在這樣子的情況下，ORM&#x2F;ODM若切換至欄位X還在時的版本內容，其對應的欄位的資料並不會跟著復原，比如說拿以下架構來進行欄位上的減量：減少price這欄位的話</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">name</span>  price   date<br><span class="hljs-attribute">apple</span> <span class="hljs-number">10</span>    <span class="hljs-number">4</span>/<span class="hljs-number">13</span><br><span class="hljs-attribute">orange</span> <span class="hljs-number">12</span> <span class="hljs-number">4</span>/<span class="hljs-number">14</span><br></code></pre></td></tr></table></figure>
 <p>那麼就會是以下結果，</p>
