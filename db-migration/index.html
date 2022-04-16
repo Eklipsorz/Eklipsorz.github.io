@@ -16,17 +16,17 @@
   <meta name="author" content="Eklipsorz">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Database migration (別名為schema migration 或者 database change management)，目前是由ORM&#x2F;ODM來實現，並非由資料庫管理系統本身來實現，其概念主要目的是為主要為了在 盡量不破壞(PS. 只是盡量，並非完全能夠避免不破壞)原有表格資料的情況下，來將每一個時間點下的表格架構進行版本控制來讓這些表格架構能夠重複使用、可根據執行">
+    <meta name="description" content="Database migration (別名為schema migration 或者 database change management)，目前是由ORM&#x2F;ODM來實現，並非由資料庫管理系統本身來實現，其概念主要目的是為主要為了在 盡量不破壞(PS. 只是盡量，並非完全能夠避免破壞)原有表格資料的情況下，來將每一個時間點下的表格架構進行版本控制來讓這些表格架構能夠重複使用、可根據執行環">
 <meta property="og:type" content="article">
 <meta property="og:title" content="探討：Database Migration">
 <meta property="og:url" content="https://blog.sloth.engineer/db-migration/index.html">
 <meta property="og:site_name" content="Sloth Engineer">
-<meta property="og:description" content="Database migration (別名為schema migration 或者 database change management)，目前是由ORM&#x2F;ODM來實現，並非由資料庫管理系統本身來實現，其概念主要目的是為主要為了在 盡量不破壞(PS. 只是盡量，並非完全能夠避免不破壞)原有表格資料的情況下，來將每一個時間點下的表格架構進行版本控制來讓這些表格架構能夠重複使用、可根據執行">
+<meta property="og:description" content="Database migration (別名為schema migration 或者 database change management)，目前是由ORM&#x2F;ODM來實現，並非由資料庫管理系統本身來實現，其概念主要目的是為主要為了在 盡量不破壞(PS. 只是盡量，並非完全能夠避免破壞)原有表格資料的情況下，來將每一個時間點下的表格架構進行版本控制來讓這些表格架構能夠重複使用、可根據執行環">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650021326/blog/database/migration/db-migration-build-table1_vjnkjf.png">
 <meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650021326/blog/database/migration/db-migration-update-table1_puwlsx.png">
 <meta property="article:published_time" content="2022-04-15T13:27:51.000Z">
-<meta property="article:modified_time" content="2022-04-15T13:40:24.465Z">
+<meta property="article:modified_time" content="2022-04-16T14:43:17.179Z">
 <meta property="article:author" content="Eklipsorz">
 <meta property="article:tag" content="Database Migration">
 <meta property="article:tag" content="Migration">
@@ -252,7 +252,7 @@
             <h1 style="display: none">探討：Database Migration</h1>
             
             <div class="markdown-body">
-              <p>Database migration (別名為schema migration 或者 database change management)，目前是由ORM&#x2F;ODM來實現，並非由資料庫管理系統本身來實現，其概念主要目的是為主要為了在 <strong>盡量不破壞(PS. 只是盡量，並非完全能夠避免不破壞)原有表格資料的情況下</strong>，來將每一個時間點下的表格架構進行版本控制來讓這些表格架構能夠重複使用、可根據執行環境來進行測試、共享於整個團隊。</p>
+              <p>Database migration (別名為schema migration 或者 database change management)，目前是由ORM&#x2F;ODM來實現，並非由資料庫管理系統本身來實現，其概念主要目的是為主要為了在 <strong>盡量不破壞(PS. 只是盡量，並非完全能夠避免破壞)原有表格資料的情況下</strong>，來將每一個時間點下的表格架構進行版本控制來讓這些表格架構能夠重複使用、可根據執行環境來進行測試、共享於整個團隊。</p>
 <blockquote>
 <p>The goals of database migration software are to make database changes repeatable, shareable, and testable without loss of data</p>
 </blockquote>
