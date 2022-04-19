@@ -1,0 +1,506 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Eklipsorz">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="session 本身的含義根據字典所描述的session，會是指特定活動下的一段時間或者特定活動下的一場會議，在這裡可以稍微轉換一下說法，一段時間可以用一場會議來替代描述session，那麼實際上專注在會議上的定義就能明瞭session的意涵，而meeting代表著一個計畫好的時間點，能夠與其他人討論著什麼東西的時間點，或者說計畫好的互動情形、互動狀態，添加至原句就 使session的意思變成特定">
+<meta property="og:type" content="article">
+<meta property="og:title" content="探討：http&#x2F;https協議上的 session 概念">
+<meta property="og:url" content="https://blog.sloth.engineer/session-concept-in-rfc/index.html">
+<meta property="og:site_name" content="Sloth Engineer">
+<meta property="og:description" content="session 本身的含義根據字典所描述的session，會是指特定活動下的一段時間或者特定活動下的一場會議，在這裡可以稍微轉換一下說法，一段時間可以用一場會議來替代描述session，那麼實際上專注在會議上的定義就能明瞭session的意涵，而meeting代表著一個計畫好的時間點，能夠與其他人討論著什麼東西的時間點，或者說計畫好的互動情形、互動狀態，添加至原句就 使session的意思變成特定">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-19T16:41:28.000Z">
+<meta property="article:modified_time" content="2022-04-19T16:42:07.239Z">
+<meta property="article:author" content="Eklipsorz">
+<meta property="article:tag" content="Cookie">
+<meta property="article:tag" content="Session">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>探討：http/https協議上的 session 概念 - Sloth Engineer</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.sloth.engineer","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Sloth Engineer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://res.cloudinary.com/dqfxgtyoi/image/upload/v1647757523/GitHub-Page/default-cover_drxoxt.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="探討：http/https協議上的 session 概念">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Eklipsorz
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-04-20 00:41" pubdate>
+        April 20, 2022 12:41 AM
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      3 分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">探討：http/https協議上的 session 概念</h1>
+            
+            <div class="markdown-body">
+              <h2 id="session-本身的含義"><a href="#session-本身的含義" class="headerlink" title="session 本身的含義"></a>session 本身的含義</h2><p>根據字典所描述的session，會是指特定活動下的一段時間或者特定活動下的一場會議，在這裡可以稍微轉換一下說法，一段時間可以用一場會議來替代描述session，那麼實際上專注在會議上的定義就能明瞭session的意涵，而meeting代表著一個計畫好的時間點，能夠與其他人討論著什麼東西的時間點，或者說計畫好的互動情形、互動狀態，添加至原句就 <strong>使session的意思變成特定活動下的所預計好之互動情形</strong> </p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><pre><code class="hljs livecodeserver">session: <span class="hljs-keyword">a</span> period <span class="hljs-keyword">of</span> <span class="hljs-built_in">time</span> <span class="hljs-keyword">or</span> meeting arranged <span class="hljs-keyword">for</span> <span class="hljs-keyword">a</span> particular activity<br>meeting: <span class="hljs-keyword">a</span> planned occasion when people come together <span class="hljs-built_in">to</span> discuss something<br></code></pre></td></tr></table></figure>
+
+<h2 id="session-在http-x2F-https協議上的含義"><a href="#session-在http-x2F-https協議上的含義" class="headerlink" title="session 在http&#x2F;https協議上的含義"></a>session 在http&#x2F;https協議上的含義</h2><p>從上述轉換成網路連線的說法，<strong>特定活動下的所預計好之互動情形</strong> 的特定活動下就是意旨<strong>伺服器和客戶端之間的連線活動下</strong>，所預計好之互動情形則是意旨 <strong>伺服器和客戶端之間在連線時的互動會根據RFC規範所定義的內容來進行</strong>，換言之預計就是指著根據RFC規範下所會有的互動，簡單點就是指 <strong>伺服器和客戶端之間在連線時的互動狀態</strong></p>
+<h2 id="session-在http-x2F-https協議的存在目的"><a href="#session-在http-x2F-https協議的存在目的" class="headerlink" title="session 在http&#x2F;https協議的存在目的"></a>session 在http&#x2F;https協議的存在目的</h2><p>由於http&#x2F;https協議本身為了簡化客戶端和伺服器之間的連線結構，而定義客戶端和伺服器之間在連線時互動情況並不會紀錄下來-無狀態(stateless)，但隨著越來越多服務需要客戶端和伺服器之間的過去互動情況，比如首次登入後就直接透過互動情況而跳過、使用者可以透過過去的購物車內容來直接購買，就有人於RFC規範提出session概念以及如何運用session概念來允許客戶端和伺服器在連線過程中 <strong>分別讓客戶端單方面紀錄與伺服器之間的互動情形、讓伺服器單方面紀錄與客戶端之間的互動情形、更或者讓兩者紀錄雙方的互動情形</strong>。</p>
+<p>而具體實作方式則是允許客戶端和伺服器在每一次連線時可以各自從自己的系統中分配空間來儲存能夠代表與彼此進行連線時會有的互動情形之資料，而這樣的資料會是用session來稱呼，session 裡頭的內容則是稱之為session information，在下一次連線時，雙方可從session來延續過去的互動情形進行額外的處理，比如說客戶端曾與某個電商伺服器進行連線並從中將產品放進購物車，但過程中客戶端先暫時關閉伺服器連線，而為了讓客戶端還能回憶起購物車的產品，會紀錄著這產品的相關資訊，而這資訊本身就會是session，其內容會是產品的主要內容，也就是session information。</p>
+<p>實作中的客戶端會以Cookie資訊來稱呼session以及透過伺服器所給定的Set-Cookie封包來建立紀錄，接著讓客戶端每次向著曾經請求的同個伺服器發送請求時就會跟著附加Cookie資訊至請求封包，以讓伺服器延續先前的處理結果為客戶端處理；而伺服器紀錄客戶端連線時的互動情形，通常會直接以session來命名</p>
+<p>總結：</p>
+<ol>
+<li>session 本就是概念，與在實際實現上，伺服器的session相比，session就只是描述如何實現它和它是什麼，而伺服器上的session就是依據著前者概念來建立出實體的session。</li>
+<li>session概念的存在意義是為了 <strong>在不違反http&#x2F;https無狀態下的環境能夠滿足伺服器和客戶端對於狀態的需求</strong></li>
+<li>通常，session概念所對應的實現分別在伺服器和客戶端具有不同的名字：</li>
+</ol>
+<ul>
+<li>Cookie：屬於客戶端，是伺服器麻煩客戶端去紀錄與伺服器的互動狀態</li>
+<li>session：屬於伺服器，是伺服器單方面紀錄與客戶端的互動狀態</li>
+</ul>
+<p>相關的 RFC規範 和 參考文獻：<br><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc2109">RFC2109: HTTP State Management Mechanism</a><br><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc2965">RFC2965: HTTP State Management Mechanism</a><br><a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc6265">RFC6265: HTTP State Management Mechanism</a><br><a target="_blank" rel="noopener" href="https://blog.huli.tw/2019/08/09/session-and-cookie-part2/">淺談 Session 與 Cookie：一起來讀 RFC</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Website-Development/">Website Development</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Cookie/">Cookie</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Session/">Session</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本Blog上的所有文章除特别聲明外，均採用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 協議</a> ，轉載請註明出處！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/cookie-concept/">
+                        <span class="hidden-mobile">筆記&探討：Cookie 本身和設定</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Eklipsorz/eklipsorz-blog-store');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
