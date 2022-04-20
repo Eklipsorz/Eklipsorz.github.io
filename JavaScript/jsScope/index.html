@@ -1,0 +1,574 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Eklipsorz">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="在程式語言中，作用域(Scope)是指對應某種實體(entity)的名字(name)所能夠被合法辨識以及使用的範圍，其中實體是指的是某種記憶體區塊，而名字就是變數(variable)名稱，換言之，只要我們透過變數名稱就能操控代表記憶體區塊的實體。在這裡皆以let、const這些不違反Scope規則的變數宣告方式，var宣告會另開一個小節做說明 Scope 有哪些種類？Scope可以是由{}所構成的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript - Scope 簡介">
+<meta property="og:url" content="https://blog.sloth.engineer/JavaScript/jsScope/index.html">
+<meta property="og:site_name" content="Sloth Engineer">
+<meta property="og:description" content="在程式語言中，作用域(Scope)是指對應某種實體(entity)的名字(name)所能夠被合法辨識以及使用的範圍，其中實體是指的是某種記憶體區塊，而名字就是變數(variable)名稱，換言之，只要我們透過變數名稱就能操控代表記憶體區塊的實體。在這裡皆以let、const這些不違反Scope規則的變數宣告方式，var宣告會另開一個小節做說明 Scope 有哪些種類？Scope可以是由{}所構成的">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-09-09T09:47:19.000Z">
+<meta property="article:modified_time" content="2022-03-20T07:50:14.002Z">
+<meta property="article:author" content="Eklipsorz">
+<meta property="article:tag" content="Scope">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>JavaScript - Scope 簡介 - Sloth Engineer</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.sloth.engineer","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Sloth Engineer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://res.cloudinary.com/dqfxgtyoi/image/upload/v1647757523/GitHub-Page/default-cover_drxoxt.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JavaScript - Scope 簡介">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Eklipsorz
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-09 17:47" pubdate>
+        September 9, 2021 5:47 PM
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9 分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JavaScript - Scope 簡介</h1>
+            
+            <div class="markdown-body">
+              <p>在程式語言中，作用域(Scope)是指對應某種實體(entity)的名字(name)所能夠被合法辨識以及使用的範圍，其中實體是指的是某種記憶體區塊，而名字就是變數(variable)名稱，換言之，只要我們透過變數名稱就能操控代表記憶體區塊的實體。在這裡皆以let、const這些不違反Scope規則的變數宣告方式，var宣告會另開一個小節做說明</p>
+<h2 id="Scope-有哪些種類？"><a href="#Scope-有哪些種類？" class="headerlink" title="Scope 有哪些種類？"></a>Scope 有哪些種類？</h2><p>Scope可以是由{}所構成的範圍以及未被{}所構成的範圍，他們的形式通常分別會是如下：首先是由{}所構成的範圍，這個範圍又被稱之為區塊(Block)，其構成必須藉由開發者自行設定才會產生</p>
+<figure class="highlight mercury"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><pre><code class="hljs mercury">&#123;<br>    statement1 / expression <span class="hljs-number">1</span><br>               .<br>               .<br>               .<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>另一個則是不用括號</p>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs erlang">statement1 / expression <span class="hljs-number">1</span><br>           .<br>           .<br>           .<br>           .<br><br></code></pre></td></tr></table></figure>
+
+<p>預設上若沒特定添加{}的話，變數所在的作用域會是在不用括號的範圍，在這個範疇中會是全域作用域(Global Scope)，而括號構成的範圍只會出現全域作用域內部，對全域作用域而言，該範圍會是區域作用域(Local Scope)，其中根據全域作用域內包含區域作用域，我們可以將全域作用域成這個區域作用域的Parent Scope，而這區域作用域會是全域作用域的Child Scope，當然我們也可以在區域作用域內建立另一個區塊，形成另一種Parent-Child之間的作用域，若再進一步區分的話其中最根源或者包含所有區域作用域的作用域會是Root Scope，而這個作用域正是全域作用域。</p>
+<p>現在我們知道預設上我們會在Root Scope進行宣告以及定義變數，在這裡所宣告的變數所擁有的作用域會是Root Scope或 Global Scope，而此變數會被稱之為全域變數，若跳脫Scope的範圍或者執行完畢時，其變數所佔用的記憶體會被釋放，若是在Root Scope內部產生另一個Scope並進行變數宣告的話，其額外產生的Scope對於Global Scope而言會是Local Scope，在那裡宣告的變數所擁有的Scope會只有那區塊，而不是Root Scope，而且該變數只要跳脫那Scope，它所佔用的記憶體空間會被釋放掉。</p>
+<p>比如首先我們先替Root Scope取名為Scope A，其內部再產生一個名為Scope B的Scope，括號內部又宣告了一個變數b，其變數b的Scope只有括號內部而已。</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs coq">// <span class="hljs-keyword">Scope</span> A: Root <span class="hljs-keyword">Scope</span><br><span class="hljs-keyword">let</span> a = <span class="hljs-number">10</span><br><br>&#123; // <span class="hljs-keyword">Scope</span> B: Child <span class="hljs-keyword">Scope</span> of Root <span class="hljs-keyword">Scope</span><br><br>    <span class="hljs-keyword">let</span> b = <span class="hljs-number">20</span><br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>在這情況下的變數b會被稱作為區域變數，且該Scope A對於由括號構成的Scope B而言，Scope A會是他的Parent Scope，而Scope B會是Scope A的Child Scope。若我們繼續沿用上面例子中的Scope B內產生另一個名為Scope C的Scope的話，也就是如下所示：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs coq">// <span class="hljs-keyword">Scope</span> A: Root <span class="hljs-keyword">Scope</span><br><span class="hljs-keyword">let</span> a = <span class="hljs-number">10</span><br><br>&#123; // <span class="hljs-keyword">Scope</span> B: Child <span class="hljs-keyword">Scope</span> of Root <span class="hljs-keyword">Scope</span><br>    <span class="hljs-keyword">let</span> b = <span class="hljs-number">20</span> <br>    &#123; // <span class="hljs-keyword">Scope</span> C: Child <span class="hljs-keyword">Scope</span> of <span class="hljs-keyword">Scope</span> B<br>        <span class="hljs-keyword">let</span> c = <span class="hljs-number">30</span><br>    &#125;<br>    <br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>其Scope C會是Scope B的Parent Scope，而Scope C則會是Scope B的Child Scope。</p>
+<h2 id="Root、Parent、Child這三者下的變數存取關係"><a href="#Root、Parent、Child這三者下的變數存取關係" class="headerlink" title="Root、Parent、Child這三者下的變數存取關係"></a>Root、Parent、Child這三者下的變數存取關係</h2><p>若我們把這些括號給去除掉的話，實際上還是同一個作用域下的變數，後面變數可以存取前面已宣告的變數值，只是現在我們只是單純按照括號賦予他們特定的作用域，進而告訴變數什麼時候該自己釋放記憶體，否則若不釋放會因為被判定成不屬於它原本的作用域而出錯。在這樣規則下，我們可以得知二件事：1. 變數宣告的先後順序仍沒改變，後面變數可以存取前面已宣告的變數，2. 變數所在的作用域會影響著它們何時釋放，接著我們將利用這兩套被推斷的規則以及例子來得知Root、Parent、Child這三者下的變數存取關係是什麼。</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs coq">// <span class="hljs-keyword">Scope</span> A: Root <span class="hljs-keyword">Scope</span><br><span class="hljs-keyword">let</span> a = <span class="hljs-number">10</span><br><br> // <span class="hljs-keyword">Scope</span> B: Child <span class="hljs-keyword">Scope</span> of Root <span class="hljs-keyword">Scope</span><br>    <span class="hljs-keyword">let</span> b = <span class="hljs-number">20</span> <br>     // <span class="hljs-keyword">Scope</span> C: Child <span class="hljs-keyword">Scope</span> of <span class="hljs-keyword">Scope</span> B<br>        <span class="hljs-keyword">let</span> c = <span class="hljs-number">30</span><br>    <br></code></pre></td></tr></table></figure>
+
+<p>在這小節中，會以三個小例子來說明存取關係是如何，而這些例子分別可以推斷出</p>
+<ol>
+<li>無法在Parent Scope存取Child Scope所定義的變數。</li>
+<li>Child Scope 能夠存取位於Parent Scope的變數，但前提必須看要存取的變數是否在Child Scope之前。</li>
+<li>多個Parent Scope是相同的Child Scope是無法存取彼此間的變數。</li>
+</ol>
+<h3 id="例子：無法在Parent-Scope存取Child-Scope所定義的變數。"><a href="#例子：無法在Parent-Scope存取Child-Scope所定義的變數。" class="headerlink" title="例子：無法在Parent Scope存取Child Scope所定義的變數。"></a>例子：無法在Parent Scope存取Child Scope所定義的變數。</h3><p>繼續沿用上個例子，當想在Root Scope去印出Scope C下的變數或者Scope B的變數時，在只能待在Root Scope的前提下，只能有兩種選擇方式：a. 在Scope B前寫印變數的程式、b. 在Scope B後寫出印變數的程式</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs coq">// <span class="hljs-keyword">Scope</span> A: Root <span class="hljs-keyword">Scope</span><br><span class="hljs-keyword">let</span> a = <span class="hljs-number">10</span><br><br>&#123; // <span class="hljs-keyword">Scope</span> B: Child <span class="hljs-keyword">Scope</span> of Root <span class="hljs-keyword">Scope</span><br>    <span class="hljs-keyword">let</span> b = <span class="hljs-number">20</span> <br>    &#123; // <span class="hljs-keyword">Scope</span> C: Child <span class="hljs-keyword">Scope</span> of <span class="hljs-keyword">Scope</span> B<br>        <span class="hljs-keyword">let</span> c = <span class="hljs-number">30</span><br>    &#125;<br>    <br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>這兩種選擇方式分別如下所示：</p>
+<p>a. 在Scope B前寫印變數的程式：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs coq">// <span class="hljs-keyword">Scope</span> A: Root <span class="hljs-keyword">Scope</span><br><span class="hljs-keyword">let</span> a = <span class="hljs-number">10</span><br><br>console.log(b)<br>console.log(c)<br>&#123; // <span class="hljs-keyword">Scope</span> B: Child <span class="hljs-keyword">Scope</span> of Root <span class="hljs-keyword">Scope</span><br>    <span class="hljs-keyword">let</span> b = <span class="hljs-number">20</span> <br>    &#123; // <span class="hljs-keyword">Scope</span> C: Child <span class="hljs-keyword">Scope</span> of <span class="hljs-keyword">Scope</span> B<br>        <span class="hljs-keyword">let</span> c = <span class="hljs-number">30</span><br>    &#125;<br>    <br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>b. 在Scope B後寫出印變數的程式：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs coq">// <span class="hljs-keyword">Scope</span> A: Root <span class="hljs-keyword">Scope</span><br><span class="hljs-keyword">let</span> a = <span class="hljs-number">10</span><br><br><br>&#123; // <span class="hljs-keyword">Scope</span> B: Child <span class="hljs-keyword">Scope</span> of Root <span class="hljs-keyword">Scope</span><br>    <span class="hljs-keyword">let</span> b = <span class="hljs-number">20</span> <br>    &#123; // <span class="hljs-keyword">Scope</span> C: Child <span class="hljs-keyword">Scope</span> of <span class="hljs-keyword">Scope</span> B<br>        <span class="hljs-keyword">let</span> c = <span class="hljs-number">30</span><br>    &#125;<br>    <br><br>&#125;<br>console.log(b)<br>console.log(c)<br></code></pre></td></tr></table></figure>
+
+<p>但這兩種方式皆無法正常印出變數b和變數c，a方式是因為變數b和變數c都還沒被宣告定義，所以本來就印不出來，而b方式則是因爲Scope內的所有變數的記憶體皆被釋放，所以也就跟著印不出來，同樣的概念也可以放在只考慮Scope B和 Scope C這兩者上，將他們兩者換成Parent Scope和Child Scope，當然最後結果會是沒辦法在Parent Scope存取到Child Scope下的變數。</p>
+<h3 id="例子2-Child-Scope-能夠存取位於Parent-Scope的變數"><a href="#例子2-Child-Scope-能夠存取位於Parent-Scope的變數" class="headerlink" title="例子2: Child Scope 能夠存取位於Parent Scope的變數"></a>例子2: Child Scope 能夠存取位於Parent Scope的變數</h3><p>同樣地，若我們想要在Child Scope去存取Parent Scope下的變數，比如想在Scope B的範圍下印出Parent Scope的變數a，這時我們會因為Parent Scope的變數a還存在而能夠印出來。</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs coq">// <span class="hljs-keyword">Scope</span> A: Root <span class="hljs-keyword">Scope</span><br><span class="hljs-keyword">let</span> a = <span class="hljs-number">10</span><br><br><br>&#123; // <span class="hljs-keyword">Scope</span> B: Child <span class="hljs-keyword">Scope</span> of Root <span class="hljs-keyword">Scope</span><br>    <span class="hljs-keyword">let</span> b = <span class="hljs-number">20</span>  <br>    console.log(a)<br><br>    &#123; // <span class="hljs-keyword">Scope</span> C: Child <span class="hljs-keyword">Scope</span> of <span class="hljs-keyword">Scope</span> B<br>        <span class="hljs-keyword">let</span> c = <span class="hljs-number">30</span><br>    &#125;<br>    <br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>但變數a的宣告定義是放在Scope B後頭的話，也就是像這樣，</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs coq">// <span class="hljs-keyword">Scope</span> A: Root <span class="hljs-keyword">Scope</span><br><br><br><br>&#123; // <span class="hljs-keyword">Scope</span> B: Child <span class="hljs-keyword">Scope</span> of Root <span class="hljs-keyword">Scope</span><br>    <span class="hljs-keyword">let</span> b = <span class="hljs-number">20</span> <br>    <br>    console.log(a)<br>    &#123; // <span class="hljs-keyword">Scope</span> C: Child <span class="hljs-keyword">Scope</span> of <span class="hljs-keyword">Scope</span> B<br>        <span class="hljs-keyword">let</span> c = <span class="hljs-number">30</span><br>    &#125;<br>    <br><br>&#125;<br><span class="hljs-keyword">let</span> a = <span class="hljs-number">10</span><br></code></pre></td></tr></table></figure>
+
+<p>在這裡，對於Scope B而言，變數a的宣告定義會被系統認定為還未定義而無法被正常印出，這也代表宣告定義的先後順序會影響存取。 但若是在Child Scope之前就定義好要存取的變數，那麼可以在Child Scope來存取Parent Scope的元素。</p>
+<h3 id="例子3-多個Parent-Scope是相同的Child-Scope是無法存取彼此間的變數"><a href="#例子3-多個Parent-Scope是相同的Child-Scope是無法存取彼此間的變數" class="headerlink" title="例子3: 多個Parent Scope是相同的Child Scope是無法存取彼此間的變數"></a>例子3: 多個Parent Scope是相同的Child Scope是無法存取彼此間的變數</h3><p>若我們考慮至少1個身在同個Scope的Child Scope，這些Child Scope彼此間的存取狀況會是如何？我們先繼續沿用上個例子來假設，首先我們在Scope B產生名為Scope D的Scope，現在我們有Scope C 和 Scope D，當我們想在Scope C存取Scope D的變數時，會因為宣告的先後順序而無法正常存取，而當我們想在Scope D存取Scope C下的變數時，我們會因為Scope C的變數已經被釋放掉而無法正常存取，換言之，Scope C 和 Scope D這兩者間無法彼此存取他們所擁有的變數。</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs coq"><br>// <span class="hljs-keyword">Scope</span> A: Root <span class="hljs-keyword">Scope</span><br><br><span class="hljs-keyword">let</span> a = <span class="hljs-number">10</span><br><br>&#123; // <span class="hljs-keyword">Scope</span> B: Child <span class="hljs-keyword">Scope</span> of Root <span class="hljs-keyword">Scope</span><br>    <span class="hljs-keyword">let</span> b = <span class="hljs-number">20</span> <br>    <br>    console.log(a)<br>    &#123; // <span class="hljs-keyword">Scope</span> C: Child <span class="hljs-keyword">Scope</span> of <span class="hljs-keyword">Scope</span> B<br>        <span class="hljs-keyword">let</span> c = <span class="hljs-number">30</span><br>    &#125;<br><br>    &#123; // <span class="hljs-keyword">Scope</span> D: Child <span class="hljs-keyword">Scope</span> of <span class="hljs-keyword">Scope</span> B<br>        <span class="hljs-keyword">let</span> d = <span class="hljs-number">40</span><br>    &#125;<br>    <br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+<h2 id="補充資料"><a href="#補充資料" class="headerlink" title="補充資料"></a>補充資料</h2><h3 id="var-宣告過的變數"><a href="#var-宣告過的變數" class="headerlink" title="var 宣告過的變數"></a>var 宣告過的變數</h3><p>var的不同處在於var是ES5標準以前就有的關鍵字，ES標準越前面其嚴謹性會比較鬆散，這使得他的作用域上往往會出現預期以外的事情，比如使區域變數有可能會升格為全域變數，而let、const則是ES6標準出現的，其作用域上會嚴格根據宣告所在來決定，當宣告在全域出現，那就是全域變數；若出現在區域上，那就是區域變數。</p>
+<p>另外部分未使用var&#x2F;const&#x2F;let來宣告變數時，該變數很有可能因為預設關係變成var性質的變數，比如在一般模式下執行以下程式碼，其變數x會變成var性質的變數x，進而因其性質而使該變數升格為全域變數。</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-string">&#x27;use non-strict&#x27;</span><br>&#123;<br>  <span class="hljs-keyword">for</span> (x = <span class="hljs-number">0</span>; x &lt; <span class="hljs-number">10</span>; x++) &#123;<br>    <br>  &#125;<br><br>&#125;<br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(x)                                  <span class="hljs-comment">// 印出10</span><br><br></code></pre></td></tr></table></figure>
+
+
+<h3 id="由括號所構成的區域作用域"><a href="#由括號所構成的區域作用域" class="headerlink" title="由括號所構成的區域作用域"></a>由括號所構成的區域作用域</h3><p>除了一般由兩個括號所構成的作用域以外，函式、迴圈等用上括號的結構，其性質上會是在由括號構成的作用域</p>
+<figure class="highlight mercury"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs mercury">&#123;<br>    statement1 / expression <span class="hljs-number">1</span><br>               .<br>               .<br>               .<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>比如：</p>
+<p>a. 函式：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">function</span> <span class="hljs-title function_">test</span>(<span class="hljs-params"></span>) &#123;<br><br>    let testval = <span class="hljs-number">10</span> <br>    <br><br>    <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(testval)        <span class="hljs-comment">//result = 10</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>b. 迴圈：其中statement1至3也是在括號內部構成的作用域。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-keyword">for</span> (statement1; condition1; statement3) &#123;<br>    <span class="hljs-regexp">//</span> run something<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>可以將for迴圈看作是</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs awk">&#123;<br>    statement1;<br><br>    loop1:                      <span class="hljs-regexp">//</span> loop1標籤<br><br>    <span class="hljs-keyword">if</span> (condition) &#123;            <span class="hljs-regexp">//</span> 通常是條件式<br>        <span class="hljs-regexp">//</span>run something<br>        statement3<br>        <span class="hljs-keyword">continue</span> loop1;         <span class="hljs-regexp">//</span> 會直接跳回loop1標籤所在的地方執行<br>    &#125;<br>    <br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>同樣地，while迴圈和do-while迴圈內的條件式可以看作是括號內部所構成的作用域：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-keyword">while</span> (condition1) &#123;<br>    <span class="hljs-regexp">//</span> run something<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gcode"><span class="hljs-keyword">do</span> &#123;<br><br>&#125; <span class="hljs-keyword">while</span> <span class="hljs-comment">(condition1)</span><br></code></pre></td></tr></table></figure>
+
+<p>可以分別看作是:</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">loop1:                          <span class="hljs-regexp">//</span> loop1標籤<br><span class="hljs-keyword">if</span> (condition1) &#123;<br>    <span class="hljs-regexp">//</span> run something<br>    <span class="hljs-keyword">continue</span> loop1;             <span class="hljs-regexp">//</span> 會直接跳回loop1標籤所在的地方執行<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs awk">loop1:                          <span class="hljs-regexp">//</span> loop1標籤<br><span class="hljs-regexp">//</span> run something<br><br><span class="hljs-keyword">if</span> (condition1) &#123;<br>    <span class="hljs-keyword">continue</span> loop1;             <span class="hljs-regexp">//</span> 會直接跳回loop1標籤所在的地方執行<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>參考資料：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Statements/var">https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Statements/var</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.bitsrc.io/understand-scope-in-javascript-e150f889ba72">https://blog.bitsrc.io/understand-scope-in-javascript-e150f889ba72</a></li>
+<li><a target="_blank" rel="noopener" href="https://8thlight.com/blog/jarkyn-soltobaeva/2017/06/13/scope-and-closures-in-javascript.html">https://8thlight.com/blog/jarkyn-soltobaeva/2017/06/13/scope-and-closures-in-javascript.html</a></li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Scope/">Scope</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本Blog上的所有文章除特别聲明外，均採用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 協議</a> ，轉載請註明出處！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/JavaScript/typeCheckingAndCoercion/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JS - 型別檢查與隱性轉換</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Website-Development/lottaryFinalTask/">
+                        <span class="hidden-mobile">Simulate a Lottary game</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Eklipsorz/eklipsorz-blog-store');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,517 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Eklipsorz">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="引發自學的問題根據AC平台給予的餐廳平台開發規格來開發其平台的過程中，令我最頭痛的問題就是如何解決以下問題，而這也是這篇文章的開端。  使用者在點選刪除按鈕，要有提示視窗提示使用者確定是否刪除，等使用者按下確定刪除才會真的刪除   首先刪除按鈕原本是被一個表單元件所包覆著，而按鈕就是內部的按鈕元件，一般來說當使用者按下刪除按鈕，表單會發生提交事件並做預設事件處理，以POST的方式來轉交資料指定位置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AC平台的自學經驗回顧">
+<meta property="og:url" content="https://blog.sloth.engineer/uncategorized/self-study-experience/index.html">
+<meta property="og:site_name" content="Sloth Engineer">
+<meta property="og:description" content="引發自學的問題根據AC平台給予的餐廳平台開發規格來開發其平台的過程中，令我最頭痛的問題就是如何解決以下問題，而這也是這篇文章的開端。  使用者在點選刪除按鈕，要有提示視窗提示使用者確定是否刪除，等使用者按下確定刪除才會真的刪除   首先刪除按鈕原本是被一個表單元件所包覆著，而按鈕就是內部的按鈕元件，一般來說當使用者按下刪除按鈕，表單會發生提交事件並做預設事件處理，以POST的方式來轉交資料指定位置">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1639406983/self-study-experience/example_weayrt.gif">
+<meta property="article:published_time" content="2021-12-13T15:07:06.000Z">
+<meta property="article:modified_time" content="2022-03-17T16:06:36.448Z">
+<meta property="article:author" content="Eklipsorz">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1639406983/self-study-experience/example_weayrt.gif">
+  
+  
+  <title>AC平台的自學經驗回顧 - Sloth Engineer</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.sloth.engineer","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Sloth Engineer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://res.cloudinary.com/dqfxgtyoi/image/upload/v1647757523/GitHub-Page/default-cover_drxoxt.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="AC平台的自學經驗回顧">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Eklipsorz
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-13 23:07" pubdate>
+        December 13, 2021 11:07 PM
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9 分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">AC平台的自學經驗回顧</h1>
+            
+            <div class="markdown-body">
+              <h2 id="引發自學的問題"><a href="#引發自學的問題" class="headerlink" title="引發自學的問題"></a>引發自學的問題</h2><p>根據AC平台給予的餐廳平台開發規格來開發其平台的過程中，令我最頭痛的問題就是如何解決以下問題，而這也是這篇文章的開端。</p>
+<blockquote>
+<p>使用者在點選刪除按鈕，要有提示視窗提示使用者確定是否刪除，等使用者按下確定刪除才會真的刪除</p>
+</blockquote>
+<p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1639406983/self-study-experience/example_weayrt.gif" srcset="/img/loading.gif" lazyload alt="示意圖"></p>
+<p>首先刪除按鈕原本是被一個表單元件所包覆著，而按鈕就是內部的按鈕元件，一般來說當使用者按下刪除按鈕，表單會發生提交事件並做預設事件處理，以POST的方式來轉交資料指定位置至以及導向其指定位置，而我設定的指定位置則是伺服器的合法路由，如下所示：</p>
+<blockquote>
+<p>&#x2F;restaurants&#x2F;?_method&#x3D;DELETE</p>
+</blockquote>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><pre><code class="hljs handlebars"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;/restaurants/</span></span></span><span class="hljs-template-variable">&#123;&#123; <span class="hljs-name">this._id</span> &#125;&#125;</span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">?_method=DELETE&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;delete-form&quot;</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&quot;post&quot;</span> <span class="hljs-attr">data-name</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">this.name</span>&#125;&#125;</span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;display: inline;&quot;</span>&gt;</span></span><br><span class="language-xml">      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn btn-danger&quot;</span>&gt;</span>Delete<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
+
+<p>而伺服器當接收到該路由的請求，便會根據路由清單找尋合適的路由來做處理，而這個路由處理的內容如下，主要是根據使用者按下的刪除按鈕之ID來刪除對應的餐廳資料以及重新導向瀏覽所有餐廳的首頁，所以在不做任何處理的情況下，只要刪除按鈕被按下，就會被刪除並重新渲染。</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript"><span class="hljs-regexp">//</span> define route <span class="hljs-keyword">for</span> deleting a restaurant<br>router.<span class="hljs-keyword">delete</span>(<span class="hljs-string">&#x27;/:id&#x27;</span>, <span class="hljs-function"><span class="hljs-params">(req, res)</span> =&gt;</span> &#123;<br><br>  const reqId = req.params.id<br><br>  <span class="hljs-regexp">//</span> find the restaurant <span class="hljs-keyword">by</span> id <span class="hljs-keyword">and</span> <span class="hljs-keyword">delete</span> it<br>  restaurantModel.findByIdAndRemove(reqId)<br>    .exec()<br>    .<span class="hljs-keyword">then</span>(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> res.redirect(<span class="hljs-string">&#x27;/&#x27;</span>))<br>    .<span class="hljs-keyword">catch</span>(<span class="hljs-function"><span class="hljs-params">(error)</span> =&gt;</span> console.log(error))<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<p>而<strong>提示視窗的發生必須發生在點擊刪除時才發生，且不能在使用者按下確定之前或者按下取消就刪除餐廳，必須等到使用者按下確定刪除才可刪除</strong>，所以在這裡必須先取消掉表單的預設提交事件處理，讓它在發生提交事件的時候能夠在出現提示視窗的時候能夠不刪除，且等著使用者按下確定，在這裏我使用著sweetalert 2所提供的API來實現著提示視窗和能夠等著使用者按下確定的機制，並放置在表單的提交事件內部。</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-comment">// fire a event to swal for showing alert model</span><br>    Swal.fire(&#123;<br>      <span class="hljs-attr">title</span>: <span class="hljs-string">`確定移除<span class="hljs-subst">$&#123;restaurantName&#125;</span>嗎？`</span>,<br>      <span class="hljs-attr">showDenyButton</span>: <span class="hljs-literal">true</span>,<br>      <span class="hljs-attr">confirmButtonText</span>: <span class="hljs-string">&#x27;確定移除&#x27;</span>,<br>      <span class="hljs-attr">denyButtonText</span>: <span class="hljs-string">&#x27;取消移除&#x27;</span>,<br>    &#125;).then(<span class="hljs-function">(<span class="hljs-params">result</span>) =&gt;</span> &#123;<br><br>      <span class="hljs-comment">// If user click a button for confirming, it just send a request for deleting it</span><br>      <span class="hljs-keyword">if</span> (result.isConfirmed) &#123;<br>        Swal.fire(<span class="hljs-string">&#x27;已移除&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-string">&#x27;success&#x27;</span>)<br>      &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (result.isDenied) &#123;<br>        <span class="hljs-comment">// If user click a button for cancelling, it just cancel execution of deleting it</span><br>        Swal.fire(<span class="hljs-string">&#x27;別擔心，我沒移除喔 :&gt;&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-string">&#x27;info&#x27;</span>)<br>      &#125;<br>    &#125;)<br></code></pre></td></tr></table></figure>
+
+<p>而整體的表單事件會是如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs javascript">deleteForm.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;submit&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> &#123;<br><br>   <span class="hljs-keyword">const</span> restaurantName = deleteForm.<span class="hljs-property">dataset</span>.<span class="hljs-property">name</span><br><br>   <span class="hljs-comment">// fire a event to swal for showing alert model</span><br>   <span class="hljs-title class_">Swal</span>.<span class="hljs-title function_">fire</span>(&#123;<br>     <span class="hljs-attr">title</span>: <span class="hljs-string">`確定移除<span class="hljs-subst">$&#123;restaurantName&#125;</span>嗎？`</span>,<br>     <span class="hljs-attr">showDenyButton</span>: <span class="hljs-literal">true</span>,<br>     <span class="hljs-attr">confirmButtonText</span>: <span class="hljs-string">&#x27;確定移除&#x27;</span>,<br>     <span class="hljs-attr">denyButtonText</span>: <span class="hljs-string">&#x27;取消移除&#x27;</span>,<br>   &#125;).<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">result</span>) =&gt;</span> &#123;<br><br>     <span class="hljs-comment">// If user click a button for confirming, it just send a request for deleting it</span><br>     <span class="hljs-keyword">if</span> (result.<span class="hljs-property">isConfirmed</span>) &#123;<br>       <span class="hljs-title class_">Swal</span>.<span class="hljs-title function_">fire</span>(<span class="hljs-string">&#x27;已移除&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-string">&#x27;success&#x27;</span>)<br>       <span class="hljs-comment">// send a data to /restaurants/:id/delete via post method and redirect to /</span><br>       deleteForm.<span class="hljs-title function_">submit</span>()<br><br>     &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (result.<span class="hljs-property">isDenied</span>) &#123;<br>       <span class="hljs-comment">// If user click a button for cancelling, it just cancel execution of deleting it</span><br>       <span class="hljs-title class_">Swal</span>.<span class="hljs-title function_">fire</span>(<span class="hljs-string">&#x27;別擔心，我沒移除喔 :&gt;&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-string">&#x27;info&#x27;</span>)<br>     &#125;<br>   &#125;)<br><br> &#125;)<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="第一次出手與失敗"><a href="#第一次出手與失敗" class="headerlink" title="第一次出手與失敗"></a>第一次出手與失敗</h2><p>在這裡為了解決以下問題，</p>
+<blockquote>
+<p>提示視窗的發生必須發生在點擊刪除時才發生，且不能在使用者按下確定之前或者按下取消就刪除餐廳，必須等到使用者按下確定刪除才可刪除</p>
+</blockquote>
+<p>首先我從preventDefault和stopPropagation的角度來取消瀏覽器給予的預設提交事件處理，並將語法放在sweetalert的API之前，想先取消掉，結果真的如預期般的，當使用者按下刪除按鈕跑出視窗時，瀏覽器再也不會隨意提交資料和導向頁面，只是<strong>問題轉變成我要如何透過語法自行提交資料</strong>，好觸發伺服器對應路由。</p>
+<p>過程中，我是有做出一些傻事，比如將上述語法放入至sweetalert的特定區塊(下面程式碼的最後兩行)，而這特定區塊是負責定義”被按下取消所要做的處理”，想說按下確定就按照原有預設的事件處理，而按下取消就取消掉好避免額外的刪除，但由於preventDefault這語法本身必須要在第一時間告知瀏覽器取消原有事件處理，若拖到告知的時間，就會使該語法的功用失效，而我是放在swal所建立的promise後的then，而這樣的放置勢必會拖到第一時間告知的時間，進而讓表單正常使用預設的事件處理</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs stylus">Swal<span class="hljs-selector-class">.fire</span>(&#123;<br>     title: `確定移除$&#123;restaurantName&#125;嗎？`,<br>     showDenyButton: true,<br>     confirmButtonText: <span class="hljs-string">&#x27;確定移除&#x27;</span>,<br>     denyButtonText: <span class="hljs-string">&#x27;取消移除&#x27;</span>,<br>   &#125;)<span class="hljs-selector-class">.then</span>((result) =&gt; &#123;<br><br>     <span class="hljs-comment">// If user click a button for confirming, it just send a request for deleting it</span><br>     <span class="hljs-keyword">if</span> (result.isConfirmed) &#123;<br>       Swal<span class="hljs-selector-class">.fire</span>(<span class="hljs-string">&#x27;已移除&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-string">&#x27;success&#x27;</span>)<br>     &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (result.isDenied) &#123;<br>       <span class="hljs-comment">// If user click a button for cancelling, it just cancel execution of deleting it</span><br>       Swal<span class="hljs-selector-class">.fire</span>(<span class="hljs-string">&#x27;別擔心，我沒移除喔 :&gt;&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-string">&#x27;info&#x27;</span>)<br>       event<span class="hljs-selector-class">.preventDefault</span>()  <span class="hljs-comment">//  &lt;- 放在這喔</span><br>       event<span class="hljs-selector-class">.stopPropagation</span>() <span class="hljs-comment">//  &lt;- 放在這喔</span><br>     &#125;<br>   &#125;)<br></code></pre></td></tr></table></figure>
+<h2 id="尋找與嘗試"><a href="#尋找與嘗試" class="headerlink" title="尋找與嘗試"></a>尋找與嘗試</h2><p>後來想到表單在接受瀏覽器的解析後勢必會像物件那樣擁有屬性和方法，那時我就在想或許表單擁有著類似可以自己提交的功能，後來查閱了MDN和w3school，果不其然，表單的確有名為submit的方法可以讓使用者決定何時提交表單資料，</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-selector-tag">form</span><span class="hljs-selector-class">.submit</span>()<br></code></pre></td></tr></table></figure>
+<p>我將取消預設事件處理的程式碼放到sweetalert 2的API之前，然後在sweetalert的另一塊負責定義使用者按下確定的處理內容添加上述語法，整體表單提交事件處理的程式碼會是如下：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs stylus">deleteForm<span class="hljs-selector-class">.addEventListener</span>(<span class="hljs-string">&#x27;submit&#x27;</span>, (event) =&gt; &#123;<br><br>  event<span class="hljs-selector-class">.preventDefault</span>()<br>  event<span class="hljs-selector-class">.stopPropagation</span>()<br>  const restaurantName = deleteForm<span class="hljs-selector-class">.dataset</span><span class="hljs-selector-class">.name</span><br><br>  <span class="hljs-comment">// fire a event to swal for showing alert model</span><br>  Swal<span class="hljs-selector-class">.fire</span>(&#123;<br>    title: `確定移除$&#123;restaurantName&#125;嗎？`,<br>    showDenyButton: true,<br>    confirmButtonText: <span class="hljs-string">&#x27;確定移除&#x27;</span>,<br>    denyButtonText: <span class="hljs-string">&#x27;取消移除&#x27;</span>,<br>  &#125;)<span class="hljs-selector-class">.then</span>((result) =&gt; &#123;<br><br>    <span class="hljs-comment">// If user click a button for confirming, it just send a request for deleting it</span><br>    <span class="hljs-keyword">if</span> (result.isConfirmed) &#123;<br>      Swal<span class="hljs-selector-class">.fire</span>(<span class="hljs-string">&#x27;已移除&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-string">&#x27;success&#x27;</span>)<br>      <span class="hljs-comment">// send a data to /restaurants/:id/delete via post method and redirect to /</span><br>      deleteForm<span class="hljs-selector-class">.submit</span>()<br><br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (result.isDenied) &#123;<br>      <span class="hljs-comment">// If user click a button for cancelling, it just cancel execution of deleting it</span><br>      Swal<span class="hljs-selector-class">.fire</span>(<span class="hljs-string">&#x27;別擔心，我沒移除喔 :&gt;&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-string">&#x27;info&#x27;</span>)<br><br>    &#125;<br>  &#125;)<br></code></pre></td></tr></table></figure>
+
+<p>修改後並做了測試來確定以下的事情是否成功，結果是成功的。</p>
+<blockquote>
+<p>提示視窗的發生必須發生在點擊刪除時才發生，且不能在使用者按下確定之前或者按下取消就刪除餐廳，必須等到使用者按下確定刪除才可刪除</p>
+</blockquote>
+<p>不過由於刪除表單不只一個，所以用上了以下語法來包覆著上面的語法，來讓每個餐廳的刪除按鈕都擁有相同的事件處理內容</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">const</span> deleteForms = <span class="hljs-built_in">document</span>.<span class="hljs-built_in">querySelectorAll</span>(<span class="hljs-string">&#x27;.delete-form&#x27;</span>)<br><br><br><span class="hljs-comment">// add sumbit event to each form (button) for deleting</span><br><span class="hljs-comment">// when occuring submit event, it just showing another alert model </span><br><span class="hljs-comment">// to remind user to make sure that each user really want to delete</span><br>deleteForms.forEach(deleteForm =&gt; &#123;<br>    <span class="hljs-comment">///<span class="language-markdown">.... </span></span><br>&#125;)<br></code></pre></td></tr></table></figure>
+<h2 id="回顧與發現"><a href="#回顧與發現" class="headerlink" title="回顧與發現"></a>回顧與發現</h2><p>從結果來回顧過去所做的事情，雖然看似很簡單，但其實我花了不少時間去研究表單提交的機制以及有什麼樣的方法，只是在這裡不會太探討那些細節，我還去研究form在html語法下會有的屬性(attribute)，如onsubmit要放置return false，但不管如何，這些過程也幫助我理解表單這物件會有什麼方法能夠使用以及如何搭配著類似sweetalert2這樣子提示視窗來解決我原有的問題。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本Blog上的所有文章除特别聲明外，均採用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 協議</a> ，轉載請註明出處！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/uncategorized/AC-graduate-experience/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">AC畢業心得：從學期一至學期三</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/uncategorized/prototype/">
+                        <span class="hidden-mobile">JavaScript 的 prototype 簡介</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Eklipsorz/eklipsorz-blog-store');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
