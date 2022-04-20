@@ -16,12 +16,12 @@
   <meta name="author" content="Eklipsorz">
   <meta name="keywords" content="">
   
-    <meta name="description" content="鑑於 探討：http&#x2F;https協議上的 session 概念所提到session存在目的，在這裡會使用基於RFC所提到session概念和如何用cookie實現session概念來描述，其中在這裡客戶端單方面與伺服器之間的互動情形紀錄會是稱作為cookie，而伺服器負責單方面與客戶端互動情況紀錄會是session，若兩者同時紀錄，那麼就會是雙方紀錄彼此的互動情形。 此外，客戶端的coo">
+    <meta name="description" content="鑑於 探討：http&#x2F;https協議上的 session 概念所提到stateful session的概念，在這裡會基於概念的實現來說明cookie，此外，客戶端的cookie和伺服器的session皆為 實作stateful session概念的產物，不過這裡只會探討到實現層面。 cookie客戶端的 cookie 是一塊用來記錄與伺服器的過去互動狀態的資料，會根據伺服器的回應是否帶有">
 <meta property="og:type" content="article">
 <meta property="og:title" content="筆記&amp;探討：Cookie 本身和設定">
 <meta property="og:url" content="https://blog.sloth.engineer/cookie-concept/index.html">
 <meta property="og:site_name" content="Sloth Engineer">
-<meta property="og:description" content="鑑於 探討：http&#x2F;https協議上的 session 概念所提到session存在目的，在這裡會使用基於RFC所提到session概念和如何用cookie實現session概念來描述，其中在這裡客戶端單方面與伺服器之間的互動情形紀錄會是稱作為cookie，而伺服器負責單方面與客戶端互動情況紀錄會是session，若兩者同時紀錄，那麼就會是雙方紀錄彼此的互動情形。 此外，客戶端的coo">
+<meta property="og:description" content="鑑於 探討：http&#x2F;https協議上的 session 概念所提到stateful session的概念，在這裡會基於概念的實現來說明cookie，此外，客戶端的cookie和伺服器的session皆為 實作stateful session概念的產物，不過這裡只會探討到實現層面。 cookie客戶端的 cookie 是一塊用來記錄與伺服器的過去互動狀態的資料，會根據伺服器的回應是否帶有">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650275946/blog/network/ClientAndServer/cookie-require_a_website_pscr94.png">
 <meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650275945/blog/network/ClientAndServer/cookie-require_a_cookie_q9lbnf.png">
@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650285736/blog/network/csrf/csrf-flow-website2-rendering_ucbzsn.png">
 <meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650285736/blog/network/csrf/csrf-flow-request-forgery_my7ghb.png">
 <meta property="article:published_time" content="2022-04-18T16:56:48.000Z">
-<meta property="article:modified_time" content="2022-04-19T16:49:24.430Z">
+<meta property="article:modified_time" content="2022-04-20T08:14:35.898Z">
 <meta property="article:author" content="Eklipsorz">
 <meta property="article:tag" content="Cookie">
 <meta name="twitter:card" content="summary_large_image">
@@ -215,7 +215,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      6.7k 字
+      6.6k 字
     </span>
   
 
@@ -224,7 +224,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12 分鐘
+      11 分鐘
     </span>
   
 
@@ -256,8 +256,7 @@
             <h1 style="display: none">筆記&amp;探討：Cookie 本身和設定</h1>
             
             <div class="markdown-body">
-              <p>鑑於 <a href="/session-concept-in-rfc">探討：http&#x2F;https協議上的 session 概念</a>所提到session存在目的，在這裡會使用基於RFC所提到session概念和如何用cookie實現session概念來描述，其中在這裡客戶端單方面與伺服器之間的互動情形紀錄會是稱作為cookie，而伺服器負責單方面與客戶端互動情況紀錄會是session，若兩者同時紀錄，那麼就會是雙方紀錄彼此的互動情形。</p>
-<p>此外，客戶端的cookie和伺服器的session皆為 實作session概念的產物，不過這裡只會探討到實作層面。</p>
+              <p>鑑於 <a href="/session-concept-in-rfc">探討：http&#x2F;https協議上的 session 概念</a>所提到stateful session的概念，在這裡會基於概念的實現來說明cookie，此外，客戶端的cookie和伺服器的session皆為 <strong>實作stateful session概念的產物</strong>，不過這裡只會探討到實現層面。</p>
 <h2 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h2><p>客戶端的 cookie 是一塊用來記錄與伺服器的過去互動狀態的資料，會根據伺服器的回應是否帶有Set-Cookie才決定是否於客戶端建立cookie，若有的話，就建立；若沒有，就不建立。通常當伺服器想要客戶端儲存目前互動狀態時，伺服器會發送一個擁有Set-Cookie標頭(header)的封包給客戶端，其標頭內容會是以能夠代替這次的互動狀態，其內容形式會是如下(cookie-name和cookie-value即為這次的互動狀態)，客戶端一收到就會根據標頭內容來設置自己的cookie內容為cookie-name:cookie-value，</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs xml">Set-Cookie: <span class="hljs-tag">&lt;<span class="hljs-name">cookie-name</span>&gt;</span>=<span class="hljs-tag">&lt;<span class="hljs-name">cookie-value</span>&gt;</span>; <br></code></pre></td></tr></table></figure>
 

@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650439921/blog/network/session/session_response_jybm8b.png">
 <meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650439922/blog/network/session/building_a_cookie_bujrln.png">
 <meta property="article:published_time" content="2022-04-19T16:41:28.000Z">
-<meta property="article:modified_time" content="2022-04-20T07:45:51.139Z">
+<meta property="article:modified_time" content="2022-04-20T08:15:40.970Z">
 <meta property="article:author" content="Eklipsorz">
 <meta property="article:tag" content="Cookie">
 <meta property="article:tag" content="Session">
@@ -256,7 +256,7 @@
 <figure class="highlight livecodeserver"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><pre><code class="hljs livecodeserver">session: <span class="hljs-keyword">a</span> period <span class="hljs-keyword">of</span> <span class="hljs-built_in">time</span> <span class="hljs-keyword">or</span> meeting arranged <span class="hljs-keyword">for</span> <span class="hljs-keyword">a</span> particular activity<br>meeting: <span class="hljs-keyword">a</span> planned occasion when people come together <span class="hljs-built_in">to</span> discuss something<br></code></pre></td></tr></table></figure>
 
 <h2 id="session-在http協議上的含義"><a href="#session-在http協議上的含義" class="headerlink" title="session 在http協議上的含義"></a>session 在http協議上的含義</h2><p>從上述轉換成http協議上的說法，<strong>特定活動下的所預計好之互動情形</strong> 的特定活動下就是意旨<strong>伺服器和客戶端之間的連線活動下</strong>，所預計好之互動情形則是意旨 <strong>伺服器和客戶端之間在連線時的互動會根據RFC規範所定義的內容來進行</strong>，換言之預計就是指著根據RFC規範下所會有的互動，簡單點就是指 <strong>伺服器和客戶端之間在連線時的互動情形、互動狀態</strong></p>
-<p>然而 session 僅僅只是描述著 <strong>伺服器和客戶端之間在連線時的互動情形</strong>，而非代表存在著能夠代表互動情形的資訊並儲存在相關的伺服器和客戶端</p>
+<p>然而 session 僅僅只是描述著 <strong>伺服器和客戶端之間在連線時的互動情形</strong> 這抽象概念，而非代表存在著能夠代表互動情形的資訊並儲存在相關的伺服器和客戶端，換言之，session在這裡目前是毫無任何形式來表現，比如沒用資訊這具體形式來表示session，就只是一段話來描述。</p>
 <h2 id="session-搖身成為-stateful-session"><a href="#session-搖身成為-stateful-session" class="headerlink" title="session 搖身成為 stateful session"></a>session 搖身成為 stateful session</h2><p>由於http協議本身為了簡化客戶端和伺服器之間的連線結構，而定義客戶端和伺服器之間在連線時互動情況並不會紀錄下來-無狀態(stateless)，隨著越來越多服務需要客戶端和伺服器之間的過去互動情況，比如首次登入後就直接透過互動情況而跳過、使用者可以透過過去的購物車內容來直接購買，為此，就有人謀生一個想法-能夠讓伺服器和客戶端紀錄過去的互動狀況，然而這些情景無疑可能會大改當時已經定義好的http設計，比如從無狀態更改正狀態(statefaul)協議。</p>
 <p>因此為了在不違反http無狀態下的環境能夠滿足伺服器和客戶端對於狀態的需求，有人於RFC規範提出stateful session概念：</p>
 <ul>
