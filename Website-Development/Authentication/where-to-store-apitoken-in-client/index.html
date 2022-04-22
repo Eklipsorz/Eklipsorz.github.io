@@ -1,0 +1,525 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Eklipsorz">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="當前端成功從API伺服器獲取API Token時，往後若要使用API伺服器獲取特定服務必須將對應Token傳給伺服器以此證明自己是合法使用者來獲得使用服務，而客戶端勢必要有一個空間要能夠存放API Token，主要有兩種方式：  使用cookie來存放API Token：由於前後端分離出來，所以會容易因為兩者所處的Domain不同，所以容易因為同源政策關係，而無法從隸屬於後端伺服器的cookie取">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前後端分離：客戶端如何存API Token？">
+<meta property="og:url" content="https://blog.sloth.engineer/Website-Development/Authentication/where-to-store-apitoken-in-client/index.html">
+<meta property="og:site_name" content="Sloth Engineer">
+<meta property="og:description" content="當前端成功從API伺服器獲取API Token時，往後若要使用API伺服器獲取特定服務必須將對應Token傳給伺服器以此證明自己是合法使用者來獲得使用服務，而客戶端勢必要有一個空間要能夠存放API Token，主要有兩種方式：  使用cookie來存放API Token：由於前後端分離出來，所以會容易因為兩者所處的Domain不同，所以容易因為同源政策關係，而無法從隸屬於後端伺服器的cookie取">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650644680/blog/network/api-token/token-in-cookie-example1_cdxloo.png">
+<meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650644680/blog/network/api-token/token-in-cookie-example2_i0xnis.png">
+<meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650645728/blog/network/api-token/token-in-cookie-example3_svhsie.png">
+<meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650648954/blog/network/api-token/bearer_token_example1_r1jymv.png">
+<meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650648954/blog/network/api-token/bearer_token_example2_ibn7nw.png">
+<meta property="article:published_time" content="2022-04-22T18:49:45.000Z">
+<meta property="article:modified_time" content="2022-04-22T18:50:36.377Z">
+<meta property="article:author" content="Eklipsorz">
+<meta property="article:tag" content="Cookie">
+<meta property="article:tag" content="Bearer Token">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650644680/blog/network/api-token/token-in-cookie-example1_cdxloo.png">
+  
+  
+  <title>前後端分離：客戶端如何存API Token？ - Sloth Engineer</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.sloth.engineer","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Sloth Engineer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://res.cloudinary.com/dqfxgtyoi/image/upload/v1647757523/GitHub-Page/default-cover_drxoxt.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="前後端分離：客戶端如何存API Token？">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Eklipsorz
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-04-23 02:49" pubdate>
+        April 23, 2022 2:49 AM
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.9k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      5 分鐘
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">前後端分離：客戶端如何存API Token？</h1>
+            
+            <div class="markdown-body">
+              <p>當前端成功從API伺服器獲取API Token時，往後若要使用API伺服器獲取特定服務必須將對應Token傳給伺服器以此證明自己是合法使用者來獲得使用服務，而客戶端勢必要有一個空間要能夠存放API Token，主要有兩種方式：</p>
+<ul>
+<li>使用cookie來存放API Token：由於前後端分離出來，所以會容易因為兩者所處的Domain不同，所以容易因為同源政策關係，而無法從隸屬於後端伺服器的cookie取出token來從目前所在的網域發出合法的請求</li>
+<li>使用Bearer Token：將Token放在HTTP請求封包上的標頭，尤其是Authorization標頭</li>
+</ul>
+<p>在這裡我們以兩個例子來簡介說明這兩個方法，同時以下面為前面來敘述：</p>
+<figure class="highlight isbl"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><pre><code class="hljs isbl">客戶端的<span class="hljs-variable">Cookie</span>會是以<span class="hljs-variable">Secure</span>、<span class="hljs-variable">httpOnly</span>、<span class="hljs-function"><span class="hljs-title">SameSite</span>(=<span class="hljs-variable">strict</span>)</span><br>伺服器端設定<span class="hljs-variable">CORS</span>的相關設定來允許客戶端可透過<span class="hljs-variable">FETCH</span>/<span class="hljs-variable">XHR</span>方法來存取<span class="hljs-variable">API</span>伺服器<br></code></pre></td></tr></table></figure>
+
+<h2 id="使用cookie來存放API-Token"><a href="#使用cookie來存放API-Token" class="headerlink" title="使用cookie來存放API Token"></a>使用cookie來存放API Token</h2><p>若客戶端順利從位於Domain1的伺服器獲取網頁，那麼就代表著此時客戶端獲取到位於Domain1的網頁，每一次客戶端只要在這網頁上發送請求，就會從這網域發出請求。<br><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650644680/blog/network/api-token/token-in-cookie-example1_cdxloo.png" srcset="/img/loading.gif" lazyload></p>
+<p>並且打算向API 伺服器來獲取對應API Token，API伺服器為了讓客戶端能夠將Token儲存在Cookie，會透過Set-Cookie標頭來設定對應API Token、伺服器的Domain(該Domain為Domain 2)、伺服器的PORT、伺服器的Schema，而當客戶端讀取到的時候，就會按照標頭指示來建立隸屬於該伺服器的DOMAIN(含PORT、Schema)的Cookie來儲存對應的Token。<br><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650644680/blog/network/api-token/token-in-cookie-example2_i0xnis.png" srcset="/img/loading.gif" lazyload></p>
+<p>接下來若客戶端對Domain1 的網頁進行互動而讓網頁想去獲取位於Domain 2的API 伺服器，那麼此時客戶端向Domain 2的API 伺服器發送請求將會是從Domain 1發送，然而客戶端和位於Domain 1的網頁這舉動就違背Cookie上的Same Site Policy而被無法直接使用客戶端上隸屬於Domain 2的Cookie，並且也無法將裡頭的Token附加至發送至API伺服器的請求，而伺服器收到時發現沒對應Token就直接告知對方請重新獲取Token再來發送請求<br><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650645728/blog/network/api-token/token-in-cookie-example3_svhsie.png" srcset="/img/loading.gif" lazyload></p>
+<p>當然為了解決這樣子的問題，我們可以選擇放棄Same Site Policy而設定Cookie那邊的建立設定為SameSite(&#x3D;None)，但這樣就會讓伺服器陷入CSRF攻擊的疑慮。</p>
+<h2 id="使用Bearer-Token"><a href="#使用Bearer-Token" class="headerlink" title="使用Bearer Token"></a>使用Bearer Token</h2><p>我們繼續沿用著上一個小節所使用的例子以及前提，若客戶端不用Cookie儲存API Token，可以透過Bearer Token的形式來將Token來放入客戶端的某塊暫存空間，<br><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650648954/blog/network/api-token/bearer_token_example1_r1jymv.png" srcset="/img/loading.gif" lazyload></p>
+<p>接下來若客戶端對Domain1 的網頁進行互動而讓網頁想去獲取位於Domain 2的API 伺服器時，那麼此時客戶端向Domain 2的API 伺服器發送請求將會是從Domain 1發送，在這裡客戶端從暫存空間取得API token，<br><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650648954/blog/network/api-token/bearer_token_example2_ibn7nw.png" srcset="/img/loading.gif" lazyload></p>
+<p>來將 <strong>將要發出的請求添加API Token至Authorization Header</strong> ，形式會是如下，其中Bearer只不過是告知伺服器這是個Bearer 種類的token(實際上還有Basic Token)，請按照Bearer Type來回應，接著當伺服器收到請求封包並且取出Bearer Token來進行相關驗證(如比對是否被竄改)，若驗證成功，就會准許發出請求的客戶端使用資源，若驗證失敗，就會駁回。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">Authorization: Bearer <span class="hljs-tag">&lt;<span class="hljs-name">token</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="補充知識：Bearer-Token"><a href="#補充知識：Bearer-Token" class="headerlink" title="補充知識：Bearer Token"></a>補充知識：Bearer Token</h3><h4 id="名字緣由"><a href="#名字緣由" class="headerlink" title="名字緣由"></a>名字緣由</h4><p>Bearer Token原本取自於銀行界的可兌換支票，其中Bearer是指持票人或者拿著支票的人，Token是指支票本身，合在一起就是強調著 <strong>代表持票人</strong> 的支票，在這裡銀行業務員只要一看到任何一個使用者X拿到這張支票，就會認定那個就是合法的持票人，並且按照支票所指示的金額或者所要提供的服務而將銀行內部資源提供給使用者X，換言之，誰擁有著Token，誰就擁有權利獲取應該要有的資源，完全不看到使用者到底是不是合法的使用者。 Bearer Token因此這樣子的特性而因為不看使用者是誰而被別名為不記名憑證。</p>
+<p>源自於<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/305585277">bearer token到底是什么？</a></p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gauss">最近研究第三方支付系统接入，设计中有许多设计到Bearer的概念，我觉得Bearer <span class="hljs-built_in">Token</span>的设计概念也应当与类似支票兑付的场景模型有关，我来说一点自己的理解。字面翻译Bearer，指的是持票人，用支票使用场景来解释的话，就是指手持支票坐等兑付的受款人（这里假定是最普通的银行汇票）。那么银行就作为承兑人，以票面上出票人的签名为凭证行使保障受款人收款的义务。<br><br>转回Bearer <span class="hljs-built_in">token</span>的场景，这里的“票”就指的是<span class="hljs-built_in">token</span>。<span class="hljs-built_in">token</span>作为一种凭证，server端必须承认持有<span class="hljs-built_in">token</span>的用户拥有<span class="hljs-built_in">token</span>用户的对应权利，此时持有<span class="hljs-built_in">token</span>的用户就是一个“bearer”，应当作为“受款人”获取server的“付款”，即可以访问<span class="hljs-built_in">token</span>所允许的资源。所以由此来看，所谓Bearer <span class="hljs-built_in">token</span>，其实就是<span class="hljs-built_in">token</span>。毕竟<span class="hljs-built_in">token</span>本身就是令牌的意思，表示持有者拥有了权限，可以以此享受权利，获取资源。（当然也不排除<span class="hljs-built_in">Token</span>在其他场景具备其他使命，毕竟互联网使用场景千千万）当然，我还是觉得Bearer <span class="hljs-built_in">token</span>这种“Bearer”多余了，造成不必要的理解负担。<br></code></pre></td></tr></table></figure>
+
+<h4 id="Bearer-Token-還有兄弟姐妹？"><a href="#Bearer-Token-還有兄弟姐妹？" class="headerlink" title="Bearer Token 還有兄弟姐妹？"></a>Bearer Token 還有兄弟姐妹？</h4><p>其實將token 封裝至請求封包之Authorization標頭的形式主要分為Basic Type和Bearer Type，而由於封裝至請求封包的token內容也會跟著變動，所以可以稱之為Basic Token和Bearer Token。</p>
+<p>Basic Token主要是將帳號和密碼這些可以被視為credential的資料以base64url編碼或者base64編碼來製作token，並直接放至請求封包上的Authorization標頭，然而實際上base64編碼可以被反解，因此在某種程度上是以明文來放置在Authorization標頭，並且很容易被人惡意使用</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">Authorization: Basic <span class="hljs-tag">&lt;<span class="hljs-name">token</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>而Bearer Token(別名稱作為Token authentication)概念為 <strong>誰擁有這Token，誰就有Token對應的資源使用權利和權益</strong> 為主，而非像Basic Token那樣，主要會驗證使用者本身是誰。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">Authorization: Bearer <span class="hljs-tag">&lt;<span class="hljs-name">token</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/34013299/web-api-authentication-basic-vs-bearer">Web API Authentication Basic vs Bearer</a></p>
+<p><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10256445">HTTP Token 使用方式: Basic Token v.s Bearer Token</a></p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/305585277">bearer token到底是什么？</a><br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/40375508/whats-the-difference-between-jwts-and-bearer-token">What’s the difference between JWTs and Bearer Token?</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/305585277">https://www.zhihu.com/question/305585277</a><br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/34013299/web-api-authentication-basic-vs-bearer">Web API Authentication Basic vs Bearer</a><br><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10256445">HTTP Token 使用方式: Basic Token v.s Bearer Token</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Website-Development/">Website Development</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Website-Development/Authentication/">Authentication</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Cookie/">Cookie</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Bearer-Token/">Bearer Token</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本Blog上的所有文章除特别聲明外，均採用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 協議</a> ，轉載請註明出處！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Website-Development/session-concept/">
+                        <span class="hidden-mobile">筆記&探討：Session 本身和設定</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Eklipsorz/eklipsorz-blog-store');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
