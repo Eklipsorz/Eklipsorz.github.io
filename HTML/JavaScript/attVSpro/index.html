@@ -24,7 +24,7 @@
 <meta property="og:description" content="導覽簡介首先先來考慮原有文字的含義，接著分別介紹著HTML屬性和物件屬性，最後再說明HTML經過轉變化的屬性又是如何變化。 這兩者間文字含義HTML的屬性是用attribute來表達，而物件的屬性則是用property來表達，雖然這兩者在中文翻譯上是表達屬性，但真正含義都是在原文是如何表達他們，前者的attribute是指附加至元件&#x2F;物件&#x2F;物體的額外資訊，這些資訊通常會強調著">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-10-03T14:12:40.000Z">
-<meta property="article:modified_time" content="2022-03-20T07:44:34.493Z">
+<meta property="article:modified_time" content="2023-07-01T09:09:33.991Z">
 <meta property="article:author" content="Eklipsorz">
 <meta property="article:tag" content="DOM">
 <meta name="twitter:card" content="summary_large_image">
@@ -75,7 +75,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -206,7 +206,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.4k 字
+      undefined 字
     </span>
   
 
@@ -215,7 +215,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5 分鐘
+      NaN 分鐘
     </span>
   
 
@@ -252,27 +252,27 @@
 <h3 id="在程式語言上的含義"><a href="#在程式語言上的含義" class="headerlink" title="在程式語言上的含義"></a>在程式語言上的含義</h3><p>在程式語言上，HTML本身利用標籤和內容來呈現網頁的呈現，標籤正是網頁的元件，為了進一步呈現更豐富更自由的網頁內容，而添加資訊(比如href、src、id、classu)至標籤上，使瀏覽器知道透過這些資訊來改變元件的特性，而這些額外資訊正是attribute，在這裡我們可以將attribute稱之為元件屬性，然而沒用property來描述是因為這些資訊本來就不是這些元件與生俱來的，比較像是額外添加給的功能或者特性。</p>
 <p>而物件導向語言是以一個物件的角度來開發程式，過程中會為了更充分表達物件 “原有” 的特性和行為，而選擇property來描述屬性，但若選擇attribute就沒特意強調著屬性是這個物件所與生俱來的特性，只是單純附加給這些物件一些資訊來描述特性。</p>
 <h2 id="HTML屬性"><a href="#HTML屬性" class="headerlink" title="HTML屬性"></a>HTML屬性</h2><p>根據描述，HTML的屬性(attribute)只不過是附加網頁元件的額外資訊，因此我們可以在對應元件的標籤添置一些資訊，形式會是如下的attributeName和attributeValue，</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">tag</span> <span class="hljs-attr">attributeName</span>=<span class="hljs-string">attributeValue</span>&gt;</span><br>  content<br><span class="hljs-tag">&lt;/<span class="hljs-name">tag</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;tag attributeName=attributeValue&gt;</span><br><span class="line">  content</span><br><span class="line">&lt;/tag&gt;</span><br></pre></td></tr></table></figure>
 <p>前者是指定屬性名稱，後者則對應名稱的值，屬性名稱沒有大小寫之分並一律當作小寫來看待，因此你寫上大寫的ID，都會被當作id，而對應值在大部分情況下是字串值，名稱和對應值可以在滿足前面所述的規定下寫出與對應元件無關的名稱和值。但為了進一步利用屬性值來呈現更豐富的網頁效果，部分的屬性名稱被HTML標準化成每個元件皆擁有不同的屬性(attribute)，而這些屬性能夠若被瀏覽器辨識到會使對應的元件展現出額外的效果，而其餘屬性名稱則沒有任何效果。</p>
 <h2 id="物件屬性"><a href="#物件屬性" class="headerlink" title="物件屬性"></a>物件屬性</h2><p>物件導向語言中的物件所擁有的屬性(property)如同字面上的定義，會是描述物件原有的特性或者性質，通常會是以key-value pair的形式來表示屬性和屬性值，在JavaScript中，我們可以透過其動態語言特性在內容額外添加某個物件上的屬性或者事先定義一個物件會有屬性，形式上通常會是以下兩種，其中property則是屬性，而value是對應屬性的屬性值，第一種形式是透過內容額外添加屬性，第二種形式則是事先定義一個物件。</p>
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs abnf">const obj <span class="hljs-operator">=</span> &#123;&#125;<br>obj.property <span class="hljs-operator">=</span> value<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const obj = &#123;&#125;</span><br><span class="line">obj.property = value</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs qml"><span class="hljs-keyword">const</span> obj = &#123;<br>  <span class="hljs-keyword">property</span><span class="hljs-string"></span>: value<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const obj = &#123;</span><br><span class="line">  property: value</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 <h2 id="HTML轉變成DOM後"><a href="#HTML轉變成DOM後" class="headerlink" title="HTML轉變成DOM後"></a>HTML轉變成DOM後</h2><p>當瀏覽器載入頁面時，會讀取(解析)網頁並將網頁上的每一個HTML元件轉化成DOM節點或者DOM物件，而每個HTML元件上都有特定被標準化的屬性(attribute)來讓瀏覽器進一步辨識以及元件呈現，同樣地，這些被標準化的屬性在HTML元件轉化成DOM物件的過程中，瀏覽器會直接將標準化的屬性(attribute)和屬性值(attribute value)轉化成對應物件的屬性(property)以及屬性值(property value)，也就是說我們可以用物件的形式來表達那些attribute所帶有的額外資訊，比如說HTML元件為如下元件，轉化後的物件是body，其id屬性(attribute)本身因為為標準化的屬性(attribute)，所以會直接變成body物件的屬性(property)，而屬性(property)名稱會是原本的屬性(attribute)名稱，也就是body.id，而該屬性值會是”page”這內容。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">id</span>=<span class="hljs-string">“page”</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;body id=“page”&gt;</span><br></pre></td></tr></table></figure>
 
 <p>而不是標準化的屬性(attribute)則會因為瀏覽器無法辨識而不直接轉化成對應物件的屬性(property)，而這些案例通常是：</p>
 <ol>
 <li>屬性名稱未能夠正常辨識：something是這案例所要使用的屬性名稱，在這裡由於其名稱既不是body元件會有的屬性名稱，更不是正常會有的屬性名稱，所以無法被辨識</li>
 </ol>
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs abnf">&lt;body id<span class="hljs-operator">=</span><span class="hljs-string">&quot;test&quot;</span> something<span class="hljs-operator">=</span><span class="hljs-string">&quot;non-standard&quot;</span>&gt;<br>&lt;/body&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;body id=&quot;test&quot; something=&quot;non-standard&quot;&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
 <li>同個能辨識出來的屬性名稱在其他不存在該屬性的元件使用：其中type是這案例所要使用的屬性，在input元件上因為它存在type這屬性名稱，所以能夠正常辨識，而body元件則是不存在type這屬性名稱，所以無法被辨識</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">&lt;body <span class="hljs-built_in">id</span>=<span class="hljs-string">&quot;body&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;...&quot;</span>&gt;<br>  &lt;input <span class="hljs-built_in">id</span>=<span class="hljs-string">&quot;input&quot;</span> <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;text&quot;</span>&gt;<br>&lt;/body&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;body id=&quot;body&quot; type=&quot;...&quot;&gt;</span><br><span class="line">  &lt;input id=&quot;input&quot; type=&quot;text&quot;&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
 
 
 <p>最後，瀏覽器會提供一個能夠存取DOM Tree的介面給想要存取它的程式語言，比如JavaScript，該語言只要一從這個介面來獲取DOM物件時，會直接轉化成JavaScript能夠辨識的物件型別，同時間也會把該物件所擁有屬性值(property)轉化成程式語言能夠存取的型態。</p>
@@ -326,8 +326,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/uncategorized/AC21FeedBack/">
-                        <span class="hidden-mobile">AC 學習心得</span>
+                      <a href="/git/gitrebaseCMD/">
+                        <span class="hidden-mobile">git rebase && undo rebase</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

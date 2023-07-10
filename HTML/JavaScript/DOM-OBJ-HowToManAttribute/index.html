@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630158193/blog/dom_Manipulation/styleExample_ptjfbo.png">
 <meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630158193/blog/dom_Manipulation/noStyleExample_unvazz.png">
 <meta property="article:published_time" content="2021-08-28T14:00:44.000Z">
-<meta property="article:modified_time" content="2022-03-20T07:45:09.249Z">
+<meta property="article:modified_time" content="2023-07-01T09:09:33.991Z">
 <meta property="article:author" content="Eklipsorz">
 <meta property="article:tag" content="DOM">
 <meta name="twitter:card" content="summary_large_image">
@@ -78,7 +78,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -209,7 +209,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.3k 字
+      undefined 字
     </span>
   
 
@@ -218,7 +218,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4 分鐘
+      NaN 分鐘
     </span>
   
 
@@ -256,24 +256,24 @@
 <p>另外要指定的類別名稱必須事先指定好該類別下所擁有的屬性以及其屬性值是為何，否則會<br>因為無法找到對應的類別名稱而設定預設樣式。</p>
 <p>NODE.classList.remove(className1,…, classNameN)：從DOMTokenList物件刪除指定樣式名稱，而className1至classNameN則是依據開發者而定，沒限定於1~2個。</p>
 <h2 id="Node-Attribute-className"><a href="#Node-Attribute-className" class="headerlink" title="Node-Attribute: className"></a>Node-Attribute: className</h2><p>NODE.className 屬性是指元素節點所採用的屬性(尤指類別)節點是什麼或者採用的選擇器是什麼，該屬性可允許開發者讀取和寫入，若元素節點NODE搭配多個類別，那麼其值會是下面形式來表示，每一個類別之間都會有空格作為間隔，這代表著對應元素使用著class1、class2、….、classN這幾個類別。</p>
-<figure class="highlight 1c"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-string">&quot;class1 class2 ..... classN&quot;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;class1 class2 ..... classN&quot;</span><br></pre></td></tr></table></figure>
 
 <p>若要替元素節點NODE進行類別或者樣式的變更，則可透過相同規則來進行，另外，每一次的變更會連帶改變具有live特性的DOMTokenList物件。</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">NODE.className</span> = <span class="hljs-string">&quot;class1 class2 .... classN&quot;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NODE.className = &quot;class1 class2 .... classN&quot;</span><br></pre></td></tr></table></figure>
 
 <p>另外要指定的類別名稱必須事先指定好該類別下所擁有的屬性以及其屬性值是為何，否則會因為無法找到對應的類別名稱而設定預設樣式。</p>
 <h2 id="Node-Attribute-style"><a href="#Node-Attribute-style" class="headerlink" title="Node-Attribute: style"></a>Node-Attribute: style</h2><p>style是元素節點的屬性之一，用來表示目前對應網頁標籤元素在style所定義的屬性值，style會使用CSSStyleDeclaration 物件(註2)來儲存對應的HTML標籤上所擁有的style屬性，舉一個例子，在span標籤下設定style屬性來證明元素節點下的style值會跟標籤的style值是一致：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;color: red;background: blanchedalmond;&quot;</span>&gt;</span>My Website<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style=&quot;color: red;background: blanchedalmond;&quot;&gt;My Website&lt;/span&gt;</span><br></pre></td></tr></table></figure>
 
 <p>那麼在元素節點下的style內容會是：從右半邊console去抓取span標籤元素，並且利用cssText(註3)來方便觀察元素節點下的style內容會是什麼，而左半邊的紅色字體正是用span標籤元素來呈現。</p>
 <p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630158193/blog/dom_Manipulation/styleExample_ptjfbo.png" srcset="/img/loading.gif" lazyload></p>
 <p>從結果可以發現元素節點的style值會跟標籤下的style屬性是一致的。另外若把標籤下的style去掉的話，</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>My Website<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;span&gt;My Website&lt;/span&gt;</span><br></pre></td></tr></table></figure>
 
 <p>其結果會是：右半邊顯示的style是因為對應標籤的style內容不存在而變成空字串，而左半邊的span標籤元素則回到預設的樣式。</p>
 <p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630158193/blog/dom_Manipulation/noStyleExample_unvazz.png" srcset="/img/loading.gif" lazyload></p>
 <p>從這兩個例子可以明顯看出標籤和元素節點下的style值都是一樣的且保持著同步。另外由DOMTokenList物件擁有著對應元素所能夠設定的樣式屬性名稱，比如字體大小、字體顏色、背景顏色等等，這些屬性名稱皆是該物件的屬性，可以藉由這個特性來設定特定的樣式屬性值。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">NODE<span class="hljs-selector-class">.style</span><span class="hljs-selector-class">.styleName</span>: styleValue<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NODE.style.styleName: styleValue</span><br></pre></td></tr></table></figure>
 
 <p>當然，當你透過上面方法來更動樣式屬性名稱時，便是代表連動更新元素節點下的style值以及標籤元素下的style值。</p>
 <h2 id="註解"><a href="#註解" class="headerlink" title="註解"></a>註解</h2><ol>

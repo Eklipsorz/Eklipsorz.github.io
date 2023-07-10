@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650021326/blog/database/migration/db-migration-build-table1_vjnkjf.png">
 <meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650021326/blog/database/migration/db-migration-update-table1_puwlsx.png">
 <meta property="article:published_time" content="2022-04-15T13:27:51.000Z">
-<meta property="article:modified_time" content="2022-04-17T12:35:54.394Z">
+<meta property="article:modified_time" content="2023-07-01T09:09:33.991Z">
 <meta property="article:author" content="Eklipsorz">
 <meta property="article:tag" content="Database Migration">
 <meta property="article:tag" content="Migration">
@@ -80,7 +80,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -211,7 +211,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.1k 字
+      undefined 字
     </span>
   
 
@@ -220,7 +220,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7 分鐘
+      NaN 分鐘
     </span>
   
 
@@ -259,16 +259,16 @@
 <h2 id="具體版本形式"><a href="#具體版本形式" class="headerlink" title="具體版本形式"></a>具體版本形式</h2><p>在這裡的ORM&#x2F;ODM會透過migration檔案來定義每一個版本所擁有的架構內容，根據內容形式可以進一步區分為</p>
 <ul>
 <li>State based : 每一個版本是以狀態來描述，狀態會是以某些資訊或者類似形式的內容來代表每一個版本，狀態描述其版本下所具有的完整架構內容為何，接著實際做切換時，會以目前版本的架構和指定切換的架構之間的差異是如何來更改</li>
-<li>Change based ：每一個版本是以版本之間的差異，當前版本內容會是前一個版本和目前內容之間的差異，所以通常會以連續的版本內容來構成最終版本下所對應的完整架構，近似於git版本中的Snapshot機制，<h3 id="具體版本形式-例子"><a href="#具體版本形式-例子" class="headerlink" title="具體版本形式-例子"></a>具體版本形式-例子</h3></li>
+<li>Change based ：每一個版本是以版本之間的差異，當前版本內容會是前一個版本和目前內容之間的差異，所以通常會以連續的版本內容來構成最終版本下所對應的完整架構，近似於git版本中的Snapshot機制，</li>
 </ul>
-<ol>
+<h3 id="具體版本形式-例子"><a href="#具體版本形式-例子" class="headerlink" title="具體版本形式-例子"></a>具體版本形式-例子</h3><ol>
 <li>State based migration：在這裡假設直接以白話來當作狀態描述每一個版本的完整架構內容，而每一版即為每一個檔案，一開始我們有欄位1、欄位2、欄位3，那麼就會以檔案1來代表，若第二版會是增加個欄位4，那就會以檔案2來代表，若第三版會是移除欄位3，那麼就會以檔案3來代表，說完這三個migration檔案的緣由，那麼若我們想自由切換版本的話：</li>
 </ol>
 <ul>
 <li>若我們想切換成第一版的話，會拿目前版本和代表第一版的檔案內容相比差異是為何，並根據差異來切換</li>
 <li>若我們想切換成第二版的話，會拿目前版本和代表第二版的檔案內容相比差異是為何，並根據差異來切換</li>
 <li>若我們想切換成第三版的話，會拿目前版本和代表第三版的檔案內容相比差異是為何，並根據差異來切換</li>
-<li>後面版本依此類推<figure class="highlight nestedtext"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">migration 檔案1</span><span class="hljs-punctuation">:</span><br>  欄位1、欄位2、欄位3<br>migration 檔案2：<br>  欄位1、欄位2、欄位3、欄位4<br>migration 檔案3：<br>  欄位1、欄位2、欄位4<br></code></pre></td></tr></table></figure></li>
+<li>後面版本依此類推<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">migration 檔案1:</span><br><span class="line">  欄位1、欄位2、欄位3</span><br><span class="line">migration 檔案2：</span><br><span class="line">  欄位1、欄位2、欄位3、欄位4</span><br><span class="line">migration 檔案3：</span><br><span class="line">  欄位1、欄位2、欄位4</span><br></pre></td></tr></table></figure></li>
 </ul>
 <ol start="2">
 <li>Change based migration：假設有三個migration檔案，一開始會使用檔案1來表示初始版本的架構，隨後第二版的實際內容是欄位1、欄位2、欄位3、欄位4，第二版與第一版相差了欄位4，所以代表第二版的檔案2的內容就是該差異-增加欄位4，最後第三版的實際內容是與第二版內容相差一個欄位欄位3，也就是說第三版只有欄位1、欄位2、欄位4，那麼檔案3就會以差異來紀錄-移除欄位3，說完這三個migration檔案的緣由，那麼若我們想自由切換版本的話：</li>
@@ -277,7 +277,7 @@
 <li>若我們想切換成第一版的話，就會直接拿檔案1來代表</li>
 <li>若我們想切換成第二版的話，就會拿檔案1和檔案2來代表切換成第二版並給予系統去轉換成第二版的內容</li>
 <li>若我們想切換成第三版的話，就會拿檔案1、檔案2、檔案3來代表切換成第三版並給予系統去轉換成第三版的內容</li>
-<li>後面版本數依此類推<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">migration 檔案1</span><span class="hljs-punctuation">:</span><br>  欄位1、欄位2、欄位3<br>migration 檔案2：<br>  增加欄位4<br>migration 檔案3：<br>  移除欄位3<br></code></pre></td></tr></table></figure></li>
+<li>後面版本數依此類推<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">migration 檔案1:</span><br><span class="line">  欄位1、欄位2、欄位3</span><br><span class="line">migration 檔案2：</span><br><span class="line">  增加欄位4</span><br><span class="line">migration 檔案3：</span><br><span class="line">  移除欄位3</span><br></pre></td></tr></table></figure></li>
 </ul>
 <ol start="3">
 <li>總結一下：</li>
@@ -303,11 +303,11 @@
 </ul>
 <p>這三種環境下所能使用的版本通常都是共同的，這些版本的切換通常運用在開發環境和測試環境，因為這兩個環境所儲存的資料皆為彰顯是否實現功能開發以及其功能的效能是如何，資料本身並沒有太大的意義，但若應用於線上環境下，會因為儲存的資料皆為使用者相關的而使這些資料具有較大意義，進而無法輕易切換版本，原因在於<strong>ORM&#x2F;ODM來處理欄位時會因為移除欄位而損失資料</strong>。</p>
 <h3 id="ORM-x2F-ODM-破壞原有資料？"><a href="#ORM-x2F-ODM-破壞原有資料？" class="headerlink" title="ORM&#x2F;ODM 破壞原有資料？"></a>ORM&#x2F;ODM 破壞原有資料？</h3><p>在切換版本的過程，難免會移除掉某些欄位X，在這樣子的情況下，ORM&#x2F;ODM若切換至欄位X還在時的版本內容，其對應的欄位的資料並不會跟著復原，比如說拿以下架構來進行欄位上的減量：減少price這欄位的話</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">name</span>  price   date<br><span class="hljs-attribute">apple</span> <span class="hljs-number">10</span>    <span class="hljs-number">4</span>/<span class="hljs-number">13</span><br><span class="hljs-attribute">orange</span> <span class="hljs-number">12</span> <span class="hljs-number">4</span>/<span class="hljs-number">14</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name  price   date</span><br><span class="line">apple 10    4/13</span><br><span class="line">orange 12 4/14</span><br></pre></td></tr></table></figure>
 <p>那麼就會是以下結果，</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">name</span>  date<br><span class="hljs-attribute">apple</span> <span class="hljs-number">4</span>/<span class="hljs-number">13</span><br><span class="hljs-attribute">orange</span> <span class="hljs-number">4</span>/<span class="hljs-number">14</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name  date</span><br><span class="line">apple 4/13</span><br><span class="line">orange 4/14</span><br></pre></td></tr></table></figure>
 <p>接著再回到減少price欄位前的狀態：price欄位還在時的狀態，price欄位的所有資料會因為<strong>ORM&#x2F;ODM只支援增量上的版本而永久遺失</strong>。</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">name</span>   date price<br><span class="hljs-attribute">apple</span>  <span class="hljs-number">4</span>/<span class="hljs-number">13</span><br><span class="hljs-attribute">orange</span> <span class="hljs-number">4</span>/<span class="hljs-number">14</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name   date price</span><br><span class="line">apple  4/13</span><br><span class="line">orange 4/14</span><br></pre></td></tr></table></figure>
 
 <h2 id="Why-探討-版本內容增量為目標來實現版本切換"><a href="#Why-探討-版本內容增量為目標來實現版本切換" class="headerlink" title="Why 探討:版本內容增量為目標來實現版本切換?"></a>Why 探討:版本內容增量為目標來實現版本切換?</h2><p>從上述例子可以窺見 <strong>版本內容增量為目標來實現版本切換的ORM&#x2F;ODM</strong> 在處理欄位移除時會有損失資料的可能。</p>
 <p>在這裡這些ORM&#x2F;ODM之所以只能以增量相關來管理表格架構，並非是因為實作上是不可行的，而是因為若以內容減量來管理的話，除了基本的暫存空間來存放未來要切換的版本架構以外，ORM&#x2F;ODM或者資料庫管理系統是必須要替每一個版本額外備份或者花費CPU成本去計算哪些欄位資料要額外備份，來方便返回至資料移除前的版本，不論是選擇哪一樣，那時勢必會<strong>需要每一個版本都儲存著那時原有資料的內容，甚至像git系統那樣：每一個版本都儲存前一版的差異，但不管如何，資料庫所需要的空間大小並不像git所需要的空間較小，除此之外，還要考量到資料同步上的問題會不會因為過於龐大、非同步、網路問題而產生不一致</strong>。</p>

@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630225557/blog/dom_Manipulation/appendExample_gfbdyu.png">
 <meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630225557/blog/dom_Manipulation/afterExample_jxnc8j.png">
 <meta property="article:published_time" content="2021-08-29T09:33:43.000Z">
-<meta property="article:modified_time" content="2022-03-20T07:44:52.158Z">
+<meta property="article:modified_time" content="2023-07-01T09:09:33.991Z">
 <meta property="article:author" content="Eklipsorz">
 <meta property="article:tag" content="DOM">
 <meta name="twitter:card" content="summary_large_image">
@@ -85,7 +85,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -216,7 +216,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.2k 字
+      undefined 字
     </span>
   
 
@@ -225,7 +225,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6 分鐘
+      NaN 分鐘
     </span>
   
 
@@ -259,7 +259,7 @@
             <div class="markdown-body">
               <p>在這文章中，我們將簡介一個DOM物件是如何被建立、刪除、當成其他元素的子元素，而簡介內容將會以我目前所知的內容而定，後頭若有新的內容時，便會額外再增加內容。</p>
 <h2 id="Create-an-Element"><a href="#Create-an-Element" class="headerlink" title="Create an Element"></a>Create an Element</h2><p>透過createElement方法來建立新的網頁元素newTag，並且利用innerHTML&#x2F;innerText賦予內容Content給其網頁元素，讓網頁元素在HTML形式中會像是下圖中那樣。在這小節中，我們將會簡介這些方法。</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><pre><code class="hljs apache"><span class="hljs-section">&lt;newTag&gt;</span><br>	<span class="hljs-attribute">Content</span><br><span class="hljs-section">&lt;/newTag&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;newTag&gt;</span><br><span class="line">	Content</span><br><span class="line">&lt;/newTag&gt;</span><br></pre></td></tr></table></figure>
 
 <h3 id="create"><a href="#create" class="headerlink" title="create"></a>create</h3><p>document.createElement(tagName)<br>建立標籤名稱為tagName的元素節點，但在這個狀態下的元素節點並不會跟任何節點扯上parent或者child這些關係，就只是單純建立一個節點。</p>
 <p>回傳形式：以元素節點進行回傳</p>
@@ -288,7 +288,7 @@
 <h3 id="Insert-an-Element-before-the-first-child"><a href="#Insert-an-Element-before-the-first-child" class="headerlink" title="Insert an Element before the first child"></a>Insert an Element before the first child</h3><p>Element.prepend(node1, node2,…., nodeN):<br>將 node1 至 nodeN 這些節點設定為Element節點的子節點，並將這些新的子節點放到Element節點的第一個子節點之前。</p>
 <p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630225557/blog/dom_Manipulation/prependExample_l69you.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="Insert-an-Element-as-the-last-child"><a href="#Insert-an-Element-as-the-last-child" class="headerlink" title="Insert an Element as the last child"></a>Insert an Element as the last child</h3><p>Element.append(node1, node2,…., nodeN):<br>將 node1 至 nodeN 這些節點設定為Element節點的子節點，並將這些新的子節點放到Element節點的最後一個子節點之後，其結果等同於for迴圈版本的appendChild： 其中node為 node1 至 nodeN，透過for迴圈將這些新節點放到後頭。</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">for (let <span class="hljs-keyword">node</span> <span class="hljs-title">of</span> NewNodeSet) &#123;<br>	Element.appendChild(<span class="hljs-keyword">node</span><span class="hljs-title">)</span><br><span class="hljs-title">&#125;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for (let node of NewNodeSet) &#123;</span><br><span class="line">	Element.appendChild(node)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630225557/blog/dom_Manipulation/appendExample_gfbdyu.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="Insert-an-Element-after-the-element"><a href="#Insert-an-Element-after-the-element" class="headerlink" title="Insert an Element after the element"></a>Insert an Element after the element</h3><p>Element.after(node1, node2,…, nodeN):<br>將 node1 至 nodeN 這些節點設定為Element的parent節點所擁有的子節點，並將這些新的子節點放到Element節點之後，換言之，這些新的子節點就是Element節點的sibling節點，且放在Element節點之後。</p>

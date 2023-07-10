@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1633109630/blog/dom/aDomNode_x6bv3g.png">
 <meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630055616/blog/dom/aDomNodeExample_ncvwwt.png">
 <meta property="article:published_time" content="2021-08-27T11:33:10.000Z">
-<meta property="article:modified_time" content="2022-03-20T07:45:25.490Z">
+<meta property="article:modified_time" content="2023-07-01T09:09:33.991Z">
 <meta property="article:author" content="Eklipsorz">
 <meta property="article:tag" content="DOM">
 <meta name="twitter:card" content="summary_large_image">
@@ -78,7 +78,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -209,7 +209,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.5k 字
+      undefined 字
     </span>
   
 
@@ -218,7 +218,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3 分鐘
+      NaN 分鐘
     </span>
   
 
@@ -261,7 +261,7 @@
 <li>若是代表HTML檔案上的註解內容，會被當作是註解節點(Comment Node)</li>
 </ul>
 <p>以一個例子來說明一個元素(標籤)在DOM中會是什麼樣子，在這裡我們以p標籤為例子，並給予p標籤一些屬性值，比如class和id，另外再讓p標籤去包含一般文字、em元素、註解。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>DOM<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>   <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello, World!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br>  	<span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;class1 class2&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;id1&quot;</span>&gt;</span><br>		<span class="hljs-comment">&lt;!-- TEST COMMENT --&gt;</span><br>    		This is a <span class="hljs-tag">&lt;<span class="hljs-name">em</span>&gt;</span>simple<span class="hljs-tag">&lt;/<span class="hljs-name">em</span>&gt;</span> website.<br> 	<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>        <br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">   &lt;head&gt;</span><br><span class="line">	&lt;title&gt;DOM&lt;/title&gt;</span><br><span class="line">   &lt;/head&gt;</span><br><span class="line">   &lt;body&gt;</span><br><span class="line">	&lt;h1&gt;Hello, World!&lt;/h1&gt;</span><br><span class="line">  	&lt;p class=&quot;class1 class2&quot; id=&quot;id1&quot;&gt;</span><br><span class="line">		&lt;!-- TEST COMMENT --&gt;</span><br><span class="line">    		This is a &lt;em&gt;simple&lt;/em&gt; website.</span><br><span class="line"> 	&lt;/p&gt;</span><br><span class="line">        </span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
 
 <p>經過瀏覽器解析而轉換成DOM後，其p標籤會如同下圖那樣，標籤以及被包含的標籤會被當作元素節點(以橘紅色來標示)，原本標籤上的屬性值會是屬性節點(以藍綠色來標示)，而子節點出現順序將會以HTML檔案的讀取順序來決定，越先讀取的就放的越前面，首先我們會看到由”TEST COMMENT”所構成的註解節點(以綠色來標示)，接著就是以”This is a “所構成的文字節點，緊接著是<em>元素節點，最後是” website.”構成的文字節點(以淺藍色來標示)，而<em>元素節點還會包含著”simple”所構成的文字節點(以橘紅色來標示):</p>
 <p><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1630055616/blog/dom/aDomNodeExample_ncvwwt.png" srcset="/img/loading.gif" lazyload></p>

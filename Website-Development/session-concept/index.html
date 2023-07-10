@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650553317/blog/network/session/send-with-cookie-sign_n2hv2s.png">
 <meta property="og:image" content="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650553936/blog/network/session/sign-compare_hfxe4p.png">
 <meta property="article:published_time" content="2022-04-21T15:23:19.000Z">
-<meta property="article:modified_time" content="2022-04-21T15:24:08.608Z">
+<meta property="article:modified_time" content="2023-07-01T09:09:33.991Z">
 <meta property="article:author" content="Eklipsorz">
 <meta property="article:tag" content="Cookie">
 <meta property="article:tag" content="Session">
@@ -88,7 +88,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -219,7 +219,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.1k 字
+      undefined 字
     </span>
   
 
@@ -228,7 +228,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7 分鐘
+      NaN 分鐘
     </span>
   
 
@@ -285,7 +285,7 @@
 <p>在這裡的解法會是，當每次客戶端發出請求致使伺服器建立session時，<br><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650553317/blog/network/session/create-session-sign_mjqbsd.png" srcset="/img/loading.gif" lazyload></p>
 <p>原本伺服器會藉由Set-Cookie標頭封包來告知客戶端對應的sessionID是什麼(圖中會是1)，但在這裡會選擇將sessionID和伺服器所儲存的密鑰(secret)一起透過雜湊演算法來產生名為簽名(signature)的雜湊值，<br><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650553443/blog/network/session/sign-generate_grxsdm.png" srcset="/img/loading.gif" lazyload></p>
 <p>並將傳遞給客戶端的封包改成以下形式的字串，在這裡會是1.signature1，其中signature1是透過sessionID(&#x3D;1)和密鑰而構成的，而當客戶端收到之後，就便建立cookie物件來存放sessionID和簽署所構成的字串。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs xml">Set-Cookie: sessionId=<span class="hljs-tag">&lt;<span class="hljs-name">session</span> <span class="hljs-attr">id</span>&gt;</span>.<span class="hljs-tag">&lt;<span class="hljs-name">signature</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-Cookie: sessionId=&lt;session id&gt;.&lt;signature&gt;</span><br></pre></td></tr></table></figure>
 
 <p>而當下次客戶端再次向同個伺服器發出請求時，便會把對應的cookie內容(此時會是1.signature1)附加至請求封包，<br><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650553317/blog/network/session/send-with-cookie-sign_n2hv2s.png" srcset="/img/loading.gif" lazyload></p>
 <p>而伺服器收到之後就會分別對sessionID和signature1進行處理，首先會先對收到的sessionID和伺服器的密鑰進行雜湊演算法獲取另一個簽名(signature’)，並且將結果簽名值與接收過來的signature比較是否相同，若相同就代表著接收到的封包內容是未被竄改，未被竄改才會允許伺服器去找尋對應的session，否則就駁回<br><img src="https://res.cloudinary.com/dqfxgtyoi/image/upload/v1650553936/blog/network/session/sign-compare_hfxe4p.png" srcset="/img/loading.gif" lazyload></p>

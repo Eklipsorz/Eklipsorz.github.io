@@ -24,7 +24,7 @@
 <meta property="og:description" content="為了方便在object的method下使用該object的屬性或者其他method，而建立一個名為this變數，而這個變數會是指著object本身。 另外每一個function（非簡化版本）都擁有this這內建變數，只有arrow function不存在this 舉例來說： 假如我們建立一個object給user變數(此變數就成了該instance的reference或者別名)，該object的屬">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-07-29T16:38:50.000Z">
-<meta property="article:modified_time" content="2022-03-20T07:51:27.079Z">
+<meta property="article:modified_time" content="2023-07-01T09:09:33.991Z">
 <meta property="article:author" content="Eklipsorz">
 <meta property="article:tag" content="this">
 <meta name="twitter:card" content="summary_large_image">
@@ -75,7 +75,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -206,7 +206,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.8k 字
+      undefined 字
     </span>
   
 
@@ -215,7 +215,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5 分鐘
+      NaN 分鐘
     </span>
   
 
@@ -250,48 +250,48 @@
               <p>為了方便在object的method下使用該object的屬性或者其他method，而建立一個名為this變數，而這個變數會是指著object本身。 另外每一個function（非簡化版本）都擁有this這內建變數，只有arrow function不存在this</p>
 <p>舉例來說：</p>
 <p>假如我們建立一個object給user變數(此變數就成了該instance的reference或者別名)，該object的屬性為name，而方法(method)則為speak()函式</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> user = &#123;<br>      <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;apple&#x27;</span>,<br>      <span class="hljs-title function_">speak</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;my name is&#x27;</span>)<br>      &#125;,<br> &#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const user = &#123;</span><br><span class="line">      name: &#x27;apple&#x27;,</span><br><span class="line">      speak() &#123;</span><br><span class="line">        console.log(&#x27;my name is&#x27;)</span><br><span class="line">      &#125;,</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 
 <p>，每當我們想要呼叫該object的speak方法時，會產生</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-keyword">my</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">is</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my name is</span><br></pre></td></tr></table></figure>
 <p>可如果說想讓這方法去印出object本身的name，那麼就能利用下面語法來印出，其中this就這個user指向的object本身，而name則是object所擁有的屬性name</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">speak</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;my name is&#x27;</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>)<br>      &#125;,<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">speak() &#123;</span><br><span class="line">        console.log(&#x27;my name is&#x27;, this.name)</span><br><span class="line">      &#125;,</span><br></pre></td></tr></table></figure>
 <p>，結果會是：</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-keyword">my</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">is</span> apple<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my name is apple</span><br></pre></td></tr></table></figure>
 
 
 <h2 id="this-本身內容"><a href="#this-本身內容" class="headerlink" title="this 本身內容"></a>this 本身內容</h2><p>this本身會根據呼叫者是否物件、被呼叫的函式(方法)是否為arrow function來決定指向哪個物件。</p>
 <h3 id="當呼叫者是物件本身且方法為一般函式-非簡化"><a href="#當呼叫者是物件本身且方法為一般函式-非簡化" class="headerlink" title="當呼叫者是物件本身且方法為一般函式(非簡化)"></a>當呼叫者是物件本身且方法為一般函式(非簡化)</h3><p>在這種情況下的方法會是以下形式，若我們建立了一個物件並給予person1這個別名（reference)</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ada"><span class="hljs-keyword">function</span> <span class="hljs-title">functionName</span> &#123;<br>    Statement<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function functionName &#123;</span><br><span class="line">    Statement</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>，其object會是以下內容，</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> person1 = &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;John&#x27;</span>,<br>    <span class="hljs-title function_">myNameIs</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;my name is&#x27;</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">person1</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const person1 = &#123;</span><br><span class="line">    name: &#x27;John&#x27;,</span><br><span class="line">    myNameIs() &#123;</span><br><span class="line">        console.log(&#x27;my name is&#x27;, this.person1)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>當我們利用person1下的myNameIs方法時，系統會解析呼叫myNameIs的物件是誰，在這裡系統會發現是person1所指向的物件呼叫該方法的</p>
-<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">person1.my<span class="hljs-constructor">NameIs()</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">person1.myNameIs()</span><br></pre></td></tr></table></figure>
 <p>，接著它就直接該物件下的myNameIs()方法，同時它也會發現this這變數，在這裏由於系統已經發現是person1所指向的物件，所以this會跟著指向同個物件並允許系統獲取該物件的name，也就是John，最後螢幕顯示的結果會是：</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-keyword">my</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">is</span> John<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my name is John</span><br></pre></td></tr></table></figure>
 
 <p>可如果這時我再添加另一個person2來指向另一個新的物件時，比如說</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> person2 = &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Sam&#x27;</span>,<br>    <span class="hljs-title function_">myNameIs</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;my name is&#x27;</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">person1</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const person2 = &#123;</span><br><span class="line">    name: &#x27;Sam&#x27;,</span><br><span class="line">    myNameIs() &#123;</span><br><span class="line">        console.log(&#x27;my name is&#x27;, this.person1)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>那麼同樣地，我們再次下達以下程式碼：</p>
-<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">person1.my<span class="hljs-constructor">NameIs()</span><br>person2.my<span class="hljs-constructor">NameIs()</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">person1.myNameIs()</span><br><span class="line">person2.myNameIs()</span><br></pre></td></tr></table></figure>
 <p>系統會根據先前的解析方式來分別從person1和person2所指向的物件來獲取name的資訊並顯示以下結果</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-keyword">my</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">is</span> John<br><span class="hljs-keyword">my</span> <span class="hljs-built_in">name</span> <span class="hljs-keyword">is</span> Sam<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">my name is John</span><br><span class="line">my name is Sam</span><br></pre></td></tr></table></figure>
 
 <h3 id="沒有物件的時候，呼叫時的this會是？"><a href="#沒有物件的時候，呼叫時的this會是？" class="headerlink" title="沒有物件的時候，呼叫時的this會是？"></a>沒有物件的時候，呼叫時的this會是？</h3><p>可如果呼叫的函式存在this，但呼叫時卻沒有物件方便讓系統辨識this會指向誰。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs stylus">function <span class="hljs-built_in">myNameIs</span>() &#123;<br>    console<span class="hljs-selector-class">.log</span>(<span class="hljs-string">&#x27;my name is&#x27;</span>, this.name)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-title">myNameIs</span><span class="hljs-params">()</span></span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function myNameIs() &#123;</span><br><span class="line">    console.log(&#x27;my name is&#x27;, this.name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">myNameIs()</span><br></pre></td></tr></table></figure>
 <p>這時系統會預設讓這個this變數指向window這個global object，但由於window沒有name這個屬性，所以得到的結果會是：</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs actionscript">my name <span class="hljs-keyword">is</span> <span class="hljs-literal">undefined</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my name is undefined</span><br></pre></td></tr></table></figure>
 
 
 <h3 id="當使用arrow-function的this會是？"><a href="#當使用arrow-function的this會是？" class="headerlink" title="當使用arrow function的this會是？"></a>當使用arrow function的this會是？</h3><p>由於arrow function本身沒有this變數，但實作上會以該function定義所在的環境是否存在其他this內建變數，若存在的話就以該this變數所指向的object為主，若不存在的話就以window這個global object為主。</p>
 <p>舉例來說：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">arrow</span> = (<span class="hljs-params"></span>) =&gt; &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>)<br>&#125;<br><br><span class="hljs-title function_">arrow</span>() <span class="hljs-number">1.</span><br><br><span class="hljs-keyword">const</span> user = &#123;<br>        name : <span class="hljs-string">&#x27;John&#x27;</span>,<br>        <span class="hljs-attr">arrow</span>: <span class="hljs-function">() =&gt;</span> &#123;<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>)<br>        &#125;,<br>        <span class="hljs-title function_">speak</span>(<span class="hljs-params"></span>) &#123;<br>            <span class="hljs-title function_">arrow</span>()<br>        &#125;<br>&#125;<br><br>user.<span class="hljs-title function_">arrow</span>() <span class="hljs-number">2.</span><br>user.<span class="hljs-title function_">speak</span>() <span class="hljs-number">3.</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const arrow = () =&gt; &#123;</span><br><span class="line">    console.log(this)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">arrow() 1.</span><br><span class="line"></span><br><span class="line">const user = &#123;</span><br><span class="line">        name : &#x27;John&#x27;,</span><br><span class="line">        arrow: () =&gt; &#123;</span><br><span class="line">            console.log(this)</span><br><span class="line">        &#125;,</span><br><span class="line">        speak() &#123;</span><br><span class="line">            arrow()</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">user.arrow() 2.</span><br><span class="line">user.speak() 3.</span><br></pre></td></tr></table></figure>
 
 <p>程式碼中存在1.~3.這三處，第一處呼叫了位於global scope的arrow function，由該函式本身就沒有this變數，所以this會被定義成window，而第二處則是呼叫user變數指向的object之arrow方法，該方法由於定義的範圍並不存在其他this變數，因此他的this也是window，而第三處的this則是間接呼叫位於global scope的arrow 函式，所以也跟第一處一樣是指向window這object。</p>
 <p>另一個範例為：</p>
-<div class="code-wrapper"><pre><code class="hljs">var func = function () &#123;
+<pre><code>var func = function () &#123;
   var func2 = function () &#123;
     setTimeout(() =&gt; &#123;
       console.log(this); 
@@ -306,7 +306,7 @@
   func3.func(); // func3 Object
 &#125;
 func(); 
-</code></pre></div>
+</code></pre>
 <p>藉由func來執行整個程式碼，其中我們只需要關注func2()和func3.func()這兩個函式呼叫，func2呼叫由於是本身調用週期工作來印this，this被定義到的範圍是位於func2，而他的this變數指向window，所以週期工作的this也跟著指向window，而func3.func()則是因爲func3本身是物件且func會指向func2這函式物件，這相當於func3.func2()。</p>
 <p>由於這樣，而func2的this變數就跟著指向呼叫者-func3，因此週期任務也會跟著指向func3</p>
 <h2 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h2><ol>
